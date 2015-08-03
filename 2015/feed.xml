@@ -3,11 +3,11 @@
   <channel>
     <title>Visualization</title>
     <description>Visualization Class at the University of Utah</description>
-    <link>http://dataviscourse.net//2015/</link>
-    <atom:link href="http://dataviscourse.net//2015/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 03 Aug 2015 18:04:57 +0200</pubDate>
-    <lastBuildDate>Mon, 03 Aug 2015 18:04:57 +0200</lastBuildDate>
-    <generator>Jekyll v2.5.2</generator>
+    <link>http://vcg.github.io/2015/</link>
+    <atom:link href="http://vcg.github.io/2015/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 03 Aug 2015 21:01:39 +0200</pubDate>
+    <lastBuildDate>Mon, 03 Aug 2015 21:01:39 +0200</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
     
   </channel>
 </rss>
