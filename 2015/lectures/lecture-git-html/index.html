@@ -120,285 +120,662 @@
 We will be using a version control tool called git to track changes to our code. We’ll also be using Github, an online tool for hosting git repositories.</p>
 
 <p>You should already have git installed, if not see the <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">official documentation</a> on how to install git on your operating system.</p>
-<div class="slide">
 
-## Why version Control?
+<h3 id="why-version-control">Why version Control?</h3>
 
-*briefly describe the value of version control*
+<ul>
+  <li><strong>Keep copies of multiple states of files</strong> <br />
+  By committing you record a state of the file to which you can go back any time.</li>
+  <li><strong>Create alternative sates</strong><br />
+ Imagine you just want to try out something, but you realize you have to modify multiple files. You’re not sure whether it works or is worth it. With version control you can just create a <strong>branch</strong> where you can experiment or develop new features without disturbing the main or other branches.</li>
+  <li><strong>Collaborate in Teams</strong> <br />
+ Nobody wants to send code via e-mail. Version control lets you keep your code remotely and has dedicated ways to merge and deal with conflicts.</li>
+  <li><strong>Keep your work save</strong><br />
+ Your hard drive breaks. Your computer is stolen. But your code is save because you store it not only on your computer but also on a remote server.</li>
+  <li><strong>Share</strong><br />
+ You developed something awesome and want to share it. But not only do you want to make it available, you’re also happy about contributions from others!</li>
+</ul>
 
-First, let's configure git: open a shell. *describe how to do this on other OSes*
+<p><img src="images/centralized.png" alt="Version Control with Central Repository" /></p>
 
-Run the following.
+<h3 id="types-of-version-control-central-repository">Types of Version Control: Central Repository</h3>
 
-```
-git config --global user.name "YOUR NAME"
+<ul>
+  <li>Everybody needs to write to one server</li>
+  <li>All operations (history, commit, branches) require server connection</li>
+  <li>Common traditional model: CVS, SVN, etc.</li>
+  <li>Pros:
+    <ul>
+      <li>Simple Model</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Complex for larger projects
+        <ul>
+          <li>Who is allowed to write?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="types-of-version-control-distributed-version-control">Types of Version Control: Distributed Version Control</h3>
+
+<p><img src="images/distributed.png" alt="Distribute Version Control" /></p>
+
+<ul>
+  <li>Everybody has a full history of the repository locally</li>
+  <li>No defined server - every node is equal.
+    <ul>
+      <li>In practice: often server is used for one “official” copy of code.<br />
+ But: server by convention only, no technical difference.</li>
+    </ul>
+  </li>
+  <li>Pros:
+    <ul>
+      <li>No access issues
+        <ul>
+          <li>Make a copy and hack away</li>
+          <li>Ask if partner wants to accept your changes</li>
+        </ul>
+      </li>
+      <li>Everything is local
+        <ul>
+          <li>Fast!</li>
+          <li>No internet connection required</li>
+          <li>Commit often model (once per feature) - don’t sync all the time.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>Extra effort to distinguish between committing and pushing/pulling (synchronizing).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="implementations">Implementations</h3>
+
+<ul>
+  <li>Centralized
+    <ul>
+      <li>CVS</li>
+      <li>SVN</li>
+      <li>Team Foundation Server</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>Distributed
+    <ul>
+      <li>git</li>
+      <li>Mercurial</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>We will be using git in this lecture.</li>
+</ul>
+
+<h3 id="git-1">git</h3>
+
+<ul>
+  <li>Created by Linus Torvalds, 2005</li>
+  <li>Meaning: British English slang roughly equivalent to “unpleasant person”.</li>
+  <li>git – the stupid content tracker.</li>
+</ul>
+
+<p><em>I’m an egotistical bastard, and I name all my projects after myself. First ‘Linux’, now ‘git’. – Linus Torvalds</em></p>
+
+<h3 id="why-git">Why git?</h3>
+
+<ul>
+  <li>Popular (~50% of open source projects)</li>
+  <li>Truly distributed</li>
+  <li>Very fast</li>
+  <li>Everything is local</li>
+  <li>Free</li>
+  <li>Safe against corruptions</li>
+  <li>GitHub!</li>
+</ul>
+
+<h3 id="git-model">git model</h3>
+
+<p>Whiteboard sketch of git with a server.</p>
+
+<h3 id="git-tutorial">git tutorial</h3>
+
+<p>This is a quick intro to git, used in combination with GitHub. This is not a complete tutorial, but will use the most important git features.</p>
+
+<p><strong>Create a folder for your project</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>mkdir myProject 
+<span class="lineno">2</span> <span class="nv">$ </span><span class="nb">cd </span>myProject/</code></pre></div>
+
+<p><strong>Initalize the git repository</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git init 
+<span class="lineno">2</span> Initialized empty Git repository in ../myProject/.git/</code></pre></div>
+
+<p><strong>What does git do to your file system?</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># Let&#39;s look at what git creates</span>
+<span class="lineno"> 2</span> <span class="nv">$ </span>ls .git/ 
+<span class="lineno"> 3</span> branches  config  description  HEAD  hooks  info  objects  refs
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="c"># The interesting stuff is in the config file</span>
+<span class="lineno"> 6</span> <span class="nv">$ </span>cat .git/config
+<span class="lineno"> 7</span> <span class="o">[</span>core<span class="o">]</span>
+<span class="lineno"> 8</span>         <span class="nv">repositoryformatversion</span> <span class="o">=</span> 0
+<span class="lineno"> 9</span>         <span class="nv">filemode</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">10</span> <span class="nb">        </span><span class="nv">bare</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="lineno">11</span> <span class="nb">        </span><span class="nv">logallrefupdates</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="c"># More interesting for a project with branches and remotes </span>
+<span class="lineno">15</span> <span class="nv">$ </span>cat .git/config 
+<span class="lineno">16</span> <span class="o">[</span>core<span class="o">]</span>
+<span class="lineno">17</span>         <span class="nv">repositoryformatversion</span> <span class="o">=</span> 0
+<span class="lineno">18</span>         <span class="nv">filemode</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">19</span> <span class="nb">        </span><span class="nv">bare</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="lineno">20</span> <span class="nb">        </span><span class="nv">logallrefupdates</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">21</span> <span class="o">[</span>remote <span class="s2">&quot;origin&quot;</span><span class="o">]</span>
+<span class="lineno">22</span>         <span class="nv">url</span> <span class="o">=</span> https://github.com/CS171/HW1.git
+<span class="lineno">23</span>         <span class="nv">fetch</span> <span class="o">=</span> +refs/heads/*:refs/remotes/origin/*
+<span class="lineno">24</span> <span class="o">[</span>branch <span class="s2">&quot;master&quot;</span><span class="o">]</span>
+<span class="lineno">25</span>         <span class="nv">remote</span> <span class="o">=</span> origin
+<span class="lineno">26</span>         <span class="nv">merge</span> <span class="o">=</span> refs/heads/master</code></pre></div>
+
+<p><strong>Now let’s create a file</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;Hello World&#39;</span> &gt; demo.txt
+<span class="lineno">2</span> <span class="nv">$ </span>cat demo.txt 
+<span class="lineno">3</span> Hello World</code></pre></div>
+
+<p><strong>Let’s add it to version control</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git add demo.txt</code></pre></div>
+
+<p><strong>Let’s look at what is going on with the repository</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="nv">$ </span>git status
+<span class="lineno"> 2</span> <span class="c"># On branch master</span>
+<span class="lineno"> 3</span> <span class="c">#</span>
+<span class="lineno"> 4</span> <span class="c"># Initial commit</span>
+<span class="lineno"> 5</span> <span class="c">#</span>
+<span class="lineno"> 6</span> <span class="c"># Changes to be committed:</span>
+<span class="lineno"> 7</span> <span class="c">#   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)</span>
+<span class="lineno"> 8</span> <span class="c">#</span>
+<span class="lineno"> 9</span> <span class="c">#       new file:   demo.txt</span>
+<span class="lineno">10</span> <span class="c">#</span></code></pre></div>
+
+<p>That means: git knows that it’s supposed to track this file, but it’s not yet versioned.</p>
+
+<p><strong>Let’s commit the file.</strong> Once a file is committed, it’s state is recorded and you can go back to previous versions any time.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># The -m option specifies the commit message. If you don&#39;t use it you&#39;ll go into an editor to enter your commit message.  </span>
+<span class="lineno"> 2</span> <span class="nv">$ </span>git commit -m <span class="s2">&quot;Committing the test file&quot;</span> 
+<span class="lineno"> 3</span> <span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> 3be5e8c<span class="o">]</span> Wrote to demo
+<span class="lineno"> 4</span>  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="lineno"> 5</span>  create mode <span class="m">100644</span> demo.txt
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="c"># Did it work?</span>
+<span class="lineno"> 8</span> <span class="nv">$ </span>git status
+<span class="lineno"> 9</span> <span class="c"># On branch master</span>
+<span class="lineno">10</span> nothing to commit, working directory clean</code></pre></div>
+
+<p>That means that now the file is tracked and committed to git. But it’s still only stored on this one computer!</p>
+
+<p><strong>Next, we change a file and commit it again.</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># Now let&#39;s change something</span>
+<span class="lineno"> 2</span> <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;Are you still spinning?&#39;</span> &gt;&gt; demo.txt 
+<span class="lineno"> 3</span> <span class="nv">$ </span>cat demo.txt 
+<span class="lineno"> 4</span> Hello World!
+<span class="lineno"> 5</span> Are you still spinning?
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="c"># Let&#39;s check the status of git!</span>
+<span class="lineno"> 8</span> <span class="nv">$ </span>git status
+<span class="lineno"> 9</span> <span class="c"># On branch master</span>
+<span class="lineno">10</span> <span class="c"># Changes not staged for commit:</span>
+<span class="lineno">11</span> <span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="lineno">12</span> <span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="lineno">13</span> <span class="c">#</span>
+<span class="lineno">14</span> <span class="c">#       modified:   demo.txt</span>
+<span class="lineno">15</span> <span class="c">#</span>
+<span class="lineno">16</span> no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="c"># So git knows that something has changed, but hasn&#39;t recorded it. Let&#39;s commit. </span>
+<span class="lineno">19</span> <span class="nv">$ </span>git commit -m <span class="s2">&quot;Added a line to the demo file&quot;</span> 
+<span class="lineno">20</span> On branch master
+<span class="lineno">21</span> Changes not staged <span class="k">for</span> commit:
+<span class="lineno">22</span> 	modified:   demo.txt
+<span class="lineno">23</span> 	
+<span class="lineno">24</span> <span class="c"># That didn&#39;t work! You have to add all the files you want to commit every time. There is a shorthand that you can use to add all the tracked files: append &#39;-a&#39;.</span>
+<span class="lineno">25</span> <span class="nv">$ </span>git commit -a -m <span class="s2">&quot;added a line to the demo file&quot;</span> 
+<span class="lineno">26</span> <span class="o">[</span>master b03178f<span class="o">]</span> added a line to the demo file
+<span class="lineno">27</span>  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span> <span class="c"># Better. Now, let&#39;s look at what happened up to now</span>
+<span class="lineno">30</span> <span class="nv">$ </span>git log
+<span class="lineno">31</span> commit a939cdfeaf0a7ffb972e6616549e9053917e0673
+<span class="lineno">32</span> Author: Alexander Lex &lt;alex@seas.harvard.edu&gt;
+<span class="lineno">33</span> Date:   Thu Jan <span class="m">30</span> 20:35:37 <span class="m">2014</span> -0500
+<span class="lineno">34</span> 
+<span class="lineno">35</span>     spinning
+<span class="lineno">36</span> 
+<span class="lineno">37</span> commit 3be5e8c4b3691a70598d784483ef9cf35d5663ba
+<span class="lineno">38</span> Author: Alexander Lex &lt;alex@seas.harvard.edu&gt;
+<span class="lineno">39</span> Date:   Thu Jan <span class="m">30</span> 20:29:52 <span class="m">2014</span> -0500
+<span class="lineno">40</span> 
+<span class="lineno">41</span>     Wrote to demo</code></pre></div>
+
+<p>Commits have a unique ID. This ID is a hash of your complete history.  When we retreive your homeworks, we will tell you the commit ID of the homework we grade. Check whether that’s the correct ID!</p>
+
+<p>Through this cycle of editing, adding and committing, you can develop software in a linear fashion. Now let’s see how we can create alternate versions.</p>
+
+<h3 id="branching">Branching</h3>
+
+<h1 id="now-lets-create-a-branch">Now let’s create a branch</h1>
+<p>$ git branch draft</p>
+
+<h1 id="this-created-a-branch-with-the-name-draft-lets-look-at-all-the-other-branches">This created a branch with the name draft. Let’s look at all the other branches</h1>
+<p>$ git branch<br />
+  draft<br />
+* master</p>
+
+<h1 id="we-have-two-branches-draft-and-master-the--tells-us-the-active-branch-the-head">We have two branches, draft and master. The * tells us the active branch (the HEAD)</h1>
+
+<h1 id="lets-switch-the-branch">Let’s switch the branch</h1>
+<p>$ git checkout draft<br />
+Switched to branch ‘draft’</p>
+
+<h1 id="lets-see-if-there-is-something-different">Let’s see if there is something different</h1>
+<p>$ cat demo.txt <br />
+Hello World!<br />
+Are you still spinning?</p>
+
+<h1 id="no---its-the-same-now-lets-edit">No - it’s the same! Now let’s edit.</h1>
+<p>$ echo “Spinning round and round” » demo.txt <br />
+$ cat demo.txt <br />
+Hello World!<br />
+Are you still spinning?<br />
+Spinning round and round</p>
+
+<h1 id="and-commit">And commit</h1>
+<p>$ git commit -a <br />
+[draft 059daaa] Confirmed, spinning<br />
+ 1 file changed, 1 insertion(+)</p>
+
+<h1 id="no-lets-switch-back-to-master-again">No let’s switch back to master again</h1>
+<p>$ git checkout master<br />
+Switched to branch ‘master’</p>
+
+<h1 id="the-text-isnt-here">The text isn’t here.</h1>
+<p>$ cat demo.txt <br />
+Hello World!<br />
+Are you still spinning?</p>
+
+<h1 id="writing-something-to-the-front-and-to-the-end">Writing something to the front and to the end</h1>
+<p>$ cat demo.txt <br />
+I am here!<br />
+Hello World!<br />
+Are you still spinning?<br />
+Indeed!</p>
+
+<p>$ git commit -a <br />
+[master 8437327] Front and back<br />
+ 1 file changed, 2 insertions(+)</p>
+
+<h1 id="now-lets-try-to-merge-it">Now let’s try to merge it</h1>
+<p>$ git merge draft<br />
+Auto-merging demo.txt<br />
+CONFLICT (content): Merge conflict in demo.txt<br />
+Automatic merge failed; fix conflicts and then commit the result.</p>
+
+<h1 id="the-result">The result</h1>
+<p>$ cat demo.txt <br />
+I am here!<br />
+Hello World!<br />
+Are you still spinning?<br />
+«««&lt; HEAD<br />
+Indeed!<br />
+=======<br />
+Spinning round and round<br />
+»»»&gt; draft</p>
+
+<h1 id="the-first-line-was-merged-without-problems-the-final-line-where-we-have-two-alternative-versions-is-a-conflict-we-have-to-manually-resolve-the-conflict">The first line was merged without problems, The final line, where we have two alternative versions is a conflict. We have to manually resolve the conflict.</h1>
+
+<h1 id="once-this-is-done-we-can-commit-again">Once this is done, we can commit again.</h1>
+<p>$ git commit -a <br />
+[master 4dad82f] Merge branch ‘draft’</p>
+
+<h1 id="everything-back-in-order">Everything back in order.</h1>
+<p>$ git status <br />
+# On branch master<br />
+nothing to commit, working directory clean</p>
+
+<h1 id="now-ill-create-a-new-repository-on-github">Now I’ll create a new repository on github</h1>
+
+<h1 id="if-you-dont-have-a-git-repository-with-code-yet-you-can-simply-clone-that-repository-and-start-working-on-it">If you don’t have a git repository with code yet, you can simply clone that repository and start working on it:</h1>
+<p>$ git clone https://github.com/alexsb/Demo.git<br />
+# This creates a local copy of the (empty) github repository.</p>
+
+<h1 id="id-like-to-push-our-changes-to-this-repository">I’d like to push our changes to this repository.</h1>
+<p># This command tells git where the “origin” of this repository is.<br />
+$ git remote add origin https://github.com/alexsb/Demo.git</p>
+
+<h1 id="we-can-see-the-changes-already">We can see the changes already:</h1>
+<p>$ cat .git/config <br />
+[core]<br />
+        repositoryformatversion = 0<br />
+        filemode = true<br />
+        bare = false<br />
+        logallrefupdates = true<br />
+[remote “origin”]<br />
+        url = https://github.com/alexsb/Demo.git<br />
+        fetch = +refs/heads/<em>:refs/remotes/origin/</em></p>
+
+<h1 id="now-we-send-our-changes-to-github">Now we send our changes to github</h1>
+<p>$ git push -u origin master<br />
+Username for ‘https://github.com’: alexsb<br />
+Password for ‘https://alexsb@github.com’: <br />
+Counting objects: 15, done.<br />
+Delta compression using up to 8 threads.<br />
+Compressing objects: 100% (8/8), done.<br />
+Writing objects: 100% (15/15), 1.22 KiB | 0 bytes/s, done.<br />
+Total 15 (delta 2), reused 0 (delta 0)<br />
+To https://github.com/alexsb/Demo.git<br />
+ * [new branch]      master -&gt; master<br />
+Branch master set up to track remote branch master from origin.</p>
+
+<h1 id="now-our-changes-are-on-github">Now our changes are on github.</h1>
+<p># Let’s edit the file through the github web interface<br />
+# To get the changes locally, we pull</p>
+
+<p>$ git pull <br />
+remote: Counting objects: 5, done.<br />
+remote: Compressing objects: 100% (2/2), done.<br />
+remote: Total 3 (delta 1), reused 0 (delta 0)<br />
+Unpacking objects: 100% (3/3), done.<br />
+From https://github.com/alexsb/Demo<br />
+   4dad82f..4a83d51  master     -&gt; origin/master<br />
+Updating 4dad82f..4a83d51<br />
+Fast-forward<br />
+ demo.txt | 3 ++-<br />
+ 1 file changed, 2 insertions(+), 1 deletion(-)</p>
+
+<h1 id="now-these-changes-are-back-here">Now these changes are back here:</h1>
+<p>$ cat demo.txt <br />
+I am here!<br />
+Hello World!<br />
+Are you still spinning?<br />
+Indeed!<br />
+Spinning round and round.<br />
+But don’t you grow tired?</p>
+
+<h1 id="forking-on-github-forking-is-essentially-making-use-of-the-distributed-nature-of-git-while-having-the-benefits-of-a-server">Forking on Github: Forking is essentially making use of the distributed nature of git, while having the benefits of a server.</h1>
+<p># Github Issues are a great way to keep track of open tasks and problems. Issues can be references and closed from commits.</p>
+
+<h3 id="git-resources">git Resources</h3>
+
+<p><a href="http://www.sbf5.com/~cduan/technical/git/">Understanding git conceptually</a><br />
+<a href="http://www.youtube.com/watch?v=4XpnKHJAok8">Fun and insightful talk on git by Linus Torvalds</a><br />
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful git branching model</a><br />
+<a href="http://en.wikipedia.org/wiki/Git_(software)">Wikipedia on git</a></p>
+
+<p><em>briefly describe the value of version control</em></p>
+
+<p>First, let’s configure git: open a shell. <em>describe how to do this on other OSes</em></p>
+
+<p>Run the following.</p>
+
+<pre><code>git config --global user.name "YOUR NAME"
 git config --global user.email "YOUR EMAIL ADDRESS"
-```
+</code></pre>
 
-`cd` to the directory you want put your homework in (e.g., your Documents folder). *ensure the concept of a working directory is clear*
+<p><code>cd</code> to the directory you want put your homework in (e.g., your Documents folder). <em>ensure the concept of a working directory is clear</em></p>
 
-What we going to do as overview:
-![Setting up your Github repository](images/section1_github.png?raw=true)
+<p>What we going to do as overview:<br />
+<img src="images/section1_github.png?raw=true" alt="Setting up your Github repository" /></p>
 
+<p>Run the following:</p>
 
+<pre><code>git clone https://github.com/CS171/2015-cs171-homework.git -o homework
+</code></pre>
 
-Run the following:
+<p>Then <code>cd</code> into the newly created <code>2015-cs171-homework/</code> directory.  You can change the directory name if you want.</p>
 
-```
-git clone https://github.com/CS171/2015-cs171-homework.git -o homework
-```
+<p><em>open a browser window</em></p>
 
-Then `cd` into the newly created `2015-cs171-homework/` directory.  You can change the directory name if you want.
+<p>Create a new repository on the Github website following the <code>cs171-hw-lastname-firstname</code> naming convention. <strong>Use all lowercase for your repository name. It is important that your repository be named exactly as above so that we can access it for grading.</strong></p>
 
-*open a browser window*
+<p>Ensure your new repository is private and don’t click the option to “Initialize the repository with a README”.</p>
 
-Create a new repository on the Github website following the `cs171-hw-lastname-firstname` naming convention. **Use all lowercase for your repository name. It is important that your repository be named exactly as above so that we can access it for grading.**
+<p>Unless you know what you’re doing, select HTTPS.</p>
 
-Ensure your new repository is private and don't click the option to "Initialize the repository with a README".
+<p><img src="images/https.png?raw=true" alt="Setting up your Github repository" /></p>
 
-Unless you know what you're doing, select HTTPS.
+<p>Run the two commands described on GitHub under the heading “Push an existing repository from the command line”, highlighted in red below.</p>
 
-![Setting up your Github repository](images/https.png?raw=true)
+<p><img src="images/commands.png?raw=true" alt="Setting up your Github repository" /></p>
 
-Run the two commands described on GitHub under the heading "Push an existing repository from the command line", highlighted in red below.
+<p>On GitHub, go to the repository settings and navigate to the Collaborators page. Add <a href="https://github.com/cs171tf"><code>cs171tf</code></a> as a collaborator to your private repository.</p>
 
-![Setting up your Github repository](images/commands.png?raw=true)
+<p>Now your homework repository is all set!</p>
 
-On GitHub, go to the repository settings and navigate to the Collaborators page. Add [`cs171tf`](https://github.com/cs171tf) as a collaborator to your private repository.
+<h3 id="committing">Committing</h3>
 
-Now your homework repository is all set!
+<p>While working on homework assignments, periodically run the following:</p>
 
-### Committing
-
-While working on homework assignments, periodically run the following:
-
-```
-git add -A
+<pre><code>git add -A
 git commit -m "Describe your changes"
 git push
-```
+</code></pre>
 
-The `git commit` operation takes snapshot of your code at that point in time — a snapshot is called a "commit" in Git parlance. You can revert to a previous commit at any time.
+<p>The <code>git commit</code> operation takes snapshot of your code at that point in time — a snapshot is called a “commit” in Git parlance. You can revert to a previous commit at any time.</p>
 
-The `git push` operation pushes your local commits to the remote repository. It is important that you push your changes or others will not be able to see them.
+<p>The <code>git push</code> operation pushes your local commits to the remote repository. It is important that you push your changes or others will not be able to see them.</p>
 
-You should do this frequently: as often as you have an incremental, standalone improvement.
+<p>You should do this frequently: as often as you have an incremental, standalone improvement.</p>
 
-### Submitting your homework
+<h3 id="submitting-your-homework">Submitting your homework</h3>
 
-We will automatically copy your repository after each homework deadline. **You do not need to do anything else to submit your work (but make sure that you have pushed the latest version of your homework).** We will count the time of your last commit to the Github repository as your submission time.
+<p>We will automatically copy your repository after each homework deadline. <strong>You do not need to do anything else to submit your work (but make sure that you have pushed the latest version of your homework).</strong> We will count the time of your last commit to the Github repository as your submission time.</p>
 
-Refer to the [CS 171 web page](http://www.cs171.org/2015/homework/) for more information on how to submit your homework.
+<p>Refer to the <a href="http://www.cs171.org/2015/homework/">CS 171 web page</a> for more information on how to submit your homework.</p>
 
-### Getting new homework assignments
+<h3 id="getting-new-homework-assignments">Getting new homework assignments</h3>
 
-When we release a new assignment we will simply add it to the [homework github repository](https://github.com/CS171/2015-cs171-homework).
+<p>When we release a new assignment we will simply add it to the <a href="https://github.com/CS171/2015-cs171-homework">homework github repository</a>.</p>
 
-To get the latest homework assignments and potential updates or corrections to the assignment, run the following.
+<p>To get the latest homework assignments and potential updates or corrections to the assignment, run the following.</p>
 
-```
-git pull homework master
-```
+<pre><code>git pull homework master
+</code></pre>
 
-Make sure to have all your changes committed before you do that.
+<p>Make sure to have all your changes committed before you do that.</p>
 
-*Hands-on help to ensure all students have their git environment configured*
+<p><em>Hands-on help to ensure all students have their git environment configured</em></p>
 
-More nuts &amp; bolts: Python server
----
+<h2 id="more-nuts--bolts-python-server">More nuts &amp; bolts: Python server</h2>
 
-*10 minutes; interactive.*
+<p><em>10 minutes; interactive.</em></p>
 
-In most cases, we need special software — a *server* — to view HTML files. 
+<p>In most cases, we need special software — a <em>server</em> — to view HTML files.</p>
 
-You will need Python; you should already have it installed.
+<p>You will need Python; you should already have it installed.</p>
 
-`cd` to `hw1/` and run the following.
+<p><code>cd</code> to <code>hw1/</code> and run the following.</p>
 
-```
-python -m SimpleHTTPServer
-```
+<pre><code>python -m SimpleHTTPServer
+</code></pre>
 
-Open [http://localhost:8000/](http://localhost:8000/) — we have a server. You can open `table_example.html` to see an HTML file.
+<p>Open <a href="http://localhost:8000/">http://localhost:8000/</a> — we have a server. You can open <code>table_example.html</code> to see an HTML file.</p>
 
-*show the relation between the files and the contents of the directory*
+<p><em>show the relation between the files and the contents of the directory</em></p>
 
-You can only have one server at the same time (unless you specify a port). Control-C to quit. 
+<p>You can only have one server at the same time (unless you specify a port). Control-C to quit.</p>
 
-The DOM
----
+<h2 id="the-dom">The DOM</h2>
 
-*Return to your text editor (`basic.html`). 20 minutes; demonstration only.*
+<p><em>Return to your text editor (<code>basic.html</code>). 20 minutes; demonstration only.</em></p>
 
-The DOM is the hierarchical structure used for representing elements in the browser — you should already be familiar with it. Here is a simple HTML example:
+<p>The DOM is the hierarchical structure used for representing elements in the browser — you should already be familiar with it. Here is a simple HTML example:</p>
 
-```html
-&lt;!DOCTYPE HTML&gt;
-<html>
-  <head>
-    <title>CS171 Section 1</title>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-  </head>
-  <body>
-    <h1>Welcome to CS171</h1>
-    <p>Data visualization</p>
-    <svg></svg>
-  </body>
-</html>
-```
+<pre><code class="language-html">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;CS171 Section 1&lt;/title&gt;
+    &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome to CS171&lt;/h1&gt;
+    &lt;p&gt;Data visualization&lt;/p&gt;
+    &lt;svg&gt;&lt;/svg&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
-*briefly describe the structure of the document*
+<p><em>briefly describe the structure of the document</em></p>
 
-Notice the tags `&lt;...&gt;` that are matched with `&lt;/...&gt;` — those are DOM (HTML) elements.
+<p>Notice the tags <code>&lt;...&gt;</code> that are matched with <code>&lt;/...&gt;</code> — those are DOM (HTML) elements.</p>
 
-### The Web Inspector
+<h3 id="the-web-inspector">The Web Inspector</h3>
 
-`<h1>` indicates a heading. Let's change the contents of the `<h1>` and refresh.
+<p><code>&lt;h1&gt;</code> indicates a heading. Let’s change the contents of the <code>&lt;h1&gt;</code> and refresh.</p>
 
-Let's add anotger paragraph below the first paragraph — a `<p>`.
+<p>Let’s add anotger paragraph below the first paragraph — a <code>&lt;p&gt;</code>.</p>
 
-*Open `basic.html` in Chrome with Developers Tools vertically docked*
+<p><em>Open <code>basic.html</code> in Chrome with Developers Tools vertically docked</em></p>
 
-In Developer Tools, we can do live modifications to the DOM. For example, let's move the paragraph around and change its content. Or, let's delete it.
+<p>In Developer Tools, we can do live modifications to the DOM. For example, let’s move the paragraph around and change its content. Or, let’s delete it.</p>
 
-### CSS: Making it pretty
+<h3 id="css-making-it-pretty">CSS: Making it pretty</h3>
 
-*Return to the text editor*
+<p><em>Return to the text editor</em></p>
 
-HTML sets the structure and contents of the page and CSS sets its style — things like fonts, colors, margins, backgrounds, etc.
+<p>HTML sets the structure and contents of the page and CSS sets its style — things like fonts, colors, margins, backgrounds, etc.</p>
 
-Let's add some CSS.
+<p>Let’s add some CSS.</p>
 
-```
+<pre><code>...
+    &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" type="text/css" href="/style.css" /&gt;
+  &lt;/head&gt;
 ...
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-  
+</code></pre>
+
+<p>That line tells the browser to look for styling information in <code>style.css</code>.</p>
+
+<p><em>open <code>style.css</code> in another pane</em></p>
+
+<p>The file describes a list of styles (e.g. <code>color: darkgrey</code>) applied to a particular group of HTML elements.</p>
+
+<p>We won’t be using CSS extensively in this course: CSS works by assigning styles (e.g. <code>color: darkgrey</code>) to particular groups of HTML elements.</p>
+
+<p>Sometimes we want to target one particular element — a particular <code>p</code>, not all <code>p</code>s. Let’s add an <em>id</em> of <code>subheading</code> to the first <code>p</code>.</p>
+
+<pre><code class="language-html">...
+    &lt;h1&gt;Welcome to CS171&lt;/h1&gt;
+    &lt;p id="subheading"&gt;Data visualization&lt;/p&gt;
 ...
-```
+</code></pre>
 
-That line tells the browser to look for styling information in `style.css`.
+<p>And now, in <code>style.css</code>, we use that id to only apply styling to a specific paragraph.</p>
 
-*open `style.css` in another pane*
-
-The file describes a list of styles (e.g. `color: darkgrey`) applied to a particular group of HTML elements.
-
-We won't be using CSS extensively in this course: CSS works by assigning styles (e.g. `color: darkgrey`) to particular groups of HTML elements.
-
-Sometimes we want to target one particular element — a particular `p`, not all `p`s. Let's add an *id* of `subheading` to the first `p`.
-
-```html
-...
-    <h1>Welcome to CS171</h1>
-    <p id="subheading">Data visualization</p>
-...
-```
-
-And now, in `style.css`, we use that id to only apply styling to a specific paragraph.
-
-```css
-p#subheading {
+<pre><code class="language-css">p#subheading {
   color: darkgrey;
   font-style: italic;
 }
-```
+</code></pre>
 
-*return to Developer Tools*
+<p><em>return to Developer Tools</em></p>
 
-We can also edit CSS live in the Developer Tools. Let's change that paragraph's color to red.
+<p>We can also edit CSS live in the Developer Tools. Let’s change that paragraph’s color to red.</p>
 
-### SVG: Drawing shapes
+<h3 id="svg-drawing-shapes">SVG: Drawing shapes</h3>
 
-*return to the text editor*
+<p><em>return to the text editor</em></p>
 
-SVG is a format for drawing vector graphics in the browser. We'll be using SVG a lot in this course and you're probably not familiar with it yet.
+<p>SVG is a format for drawing vector graphics in the browser. We’ll be using SVG a lot in this course and you’re probably not familiar with it yet.</p>
 
-HTML and SVG are similar — HTML defines the content and structure of elements such as headings, paragraphs, and images; SVG defines graphical marks such as circles, rectangles, and paths.
+<p>HTML and SVG are similar — HTML defines the content and structure of elements such as headings, paragraphs, and images; SVG defines graphical marks such as circles, rectangles, and paths.</p>
 
-Let's add a circle inside the `<svg>` element.
+<p>Let’s add a circle inside the <code>&lt;svg&gt;</code> element.</p>
 
-```svg
-<circle cx="200" cy="200" r="50" />
-```
+<pre><code class="language-svg">&lt;circle cx="200" cy="200" r="50"/&gt;
+</code></pre>
 
-We can modify the attributes of the circle. Let's change the `cx` value. Let's make the `fill` attribute `steelblue`.
+<p>We can modify the attributes of the circle. Let’s change the <code>cx</code> value. Let’s make the <code>fill</code> attribute <code>steelblue</code>.</p>
 
-Let's add a rectangle.
+<p>Let’s add a rectangle.</p>
 
-```svg
-<rect x="10" y="100" width="10" height="100" fill="steelblue" />
-```
+<pre><code class="language-svg">&lt;rect x="10" y="100" width="10" height="100" fill="steelblue"/&gt;
+</code></pre>
 
-*remove the circle and rectangle*
+<p><em>remove the circle and rectangle</em></p>
 
-### Manipulating the DOM
+<h3 id="manipulating-the-dom">Manipulating the DOM</h3>
 
-*Expand the console drawer in the Developer Tools Elements pane*
+<p><em>Expand the console drawer in the Developer Tools Elements pane</em></p>
 
-In addition to hardcoding SVG elements, we can use Javascript to programmatically add to the DOM.
+<p>In addition to hardcoding SVG elements, we can use Javascript to programmatically add to the DOM.</p>
 
-```js
-var svg = d3.select("svg");
+<pre><code class="language-js">var svg = d3.select("svg");
 
 var circle = svg.append("circle");
-```
+</code></pre>
 
-Why don't we see anything? The circle is in the DOM, but it needs attributes for its position and size.
+<p>Why don’t we see anything? The circle is in the DOM, but it needs attributes for its position and size.</p>
 
-```js
-circle
+<pre><code class="language-js">circle
     .attr("cx", 200)
     .attr("cy", 100)
     .attr("r", 40)
     .attr("fill", "steelblue");
-```
+</code></pre>
 
-How about more circles?
+<p>How about more circles?</p>
 
-```js
-var circle2 = svg.append("circle")
+<pre><code class="language-js">var circle2 = svg.append("circle")
     .attr("cx", 300)
     .attr("cy", 100)
     .attr("r", 40)
     .attr("fill", "steelblue");
-```
+</code></pre>
 
-And of course, we can still update our original circle.
+<p>And of course, we can still update our original circle.</p>
 
-```js
-circle
+<pre><code class="language-js">circle
 	.transition()
     .attr("cx", 400);
-```
+</code></pre>
 
-### Groups
+<h3 id="groups">Groups</h3>
 
-We can group elements using `<g>` elements. First, we create a `<g>` element.
+<p>We can group elements using <code>&lt;g&gt;</code> elements. First, we create a <code>&lt;g&gt;</code> element.</p>
 
-```js
-var g = svg.append("g");
-```
+<pre><code class="language-js">var g = svg.append("g");
+</code></pre>
 
-Let's move the two circles into the `<g>`.
+<p>Let’s move the two circles into the <code>&lt;g&gt;</code>.</p>
 
-```js
-g.node().appendChild(circle.node());
+<pre><code class="language-js">g.node().appendChild(circle.node());
 g.node().appendChild(circle2.node());
-```
+</code></pre>
 
-Nothing changes — the `<g>` element just helps us group and organize elements.
+<p>Nothing changes — the <code>&lt;g&gt;</code> element just helps us group and organize elements.</p>
 
-We can apply transformations that apply to the whole group — for example, let's translate the group.
+<p>We can apply transformations that apply to the whole group — for example, let’s translate the group.</p>
 
-```js
-g
+<pre><code class="language-js">g
   .transition()
   .attr("transform", "translate(0, 100)");
-```
+</code></pre>
 
----
-*See you next week!*
-</g></g></g></g></svg></p></h1></h1></div>
+<hr />
+<p><em>See you next week!</em></p>
 
   </article>
 
