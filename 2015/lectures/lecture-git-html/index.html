@@ -241,11 +241,18 @@ We will be using a version control tool called git to track changes to our code.
 
 <h3 id="git-model">git model</h3>
 
-<p>Whiteboard sketch of git with a server.</p>
+<p>Whiteboard sketch of git with a server. A git repository is essentially a large graph.</p>
 
 <h3 id="git-tutorial">git tutorial</h3>
 
 <p>This is a quick intro to git, used in combination with GitHub. This is not a complete tutorial, but will use the most important git features.</p>
+
+<p>We start by configuring git</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git config --global user.name <span class="s2">&quot;YOUR NAME&quot;</span>
+<span class="lineno">2</span> <span class="nv">$ </span>git config --global user.email <span class="s2">&quot;YOUR EMAIL ADDRESS&quot;</span></code></pre></div>
+
+<p>Make sure that his is set to your official school address and your correct name!</p>
 
 <p><strong>Create a folder for your project</strong></p>
 
@@ -474,112 +481,113 @@ We will be using a version control tool called git to track changes to our code.
 
 <p><img src="images/newrepo.png" alt="New repo interface on GitHub" /></p>
 
-<p>If you’d like to</p>
+<p>Now let’s clone the repository from GitHub.</p>
 
-<h1 id="if-you-dont-have-a-git-repository-with-code-yet-you-can-simply-clone-that-repository-and-start-working-on-it">If you don’t have a git repository with code yet, you can simply clone that repository and start working on it:</h1>
-<p>$ git clone https://github.com/alexsb/Demo.git<br />
-# This creates a local copy of the (empty) github repository.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="nv">$ </span>git clone https://github.com/alexsb/Demo.git
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="c"># Let&#39;s see how the config looks for this one.</span>
+<span class="lineno"> 4</span> <span class="nv">$ </span>cat .git/config 
+<span class="lineno"> 5</span> <span class="o">[</span>core<span class="o">]</span>
+<span class="lineno"> 6</span> 	<span class="nv">repositoryformatversion</span> <span class="o">=</span> 0
+<span class="lineno"> 7</span> 	<span class="nv">filemode</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno"> 8</span> <span class="nb">	</span><span class="nv">bare</span> <span class="o">=</span> <span class="nb">false</span>
+<span class="lineno"> 9</span> <span class="nb">	</span><span class="nv">logallrefupdates</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">10</span> <span class="nb">	</span><span class="nv">ignorecase</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">11</span> <span class="nb">	</span><span class="nv">precomposeunicode</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="lineno">12</span> <span class="o">[</span>remote <span class="s2">&quot;origin&quot;</span><span class="o">]</span>
+<span class="lineno">13</span> 	<span class="nv">url</span> <span class="o">=</span> https://github.com/alexsb/demo.git
+<span class="lineno">14</span> 	<span class="nv">fetch</span> <span class="o">=</span> +refs/heads/*:refs/remotes/origin/*
+<span class="lineno">15</span> <span class="o">[</span>branch <span class="s2">&quot;master&quot;</span><span class="o">]</span>
+<span class="lineno">16</span> 	<span class="nv">remote</span> <span class="o">=</span> origin
+<span class="lineno">17</span> 	<span class="nv">merge</span> <span class="o">=</span> refs/heads/master</code></pre></div>
 
-<h1 id="id-like-to-push-our-changes-to-this-repository">I’d like to push our changes to this repository.</h1>
-<p># This command tells git where the “origin” of this repository is.<br />
-$ git remote add origin https://github.com/alexsb/Demo.git</p>
+<p>This creates a local copy of the (empty) GitHub repository. We will just start working with that and commit and push the code to the server. If you’d like to add an existing repository to GitHub, follow <a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/">these instructions</a>.</p>
 
-<h1 id="we-can-see-the-changes-already">We can see the changes already:</h1>
-<p>$ cat .git/config <br />
-[core]<br />
-        repositoryformatversion = 0<br />
-        filemode = true<br />
-        bare = false<br />
-        logallrefupdates = true<br />
-[remote “origin”]<br />
-        url = https://github.com/alexsb/Demo.git<br />
-        fetch = +refs/heads/<em>:refs/remotes/origin/</em></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># What&#39;s currently in the repository?</span>
+<span class="lineno"> 2</span> <span class="nv">$ </span>ls
+<span class="lineno"> 3</span> LICENSE    README.md
+<span class="lineno"> 4</span> <span class="c"># Write something to demo.txt.</span>
+<span class="lineno"> 5</span> <span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;Hello world!&quot;</span> &gt; demo.txt
+<span class="lineno"> 6</span> <span class="nb">echo</span> <span class="s2">&quot;Hello world&quot;</span> &gt; demo.txt
+<span class="lineno"> 7</span> <span class="c"># Add demo.txt to the repository.</span>
+<span class="lineno"> 8</span> <span class="nv">$ </span>git add demo.txt
+<span class="lineno"> 9</span> <span class="c"># Commit the file to the repository.</span>
+<span class="lineno">10</span> <span class="nv">$ </span>git commit -a -m <span class="s2">&quot;added demo file&quot;</span> 
+<span class="lineno">11</span> <span class="o">[</span>master 2e1918d<span class="o">]</span> added demo file
+<span class="lineno">12</span>  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="lineno">13</span>  create mode <span class="m">100644</span> demo.txt
+<span class="lineno">14</span> <span class="c"># Pushing it to the server!</span>
+<span class="lineno">15</span> <span class="nv">$ </span>git push 
+<span class="lineno">16</span> Counting objects: 3, <span class="k">done</span>.
+<span class="lineno">17</span> Delta compression using up to <span class="m">8</span> threads.
+<span class="lineno">18</span> Compressing objects: 100% <span class="o">(</span>2/2<span class="o">)</span>, <span class="k">done</span>.
+<span class="lineno">19</span> Writing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="m">324</span> bytes <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+<span class="lineno">20</span> Total <span class="m">3</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+<span class="lineno">21</span> To https://github.com/alexsb/demo.git
+<span class="lineno">22</span>    8e1ecd1..2e1918d  master -&gt; master</code></pre></div>
 
-<h1 id="now-we-send-our-changes-to-github">Now we send our changes to github</h1>
-<p>$ git push -u origin master<br />
-Username for ‘https://github.com’: alexsb<br />
-Password for ‘https://alexsb@github.com’: <br />
-Counting objects: 15, done.<br />
-Delta compression using up to 8 threads.<br />
-Compressing objects: 100% (8/8), done.<br />
-Writing objects: 100% (15/15), 1.22 KiB | 0 bytes/s, done.<br />
-Total 15 (delta 2), reused 0 (delta 0)<br />
-To https://github.com/alexsb/Demo.git<br />
- * [new branch]      master -&gt; master<br />
-Branch master set up to track remote branch master from origin.</p>
+<p>We have now committed a file locally and pushed it to the server, i.e., our local copy is in sync with the server copy. <br />
+Note that the <code>git push</code> command uses the origin defined in the config file. You can also push to other repositories!</p>
 
-<h1 id="now-our-changes-are-on-github">Now our changes are on github.</h1>
-<p># Let’s edit the file through the github web interface<br />
-# To get the changes locally, we pull</p>
+<p>Next, we will make changes at another place. We’ll use the GitHub web interface to do that.</p>
 
-<p>$ git pull <br />
-remote: Counting objects: 5, done.<br />
-remote: Compressing objects: 100% (2/2), done.<br />
-remote: Total 3 (delta 1), reused 0 (delta 0)<br />
-Unpacking objects: 100% (3/3), done.<br />
-From https://github.com/alexsb/Demo<br />
-   4dad82f..4a83d51  master     -&gt; origin/master<br />
-Updating 4dad82f..4a83d51<br />
-Fast-forward<br />
- demo.txt | 3 ++-<br />
- 1 file changed, 2 insertions(+), 1 deletion(-)</p>
+<p>Once these changes are done, our local repository is out of sync with the remote repository. To get these changes locally, we have to pull from the repository:</p>
 
-<h1 id="now-these-changes-are-back-here">Now these changes are back here:</h1>
-<p>$ cat demo.txt <br />
-I am here!<br />
-Hello World!<br />
-Are you still spinning?<br />
-Indeed!<br />
-Spinning round and round.<br />
-But don’t you grow tired?</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="nv">$ </span>git pull
+<span class="lineno"> 2</span> remote: Counting objects: 3, <span class="k">done</span>.
+<span class="lineno"> 3</span> remote: Compressing objects: 100% <span class="o">(</span>2/2<span class="o">)</span>, <span class="k">done</span>.
+<span class="lineno"> 4</span> remote: Total <span class="m">3</span> <span class="o">(</span>delta 1<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 0
+<span class="lineno"> 5</span> Unpacking objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span>.
+<span class="lineno"> 6</span> From https://github.com/alexsb/demo
+<span class="lineno"> 7</span>    2e1918d..5dd3090  master     -&gt; origin/master
+<span class="lineno"> 8</span> Updating 2e1918d..5dd3090
+<span class="lineno"> 9</span> Fast-forward
+<span class="lineno">10</span>  demo.txt <span class="p">|</span> <span class="m">1</span> +
+<span class="lineno">11</span>  <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+<span class="lineno">12</span> <span class="c"># Let&#39;s see whether the changes are here </span>
+<span class="lineno">13</span> <span class="nv">$ </span>cat demo.txt 
+<span class="lineno">14</span> Hello world
+<span class="lineno">15</span> Are you still spinning?</code></pre></div>
 
-<h1 id="forking-on-github-forking-is-essentially-making-use-of-the-distributed-nature-of-git-while-having-the-benefits-of-a-server">Forking on Github: Forking is essentially making use of the distributed nature of git, while having the benefits of a server.</h1>
-<p># Github Issues are a great way to keep track of open tasks and problems. Issues can be references and closed from commits.</p>
+<h3 id="other-github-features">Other GitHub Features</h3>
 
-<h3 id="git-resources">git Resources</h3>
+<ul>
+  <li><strong>GitHub Issues</strong> <br />
+ Github Issues are a great way to keep track of open tasks and problems. Issues can be references and closed from commits.</li>
+  <li><strong>Forking</strong> <br />
+ Forking is essentially making use of the distributed nature of git, while having the benefits of a server. When you fork a repository you make a clone of someone else’s code that you are not allowed to read. The repository appears in your github account and you can start editing the code. If you think you improved the code, you can send a “pull request” to the original owner. The owner can then review your code and merge your modifications into his main repository. Forking is hence virtually the same as branching, with the exception that it resolves issues with write permissions.</li>
+</ul>
 
-<p><a href="http://www.sbf5.com/~cduan/technical/git/">Understanding git conceptually</a><br />
-<a href="http://www.youtube.com/watch?v=4XpnKHJAok8">Fun and insightful talk on git by Linus Torvalds</a><br />
-<a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful git branching model</a><br />
-<a href="http://en.wikipedia.org/wiki/Git_(software)">Wikipedia on git</a></p>
+<h3 id="gui-clients">GUI Clients</h3>
 
-<p><em>briefly describe the value of version control</em></p>
+<ul>
+  <li><strong>GitHub Desktop</strong> <br />
+Good option if you want a GUI client. <a href="https://desktop.github.com/">Download here</a></li>
+  <li><strong>Integrated in IDEs</strong> <br />
+Many operations can be done out of a IDE such as WebStorm</li>
+</ul>
 
-<p>First, let’s configure git: open a shell. <em>describe how to do this on other OSes</em></p>
+<h3 id="setting-up-your-homework-repositories">Setting up your homework repositories.</h3>
 
-<p>Run the following.</p>
+<p>The homeworks are hosted in a git repository. Every time we release a homework we will just update the repository. You can then pull from that repository to get the latest homework on your computer.</p>
 
-<pre><code>git config --global user.name "YOUR NAME"
-git config --global user.email "YOUR EMAIL ADDRESS"
-</code></pre>
+<p>To get the homework repository, run the following:</p>
 
-<p><code>cd</code> to the directory you want put your homework in (e.g., your Documents folder). <em>ensure the concept of a working directory is clear</em></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git clone https://github.com/dataviscourse/2015-dataviscourse-homework -o homework
+<span class="lineno">2</span> <span class="nv">$ </span><span class="nb">cd </span>2015-dataviscourse-homework</code></pre></div>
 
-<p>What we going to do as overview:<br />
-<img src="images/section1_github.png?raw=true" alt="Setting up your Github repository" /></p>
+<p>Note that by using the <code>-o homework</code> option we’re not using the default remote <code>origin</code> but a user-defined remote called <code>homework</code>.</p>
 
-<p>Run the following:</p>
-
-<pre><code>git clone https://github.com/CS171/2015-cs171-homework.git -o homework
-</code></pre>
-
-<p>Then <code>cd</code> into the newly created <code>2015-cs171-homework/</code> directory.  You can change the directory name if you want.</p>
-
-<p><em>open a browser window</em></p>
-
-<p>Create a new repository on the Github website following the <code>cs171-hw-lastname-firstname</code> naming convention. <strong>Use all lowercase for your repository name. It is important that your repository be named exactly as above so that we can access it for grading.</strong></p>
+<p>Next, create a new repository on the Github website following the <code>dataviscourse15-hw-lastname-firstname</code> naming convention. <strong>Use all lowercase for your repository name. It is important that your repository be named exactly as above so that we can access it for grading.</strong></p>
 
 <p>Ensure your new repository is private and don’t click the option to “Initialize the repository with a README”.</p>
 
-<p>Unless you know what you’re doing, select HTTPS.</p>
+<p>Run the two commands described on GitHub under the heading “Push an existing repository from the command line”. For my repository these are:</p>
 
-<p><img src="images/https.png?raw=true" alt="Setting up your Github repository" /></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git remote add origin https://github.com/alexsb/dataviscourse15-hw-lex-alexander.git
+<span class="lineno">2</span> <span class="nv">$ </span>git push -u origin master</code></pre></div>
 
-<p>Run the two commands described on GitHub under the heading “Push an existing repository from the command line”, highlighted in red below.</p>
-
-<p><img src="images/commands.png?raw=true" alt="Setting up your Github repository" /></p>
-
-<p>On GitHub, go to the repository settings and navigate to the Collaborators page. Add <a href="https://github.com/cs171tf"><code>cs171tf</code></a> as a collaborator to your private repository.</p>
+<p>On GitHub, go to the repository settings and navigate to the Collaborators page. Add <a href="https://github.com/datavis-ta"><code>datavis-ta</code></a> as a collaborator to your private repository.</p>
 
 <p>Now your homework repository is all set!</p>
 
@@ -587,35 +595,33 @@ git config --global user.email "YOUR EMAIL ADDRESS"
 
 <p>While working on homework assignments, periodically run the following:</p>
 
-<pre><code>git add -A
-git commit -m "Describe your changes"
-git push
-</code></pre>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git add -A
+<span class="lineno">2</span> <span class="nv">$ </span>git commit -m <span class="s2">&quot;Describe your changes&quot;</span>
+<span class="lineno">3</span> <span class="nv">$ </span>git push</code></pre></div>
 
-<p>The <code>git commit</code> operation takes snapshot of your code at that point in time — a snapshot is called a “commit” in Git parlance. You can revert to a previous commit at any time.</p>
+<p>Remeber, <code>git commit</code> operation takes snapshot of your code at that point in time but doesn’t write to the server.</p>
 
 <p>The <code>git push</code> operation pushes your local commits to the remote repository. It is important that you push your changes or others will not be able to see them.</p>
 
 <p>You should do this frequently: as often as you have an incremental, standalone improvement.</p>
 
-<h3 id="submitting-your-homework">Submitting your homework</h3>
+<h4 id="submitting-your-homework">Submitting your homework</h4>
 
 <p>We will automatically copy your repository after each homework deadline. <strong>You do not need to do anything else to submit your work (but make sure that you have pushed the latest version of your homework).</strong> We will count the time of your last commit to the Github repository as your submission time.</p>
 
-<p>Refer to the <a href="http://www.cs171.org/2015/homework/">CS 171 web page</a> for more information on how to submit your homework.</p>
+<p>Refer to the <a href="http://www.dataviscourse.net/2015/homework/">homework page</a> for more information on how to submit your homework.</p>
 
-<h3 id="getting-new-homework-assignments">Getting new homework assignments</h3>
+<h4 id="getting-new-homework-assignments">Getting new homework assignments</h4>
 
-<p>When we release a new assignment we will simply add it to the <a href="https://github.com/CS171/2015-cs171-homework">homework github repository</a>.</p>
+<p>When we release a new assignment we will simply add it to the <a href="https://github.com/dataviscourse/2015-dataviscourse-homework">homework github repository</a>.</p>
 
 <p>To get the latest homework assignments and potential updates or corrections to the assignment, run the following.</p>
 
-<pre><code>git pull homework master
-</code></pre>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="nv">$ </span>git pull homework master</code></pre></div>
 
 <p>Make sure to have all your changes committed before you do that.</p>
 
-<p><em>Hands-on help to ensure all students have their git environment configured</em></p>
+<h2 id="web-stack">Web Stack</h2>
 
 <h2 id="more-nuts--bolts-python-server">More nuts &amp; bolts: Python server</h2>
 
