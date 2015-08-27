@@ -108,7 +108,8 @@
 
     <div class="page-content">
       <div class="wrap">
-      <div class="post">
+      <!-- Source: http://liveweave.com/JlSG6D -->
+<div class="post">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src='http://codemirror.net/lib/codemirror.js'></script>
     <script src='http://codemirror.net/mode/xml/xml.js'></script>
@@ -127,9 +128,7 @@
         .CodePreview {
             width: 100%;
             float: left;
-
             border: 1px solid gray;
-
         }
     </style>
     <script>
@@ -258,8 +257,6 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <p>The important thing about HTML is that the markup is represented by elements. An HTML element is a portion of the content that is surrounded by a pair of tags of the same name. Like this:</p>
 
-<!-- Source: http://liveweave.com/JlSG6D -->
-
 <html>
 
 <head>
@@ -278,7 +275,6 @@ Next, we go over the very basics of how the content of a web page is represented
 
 
 <script>
-    console.log("wo");
     renderCode("basic_element", "", "<strong>This is an HTML element.</strong>");
 </script>
 
@@ -290,8 +286,6 @@ Next, we go over the very basics of how the content of a web page is represented
 <p>In this element, strong is the name of the tag; the open tag is <strong>, and the matching closing tag is </strong>. The way you should interpret this is that the text “This is an HTML element” should be “strong”, i.e., typically this will be bold text.</p>
 
 <p>HTML elements can and commonly do nest:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -311,7 +305,6 @@ Next, we go over the very basics of how the content of a web page is represented
 
 
 <script>
-    console.log("wo");
     renderCode("nested_element", "", "<strong>This is strong, and <u>this is underlined and strong.</u></strong>");
 </script>
 
@@ -321,8 +314,6 @@ Next, we go over the very basics of how the content of a web page is represented
 </html>
 
 <p>In addition to the names, opening tags can contain extra information about the element. These are called attributes:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -342,7 +333,6 @@ Next, we go over the very basics of how the content of a web page is represented
 
 
 <script>
-    console.log("wo");
     renderCode("attribute", "", "<a href='http://www.google.com'>A link to Google's main page</a>");
 </script>
 
@@ -358,8 +348,7 @@ Next, we go over the very basics of how the content of a web page is represented
 <p><strong>Self-closing elements</strong><br />
 Some elements rarely have internal content, and it becomes a bit of a pain to type the closing tags every time. In that case, you can use the following shorthand notation: <foo></foo> is equivalent to <foo></foo> (you might have noticed that in the charset declaration above).</p>
 
-<p><strong>Here are some important tags:</strong><br />
-<!-- Source: http://liveweave.com/JlSG6D --></p>
+<p><strong>Here are some important tags:</strong></p>
 
 <html>
 
@@ -377,9 +366,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("htmls_tags", "html_tags.html", "");
 </script>
+<i><a href="html_tags.html">See output in new page.</a></i>
 
 
 
@@ -402,8 +391,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <p>An HTML5 document has a little bit of necessary boilerplate that you should just copy and paste every time you need to get started (and no, you won’t get charged with plagiarism for this one bit.). Every HTML5 document you create in class should have this skeleton:</p>
 
-<!-- Source: http://liveweave.com/JlSG6D -->
-
 <html>
 
 <head>
@@ -420,9 +407,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("simple_example", "simple_example.html", "");
 </script>
+<i><a href="simple_example.html">See output in new page.</a></i>
 
 
 
@@ -439,7 +426,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h4 id="inspecting-the-dom-in-a-live-browser">INSPECTING THE DOM IN A LIVE BROWSER</h4>
 
-<p>Perhaps the most important habit you will learn in these first web lessons is the following: when in doubt, go to the Developer Tools. In this case, we’ll look at the Element tree, by clicking on the menu bar: View → Developer → Developer Tools. Alternatively, you can right click on any part of the webpage, and choose “Inspect Element”. Notice that there can be a big difference between what is in the DOM and what is in the source. In fact, much of this class is about dynamically generating DOM elements.</p>
+<p>Perhaps the most important habit you will learn in these first web lessons is the following: when in doubt, go to the Developer Tools. In this case, we’ll look at the Element tree, by clicking on the menu bar: View → Developer → Developer Tools. Alternatively, you can right click on any part of the webpage, and choose “Inspect Element”. Notice that there can be a big difference between what is in the DOM and what is in the source. In fact, much of this class is about dynamically generating DOM elements. Here is a <a href="https://developer.chrome.com/devtools">good overview of the developer tools</a>.</p>
 
 <h2 id="making-things-pretty-cascading-style-sheets">Making Things Pretty: Cascading Style Sheets</h2>
 
@@ -450,8 +437,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 <h3 id="css-element-selectors">CSS Element Selectors</h3>
 
 <p>Let’s look at a very simple CSS rule:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -469,9 +454,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("simple_css", "simple_css.html", "");
 </script>
+<i><a href="simple_css.html">See output in new page.</a></i>
 
 
 
@@ -481,8 +466,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 </html>
 
 <p>In this rule, <strong>strong is the selector</strong>, and each line inside the curly brackets is a <strong>declaration</strong>. Roughly, the way this goes is: for every DOM element with tag name strong, make its background color red, and its font size 300% of the base size. CSS rules are applied in order that they appear in the document, and if more than one rule matches the element, then they both apply. For instance, the example below is entirely equivalent to the above:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -500,9 +483,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("simple_css2", "simple_css2.html", "");
 </script>
+<i><a href="simple_css2.html">See output in new page.</a></i>
 
 
 
@@ -514,8 +497,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 <h3 id="css-class-selectors">CSS Class Selectors</h3>
 
 <p>CSS selectors can be much more powerful than selecting on element names. For example, we can create user-defined “classes” of style. Classes allow us to define certain elements to be of a specific type that is then formatted consistently. Here is an example with “important” text and a “footnote”. Both are in a div, but they have different semantics, and we also want to display them differntly.</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -533,9 +514,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("css_classes", "css_classes.html", "");
 </script>
+<i><a href="css_classes.html">See output in new page.</a></i>
 
 
 
@@ -549,8 +530,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 <h3 id="css-id-selectors">CSS ID Selectors</h3>
 
 <p>ID selectors work similar to class selectors, but IDs may only be used once for an element in the DOM. You can use IDs as “anchors” to refer to a site by appending <code>#idname</code> to the URL. But you can also use IDs to apply custom styles in CSS:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -568,9 +547,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("css_ids", "css_ids.html", "");
 </script>
+<i><a href="css_ids.html">See output in new page.</a></i>
 
 
 
@@ -580,8 +559,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 </html>
 
 <p>You can also use the combination of IDs and CSS to create layouts of a page:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -599,9 +576,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("css_layouts", "css_layouts.html", "");
 </script>
+<i><a href="css_layouts.html">See output in new page.</a></i>
 
 
 
@@ -615,8 +592,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 <p>CSS selectors let you match elements based on their relationship with other elements. While I will simply refer you to the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">MDN Selectors webpage</a> for the full reference, I want to highlight two particularly important ones, the child selector, and the descendant selector.</p>
 
 <p>The child selector matches every time an element is directly enclosed by a different element. For example, consider the following rule involving the child selector:</p>
-
-<!-- Source: http://liveweave.com/JlSG6D -->
 
 <html>
 
@@ -634,9 +609,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("css_relationships", "css_relationships.html", "");
 </script>
+<i><a href="css_relationships.html">See output in new page.</a></i>
 
 
 
@@ -659,8 +634,6 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <p>Finally, you can place CSS declarations directly inside an element. You do this using the style attribute, which most HTML elements support. For example, if you have this CSS rule:</p>
 
-<!-- Source: http://liveweave.com/JlSG6D -->
-
 <html>
 
 <head>
@@ -677,9 +650,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 
 <script>
-    console.log("wa");
     renderCode("css_inline", "css_inline.html", "");
 </script>
+<i><a href="css_inline.html">See output in new page.</a></i>
 
 
 
@@ -692,6 +665,350 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h2 id="svg">SVG</h2>
 
+<p>So far we have only seen textual content in HTML, and this is a data visualization course. SVG (“Scalable Vector Graphics”) is a subset of the HTML5 standard that will provide us with essentially all of our graphical needs. SVG is extremely powerful, broadly supported, and very easy to program for. It’s also the preferred target for d3, the javascript library we’ll use for our visualization design.</p>
+
+<h3 id="minimal-example">Minimal Example</h3>
+
+<p>An SVG drawing starts with an svg element, which requires width and height attributes, specified in pixels:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_minimal" name="svg_minimal">
+
+        </textarea>
+<iframe id="preview-svg_minimal" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_minimal", "svg_minimal.html", "");
+</script>
+<i><a href="svg_minimal.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<p>This is results in a blank canvas, which is kind of boring, but you should be able to verify, using the Developer Tools, that there is in fact an honest-to-goodness SVG element there. In the following, you’ll learn how to add basic graphical shapes to the SVG element.</p>
+
+<h3 id="circle">Circle</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_circle" name="svg_circle">
+
+        </textarea>
+<iframe id="preview-svg_circle" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_circle", "svg_circle.html", "");
+</script>
+<i><a href="svg_circle.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="ellipse">Ellipse</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_ellipse" name="svg_ellipse">
+
+        </textarea>
+<iframe id="preview-svg_ellipse" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_ellipse", "svg_ellipse.html", "");
+</script>
+<i><a href="svg_ellipse.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="rectangle">Rectangle</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_rect" name="svg_rect">
+
+        </textarea>
+<iframe id="preview-svg_rect" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_rect", "svg_rect.html", "");
+</script>
+<i><a href="svg_rect.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="lines">Lines</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_line" name="svg_line">
+
+        </textarea>
+<iframe id="preview-svg_line" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_line", "svg_line.html", "");
+</script>
+<i><a href="svg_line.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="text">Text</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_text" name="svg_text">
+
+        </textarea>
+<iframe id="preview-svg_text" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_text", "svg_text.html", "");
+</script>
+<i><a href="svg_text.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="path">Path</h3>
+
+<p>The SVG path element is how you “escape” the basic SVG shapes. In case none of the predefined shapes are good enough for you, you can draw any arbitrary shape you want using the path element. We will not use it very often in class, but it’s important that you know it exists, because it helps you understand how much of d3 works under the hood.</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_path" name="svg_path">
+
+        </textarea>
+<iframe id="preview-svg_path" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_path", "svg_path.html", "");
+</script>
+<i><a href="svg_path.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<p>Instead of giving you just one simple example that wouldn’t do the path element justice, I will ask you to simply take a look at the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">MDN path tutorial</a>.</p>
+
+<h3 id="ordering">Ordering</h3>
+
+<p>The order in which elements are drawn is the order in which they appear in the element:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_order" name="svg_order">
+
+        </textarea>
+<iframe id="preview-svg_order" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_order", "svg_order.html", "");
+</script>
+<i><a href="svg_order.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<h3 id="grouping">Grouping</h3>
+
+<p>Grouping elements is a very powerful idea, and we will use it extensively when we get to use SVG for actual visualizations. It is powerful because it gives us abstraction, in the same way that a procedure groups a sequence of operations under a single name. In dynamic visualizations, it will make it possible for us to move a large number of elements by simply taking one branch of the DOM and placing it in a different subtree; without groups, we would have to remember over and over again which elements we cared about.</p>
+
+<p>In addition, SVG groups give us geometric transformations. Geometric transformations are amazingly useful when we want to change the positions of a large number of elements in the same way, or when we want to express the positions of the elements in a more convenient manner. For example, recall that SVG’s basic coordinate system increases the y coordinate in the downward direction. If we want to draw a scatterplot, for example, , then we’d have to remember every time to subtract the y coordinate we want from the height of the SVG element:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_group" name="svg_group">
+
+        </textarea>
+<iframe id="preview-svg_group" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_group", "svg_group.html", "");
+</script>
+<i><a href="svg_group.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<p>This is annoying and error-prone. Instead, we can encode that transformation directly, using SVG’s grouping node g, and its transform attribute:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_group2" name="svg_group2">
+
+        </textarea>
+<iframe id="preview-svg_group2" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_group2", "svg_group2.html", "");
+</script>
+<i><a href="svg_group2.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<p>The transform attribute is read right-to-left, and it’s saying: to get the outer y coordinate, multiply the inner y coordinate by -1, and then add 200. In other words, outer_y = 200 - inner_y, which is precisely the flipping we need. Now the y coordinates behave as we would expect them in a scatterplot: increasing y means going up.</p>
+
+<p>The main problem with these transformations, is that they apply to everything:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+<textarea id="svg_translate_text" name="svg_translate_text">
+
+        </textarea>
+<iframe id="preview-svg_translate_text" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+
+<script>
+    renderCode("svg_translate_text", "svg_translate_text.html", "");
+</script>
+<i><a href="svg_translate_text.html">See output in new page.</a></i>
+
+
+
+
+</body>
+
+</html>
+
+<p>Clearly, we don’t want that to happen in every situation.</p>
+
+<h3 id="presentation-attributes">PRESENTATION ATTRIBUTES</h3>
+
+<p>As you might have noticed by comparing the HTML examples with the SVG ones, some appearance aspects are controlled by HTML attributes; others are controlled by CSS properties. Which is which is a perennial source of confusion, and unfortunately there’s no good way around it. To add to the confusion, a subset of SVG attributes can also be specified via CSS: these are the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute">“presentation attributes”</a>.</p>
+
+<p>It’s worth remembering this because CSS declarations for these attributes will override inline attribute definitions in the DOM. This is in turn inconsistent with the rule for the style attribute itself, which overrides CSS definitions (on behalf of whoever designed this standard: I am sorry).</p>
 
     </article>
 
