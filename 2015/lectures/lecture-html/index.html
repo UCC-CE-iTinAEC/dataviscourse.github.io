@@ -341,12 +341,12 @@ Next, we go over the very basics of how the content of a web page is represented
 
 </html>
 
-<p>In this case, we’re using the <code>a</code> element (which stood for “anchor”, but now is almost universally used as a “link” — go figure). <code>href</code> means “HTML reference”, which actually makes sense for a change. The meaning given to each attribute changes from element to element.</p>
+<p>In this case, we’re using the <code>a</code> element (which stood for “anchor”, but now is almost universally used as a “link” — go figure). The attribute  <code>href</code> means “HTML reference”, which actually makes sense for a change. The meaning given to each attribute changes from element to element.</p>
 
-<p>We will use element attributes in pretty much every example from now on. The most important ones are <code>id</code>, <code>class</code>, and <code>style</code>. The <code>id</code> attribute gives the attribute a unique name, which can then be used to access the element via Javascript (we’ll see how next week). Think of it as making the element accessible via a global variable. This is as convenient as a global variable, and potentially just as confusing: needing lots of different element ids might be a sign that you could organize your code better (in the next weeks we’ll learn about good practices like this). The class and style attributes will be explained soon, in the CSS section below.</p>
+<p>We will use element attributes in pretty much every example from now on. The most important ones are <code>id</code>, <code>class</code>, and <code>style</code>. The <code>id</code> attribute gives the attribute a unique identifier, which can then be used to access the element via Javascript (we’ll see how next week). Think of it as making the element accessible via a global variable. This is as convenient as a global variable, and potentially just as confusing: needing lots of different element ids might be a sign that you could organize your code better (in the coming weeks, we’ll learn about good practices like this). The class and style attributes will be explained in the CSS section below.</p>
 
 <p><strong>Self-closing elements</strong><br />
-Some elements rarely have internal content, and it becomes a bit of a pain to type the closing tags every time. In that case, you can use the following shorthand notation: <foo></foo> is equivalent to <foo></foo> (you might have noticed that in the charset declaration above).</p>
+Some elements rarely have internal content between their opening and closing tags, and therefore it becomes a bit of a pain to type the closing tags every time. In that case, you can use the following shorthand notation: <code>&lt;foo /&gt;</code> is equivalent to <code>&lt;foo&gt;&lt;/foo&gt;</code> (you might have noticed that in the charset declaration above).</p>
 
 <p><strong>Here are some important tags:</strong></p>
 
@@ -377,7 +377,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 </html>
 
-<p>A couple of tags that don’t have visual equivalents on the website, they define <strong>document metadata</strong>:<br />
+<p>Below are a couple of tags that don’t have visual equivalents on the website, but they are used to define <strong>document metadata</strong>:<br />
  * <code>&lt;html&gt;</code> creates the entire HTML container.<br />
  * <code>&lt;head&gt;</code> Creates the header (generally where the title and links to style sheets/scripts are found).<br />
  * <code>&lt;script&gt;</code> links to or embeds a script (we will do that a lot).<br />
@@ -389,7 +389,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h3 id="necessary-boilerplate">Necessary Boilerplate</h3>
 
-<p>An HTML5 document has a little bit of necessary boilerplate that you should just copy and paste every time you need to get started (and no, you won’t get charged with plagiarism for this one bit.). Every HTML5 document you create in class should have this skeleton:</p>
+<p>An HTML5 document has a little bit of necessary boilerplate that you should just copy and paste every time you need to get started (and no, you won’t get charged with plagiarism for this one.). Every HTML5 document you create in class should have this skeleton:</p>
 
 <html>
 
@@ -422,7 +422,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <p>As we have seen above, a markup document looks a lot like a tree: it has a root, the HTML element, and elements can have children that are containing elements themselves.</p>
 
-<p>While HTML is a textual representation of a markup document, the DOM is a programming interface for it. DOM stands for “Document Object Model”, and in this class we will use “DOM” to mean the tree created by the web browsers to represent the document, and the API that they provide in order to access it. This week, we will not use the API part of it, but the examples we’ll go over in class will highlight the tree structure of the DOM.</p>
+<p>While HTML is a textual representation of a markup document, the DOM is a programming interface for it. DOM stands for “Document Object Model”, and in this class we will use “DOM” to mean the tree created by the web browsers to represent the document, and the API that they provide in order to access it. This week, we will not use the API part of it, but the examples we’ll go over in class, will highlight the tree structure of the DOM.</p>
 
 <h4 id="inspecting-the-dom-in-a-live-browser">INSPECTING THE DOM IN A LIVE BROWSER</h4>
 
@@ -432,7 +432,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <p>HTML specifies the content of a web page, but plain HTML says relatively little about how the content looks. This is where CSS comes in. CSS stands for Cascading Style Sheets: they are external declarations that control the way your elements will get rendered by a web browser. A full discussion of CSS syntax is, as usual, given at the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax">MDN CSS website</a>; we show the very basics here.</p>
 
-<p>A stylesheet will usually consist of a list of CSS rules that are inserted in <style> elements on the HTML header, &lt;head&gt;. A single CSS rule associates a CSS selector with a set of CSS declarations. These are easier to see through examples.</style></p>
+<p>A stylesheet will usually consist of a list of CSS rules that are inserted in <code>&lt;style&gt;</code> elements on the HTML header, <code>&lt;head&gt;</code>. A single CSS rule associates a CSS selector with a set of CSS declarations. These are easier to see through examples.</p>
 
 <h3 id="css-element-selectors">CSS Element Selectors</h3>
 
@@ -589,7 +589,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h3 id="css-relationship-selectors">CSS Relationship Selectors</h3>
 
-<p>CSS selectors let you match elements based on their relationship with other elements. While I will simply refer you to the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">MDN Selectors webpage</a> for the full reference, I want to highlight two particularly important ones, the child selector, and the descendant selector.</p>
+<p>CSS selectors let you match elements based on their relationship with other elements. While I will simply refer you to the <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">MDN Selectors webpage</a> for the full reference, I want to highlight two particularly important ones: the child selector and the descendant selector.</p>
 
 <p>The child selector matches every time an element is directly enclosed by a different element. For example, consider the following rule involving the child selector:</p>
 
@@ -622,7 +622,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h3 id="multiple-rules-in-css">Multiple Rules in CSS</h3>
 
-<p>When more than one CSS rule matches, then different CSS declarations might conflict with one another. In that case, then, “the most specific declaration wins”. The rules for what counts as more specific are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">really disgusting</a>, so if you find yourself debugging CSS code because the styles “don’t take”, the first thing you should try is to set completely different classes for the element, add all the declarations to this class. Then, with help from the Developer Tools, you can add classes back to your element to see which declarations might be winning the specificity race. In order to avoid this kind of trouble, it’s better to stick to simple declarations as much as possible.</p>
+<p>When more than one CSS rule matches, then different CSS declarations might conflict with one another. In that case, “the most specific declaration wins”. The rules for what counts as more specific are <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">really disgusting</a>, so if you find yourself debugging CSS code because the styles “don’t take”, the first thing you should try is to set completely different classes for the element, add all the declarations to this class. Then, with help from the Developer Tools, you can add classes back to your element to see which declarations might be winning the specificity race. In order to avoid this kind of trouble, it’s better to stick to simple declarations as much as possible.</p>
 
 <h3 id="other-ways-of-declaring-css">Other ways of declaring CSS</h3>
 
@@ -661,7 +661,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 </html>
 
-<p>It’s a bad idea to do this in HTML that you write manually: you’re mixing content with presentation, and making it hard to reuse the declarations. But later on we will be writing code to generate elements in the DOM for us, and in that case, this will be a very common and good thing to do. In this latter situation it’s a good thing to do because the reusability will be represented in our Javascript source code</p>
+<p>It’s a bad idea to do this in HTML that you write manually: you’re mixing content with presentation, and making it hard to reuse the declarations. But later on we will be writing code to generate elements in the DOM for us, and in that case, this will be a very common and good thing to do. In this latter situation, it’s a good thing to do because the reusability will be represented in our Javascript source code.</p>
 
 <h2 id="svg">SVG</h2>
 
@@ -911,9 +911,9 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h3 id="grouping">Grouping</h3>
 
-<p>Grouping elements is a very powerful idea, and we will use it extensively when we get to use SVG for actual visualizations. It is powerful because it gives us abstraction, in the same way that a procedure groups a sequence of operations under a single name. In dynamic visualizations, it will make it possible for us to move a large number of elements by simply taking one branch of the DOM and placing it in a different subtree; without groups, we would have to remember over and over again which elements we cared about.</p>
+<p>Grouping elements is a very powerful idea, and we will use it extensively when we get to use SVG for actual visualizations. It is powerful because it gives us abstraction, in the same way that a procedure groups a sequence of operations under a single name. In dynamic visualizations, this makes it possible for us to move a large number of elements by simply taking one branch of the DOM and placing it in a different subtree; without groups, we would have to remember over and over again which elements we cared about.</p>
 
-<p>In addition, SVG groups give us geometric transformations. Geometric transformations are amazingly useful when we want to change the positions of a large number of elements in the same way, or when we want to express the positions of the elements in a more convenient manner. For example, recall that SVG’s basic coordinate system increases the y coordinate in the downward direction. If we want to draw a scatterplot, for example, , then we’d have to remember every time to subtract the y coordinate we want from the height of the SVG element:</p>
+<p>In addition, SVG groups give us geometric transformations. Geometric transformations are amazingly useful when we want to change the positions of a large number of elements in the same way, or when we want to express the positions of the elements in a more convenient manner. For example, recall that SVG’s basic coordinate system increases the y coordinate in the downward direction. If we want to draw a scatterplot, for example, then we’d have to remember every time to subtract the y coordinate we want, from the height of the SVG element:</p>
 
 <html>
 
@@ -1006,7 +1006,7 @@ Some elements rarely have internal content, and it becomes a bit of a pain to ty
 
 <h3 id="presentation-attributes">PRESENTATION ATTRIBUTES</h3>
 
-<p>As you might have noticed by comparing the HTML examples with the SVG ones, some appearance aspects are controlled by HTML attributes; others are controlled by CSS properties. Which is which is a perennial source of confusion, and unfortunately there’s no good way around it. To add to the confusion, a subset of SVG attributes can also be specified via CSS: these are the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute">“presentation attributes”</a>.</p>
+<p>As you might have noticed by comparing the HTML examples with the SVG ones, some appearance aspects are controlled by HTML attributes; others are controlled by CSS properties. This is a perennial source of confusion, and unfortunately there’s no good way around it. To add to the confusion, a subset of SVG attributes can also be specified via CSS: these are the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute">“presentation attributes”</a>.</p>
 
 <p>It’s worth remembering this because CSS declarations for these attributes will override inline attribute definitions in the DOM. This is in turn inconsistent with the rule for the style attribute itself, which overrides CSS definitions (on behalf of whoever designed this standard: I am sorry).</p>
 
