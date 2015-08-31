@@ -112,145 +112,262 @@
     <div class="page-content">
       <div class="wrap">
       <!-- Source: http://liveweave.com/JlSG6D -->
-<div class="post">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src='http://codemirror.net/lib/codemirror.js'></script>
-    <script src='http://codemirror.net/mode/xml/xml.js'></script>
-    <script src='http://codemirror.net/mode/javascript/javascript.js'></script>
-    <script src='http://codemirror.net/mode/css/css.js'></script>
-    <script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
-    <link rel='stylesheet' href='http://codemirror.net/lib/codemirror.css'>
-    <style type='text/css'>
-        .CodeMirror {
-            float: left;
-            width: 100%;
-            border: 1px solid gray;
-            height: auto;
+<html class="post">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src='http://codemirror.net/lib/codemirror.js'></script>
+<script src='http://codemirror.net/mode/xml/xml.js'></script>
+<script src='http://codemirror.net/mode/javascript/javascript.js'></script>
+<script src='http://codemirror.net/mode/css/css.js'></script>
+<script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
+<link rel='stylesheet' href='http://codemirror.net/lib/codemirror.css'>
+<style type='text/css'>
+    .CodeMirror {
+        float: left;
+        width: 100%;
+        border: 1px solid gray;
+        height: auto;
+    }
+
+    .CodePreview {
+        width: 100%;
+        float: left;
+        border: 1px solid gray;
+    }
+</style>
+<script>
+
+    function renderCode(id, file, code, js, renderPreview) {
+        var delay;
+
+        var boilerplateHTML = "<!DOCTYPE html><html lang='en'><head> <meta charset='UTF-8'><title><\/title><\/head><body><script src='/2015/lectures/logger.js'\/>\n";
+        var endHTML = "\n<\/script><div id='log'></div><\/body><\/html>";
+
+        var highlightLanguage = "text/html";
+        if (js != "") {
+            highlightLanguage = "text/javascript"
         }
 
-        .CodePreview {
-            width: 100%;
-            float: left;
-            border: 1px solid gray;
-        }
-    </style>
-    <script>
-        function renderCode(id, file, code) {
-            var delay;
+        // Initialize CodeMirror editor
+        var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+            mode: highlightLanguage,
+            tabMode: 'indent',
+            lineNumbers: true,
+            lineWrapping: true,
+            autoCloseTags: true
+        });
 
-            // Initialize CodeMirror editor
-            var editor = CodeMirror.fromTextArea(document.getElementById(id), {
-                mode: 'text/html',
-                tabMode: 'indent',
-                lineNumbers: true,
-                lineWrapping: true,
-                autoCloseTags: true
-            });
+        // Live preview
+        editor.on("change", function () {
+            clearTimeout(delay);
+            delay = setTimeout(updatePreview, 1000);
+        });
 
-            // Live preview
-            editor.on("change", function () {
-                clearTimeout(delay);
-                delay = setTimeout(updatePreview, 300);
-            });
+        function updatePreview() {
 
-            function updatePreview() {
+            if (renderPreview == "false") {
+                // if we don't want to see a preview we just evaluate the javascript code
+                eval(editor.getValue());
+            }
+            else {
+
                 var previewFrame = document.getElementById('preview-' + id);
                 if (previewFrame) {
-                    // here you can make the height, I delete it first, then I make it again
-                //    previewFrame.height = "";
-                  //  previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
+                    // here you can set the height, I delete it first, then I make it again
+                    //    previewFrame.height = "";
+                    //  previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
 
 
                     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
 
                     preview.open();
-                    preview.write(editor.getValue());
+                    if (js != "") {
+                        eval(editor.getValue());
+                        //  preview.write(boilerplateHTML + editor.getValue() + endHTML);
+                    }
+                    else {
+                        preview.write(editor.getValue());
+                    }
                     preview.close();
                     previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
                 }
-
             }
 
-            setTimeout(updatePreview, 300);
+        }
 
-            function saveTextAsFile() {
-                var textToWrite = document.getElementById(id).value;
-                var textFileAsBlob = new Blob([textToWrite], {
-                    type: 'text/plain'
-                });
-                var fileNameToSaveAs = "myfile.html";
+        setTimeout(updatePreview, 300);
 
-                var downloadLink = document.createElement("a");
-                downloadLink.download = fileNameToSaveAs;
-                downloadLink.innerHTML = "Download File";
-                if (window.webkitURL != null) {
-                    // Chrome allows the link to be clicked
-                    // without actually adding it to the DOM.
-                    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-                } else {
-                    // Firefox requires the link to be added to the DOM
-                    // before it can be clicked.
-                    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-                    downloadLink.onclick = destroyClickedElement;
-                    downloadLink.style.display = "none";
-                    document.body.appendChild(downloadLink);
-                }
+        function saveTextAsFile() {
+            var textToWrite = document.getElementById(id).value;
+            var textFileAsBlob = new Blob([textToWrite], {
+                type: 'text/plain'
+            });
+            var fileNameToSaveAs = "myfile.html";
 
-                downloadLink.click();
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null) {
+                // Chrome allows the link to be clicked
+                // without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            } else {
+                // Firefox requires the link to be added to the DOM
+                // before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = destroyClickedElement;
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
             }
 
-            function destroyClickedElement(event) {
-                document.body.removeChild(event.target);
+            downloadLink.click();
+        }
+
+        function destroyClickedElement(event) {
+            document.body.removeChild(event.target);
+        }
+
+        function loadfile(input) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                editor.setValue(e.target.result);
             }
+            reader.readAsText(input.files[0]);
+        }
 
-            function loadfile(input) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    editor.setValue(e.target.result);
-                }
-                reader.readAsText(input.files[0]);
-            }
+        var input = document.getElementById("select");
 
-            var input = document.getElementById("select");
+        function selectTheme() {
+            var theme = input.options[input.selectedIndex].innerHTML;
+            editor.setOption("theme", theme);
+        }
 
-            function selectTheme() {
-                var theme = input.options[input.selectedIndex].innerHTML;
-                editor.setOption("theme", theme);
-            }
-
-            var choice = document.location.search && decodeURIComponent(document.location.search.slice(1));
-            if (choice) {
-                input.value = choice;
-                editor.setOption("theme", choice);
-            }
+        var choice = document.location.search && decodeURIComponent(document.location.search.slice(1));
+        if (choice) {
+            input.value = choice;
+            editor.setOption("theme", choice);
+        }
 
 
-            // init with file or code
-            if (file != "") {
-                $.get(file, function (data) {
-                    editor.setValue(data);
+        // init with file or code
+        if (file != "") {
+            $.get(file, function (data) {
+                editor.setValue(data);
 
-                });
-            } else if (code != "") {
+            });
+        } else if (code != "") {
 
-                editor.setValue(code);
-
-            }
-
+            editor.setValue(code);
 
         }
 
 
-    </script>
-    </header>
+    }
 
-    <header class="post-header">
-        <h1>JavaScript Fundamentals</h1>
 
-    </header>
+</script>
+</header>
 
-    <article class="post-content">
-        <h2 id="web-stack">Web Stack</h2>
+<header class="post-header">
+    <h1>JavaScript Fundamentals</h1>
+
+</header>
+
+<article class="post-content">
+    <p><em>Material based on the lecture by <a href="http://cscheid.net/courses/spr15/cs444/lectures/week3.html">Carlos Scheidegger</a></em></p>
+
+<p>If you’re following the text below, my suggestion is that you either open the Developer Tools’s JavaScript console on a browser window, and type the examples to see what they do, like we go over in class. You should also try variants, and just generally play around with the console, to get a feel for the language.</p>
+
+<p>Before we get started, though, a few words of warning: there is a lot of bad JavaScript advice on the internet. For example, although StackOverflow is typically a high-quality Q&amp;A website, I would stay well away from it when it comes to JavaScript (why that is the case is beyond my understanding). Finally, the introduction below is not meant to give you a comprehensive description of JavaScript, but rather a foothold.</p>
+
+<p>Once you become proficient in the language, then you can start worrying about best practices and special cases, especially as they related to performance and portability across browsers. It’s easier for you simply not to worry about that kind of stuff right now. (This does mean that if you’re a veteran JavaScript programmer, you’ll spot places where what I’m writing is not 100% accurate. If you were to complain, you’d be technically correct (which is the best kind of correct), but what are you doing reading a JavaScript beginner’s guide?</p>
+
+<h2 id="javascript-background">JavaScript Background</h2>
+
+<p>Why do we want to use JavaScript? So far we have only written <strong>static HTML and SVG code</strong>. In your homework, for example, you have to encode a dataset by hand every time, for your line-chart, bar chart, scatterplot, etc.<br />
+If we had a dynamic and general way to load the data, we could use the same variables for all charts and we could also plot the charts with various datasets of different size and with different characteristics. I like to think of pure HTML and SVG as analogous to pen and paper - you can create things that look nice once, but you <strong>can’t re-use them efficiently and you can’t interact with them</strong>. Computer programming brings <strong>interactivity and generalizability (re-use)</strong> to the table. We can tell the computer how to do something for certain classes of (legal) input, and the computer will do that for all possible cases of legal input.</p>
+
+<p>JavaScript is the most important programming language of the web, and the only programming language that can be used on most web-browsers without any plugins. Alternatives such as Java Applets or Flash were popular in the past but have lost significant ground to JavaScript. JavaScript is mostly used on the client-side of a client-server application, other languages such as Java and Python are popular on the server, but JavaScript is nowadays also used on the server e.g., using <a href="https://nodejs.org/">Node.js</a>. We will be focusing on the client-side in this class.</p>
+
+<p>JavaScript can be used with <strong>imperative/procedural, object-oriented, and functional programming styles</strong>.  It is a <strong>dynamically typed language</strong>, which can be strange for developers who mainly work with strongly typed languages such as C/C++ and Java. Also, Javascript uses <strong>prototypical inheritance</strong> instead of a class-based model for it’s object oriented purposes. That means that there is no “class” that is defined centrally, instead you rely on objects’ prototypes for inheritance that can be extended at runtime. If this doesn’t mean much to you now, don’t worry - we’ll go through it slowly.</p>
+
+<h2 id="javascript---the-very-basic">JavaScript - The Very Basic</h2>
+
+<p>If you know any other mainstream programming language, JavaScript will feel sufficiently familiar.</p>
+
+<p>We can write to the console (helpful for debugging by calling the log method of the console object). <strong>Hint: open up your browser’s developer tools to see the output generated by the examples here.</strong></p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="consolelog" name="consolelog"></textarea>
+
+
+<script>
+    renderCode("consolelog", "consolelog.js", "", "true", "false");
+</script>
+<i><a href="consolelog.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>It has variables which hold values:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="variables" name="variables"></textarea>
+
+
+<script>
+    renderCode("variables", "variables.js", "", "true", "false");
+</script>
+<i><a href="variables.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>The first thing to notice is that JavaScript’s variables are <strong>dynamically typed</strong>: you don’t need to declare their types before using them, and they can refer to values of different types at different times in the program execution. (This is convenient but quite error-prone: it’s usually a bad idea to make too much use of this feature.)</p>
+
+<p>You also do not need to declare a variable ahead of time. If you don’t, then JavaScript either assumes you’re referring to an already existing variable, or it creates a new global variable. Again, this is convenient but very error-prone (this is a theme, as you’ll see). One common source of confusion is that typos in variable assignments are not caught: they just become global variables.</p>
+
+<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local means in the current execution context. When used within a function these variables are really private, however, when they are declared outside a function, as in the above example, they are still global.</p>
+
+<p><strong>Arrays in Javascript:</strong></p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="arrays" name="arrays"></textarea>
+
+
+<script>
+    renderCode("arrays", "arrays.js", "", "true", "false");
+</script>
+<i><a href="arrays.js">See output in new page.</a></i>
+
+</body>
+
+</html>
 
 <h2 id="more-nuts--bolts-python-server">More nuts &amp; bolts: Python server</h2>
 
@@ -430,7 +547,7 @@ g.node().appendChild(circle2.node());
 
 <hr />
 
-    </article>
+</article>
 
 </div>
       </div>

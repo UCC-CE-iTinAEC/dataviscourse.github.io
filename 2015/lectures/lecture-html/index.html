@@ -112,145 +112,168 @@
     <div class="page-content">
       <div class="wrap">
       <!-- Source: http://liveweave.com/JlSG6D -->
-<div class="post">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src='http://codemirror.net/lib/codemirror.js'></script>
-    <script src='http://codemirror.net/mode/xml/xml.js'></script>
-    <script src='http://codemirror.net/mode/javascript/javascript.js'></script>
-    <script src='http://codemirror.net/mode/css/css.js'></script>
-    <script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
-    <link rel='stylesheet' href='http://codemirror.net/lib/codemirror.css'>
-    <style type='text/css'>
-        .CodeMirror {
-            float: left;
-            width: 100%;
-            border: 1px solid gray;
-            height: auto;
+<html class="post">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src='http://codemirror.net/lib/codemirror.js'></script>
+<script src='http://codemirror.net/mode/xml/xml.js'></script>
+<script src='http://codemirror.net/mode/javascript/javascript.js'></script>
+<script src='http://codemirror.net/mode/css/css.js'></script>
+<script src='http://codemirror.net/mode/htmlmixed/htmlmixed.js'></script>
+<link rel='stylesheet' href='http://codemirror.net/lib/codemirror.css'>
+<style type='text/css'>
+    .CodeMirror {
+        float: left;
+        width: 100%;
+        border: 1px solid gray;
+        height: auto;
+    }
+
+    .CodePreview {
+        width: 100%;
+        float: left;
+        border: 1px solid gray;
+    }
+</style>
+<script>
+
+    function renderCode(id, file, code, js, renderPreview) {
+        var delay;
+
+        var boilerplateHTML = "<!DOCTYPE html><html lang='en'><head> <meta charset='UTF-8'><title><\/title><\/head><body><script src='/2015/lectures/logger.js'\/>\n";
+        var endHTML = "\n<\/script><div id='log'></div><\/body><\/html>";
+
+        var highlightLanguage = "text/html";
+        if (js != "") {
+            highlightLanguage = "text/javascript"
         }
 
-        .CodePreview {
-            width: 100%;
-            float: left;
-            border: 1px solid gray;
-        }
-    </style>
-    <script>
-        function renderCode(id, file, code) {
-            var delay;
+        // Initialize CodeMirror editor
+        var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+            mode: highlightLanguage,
+            tabMode: 'indent',
+            lineNumbers: true,
+            lineWrapping: true,
+            autoCloseTags: true
+        });
 
-            // Initialize CodeMirror editor
-            var editor = CodeMirror.fromTextArea(document.getElementById(id), {
-                mode: 'text/html',
-                tabMode: 'indent',
-                lineNumbers: true,
-                lineWrapping: true,
-                autoCloseTags: true
-            });
+        // Live preview
+        editor.on("change", function () {
+            clearTimeout(delay);
+            delay = setTimeout(updatePreview, 1000);
+        });
 
-            // Live preview
-            editor.on("change", function () {
-                clearTimeout(delay);
-                delay = setTimeout(updatePreview, 300);
-            });
+        function updatePreview() {
 
-            function updatePreview() {
+            if (renderPreview == "false") {
+                // if we don't want to see a preview we just evaluate the javascript code
+                eval(editor.getValue());
+            }
+            else {
+
                 var previewFrame = document.getElementById('preview-' + id);
                 if (previewFrame) {
-                    // here you can make the height, I delete it first, then I make it again
-                //    previewFrame.height = "";
-                  //  previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
+                    // here you can set the height, I delete it first, then I make it again
+                    //    previewFrame.height = "";
+                    //  previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
 
 
                     var preview = previewFrame.contentDocument || previewFrame.contentWindow.document;
 
                     preview.open();
-                    preview.write(editor.getValue());
+                    if (js != "") {
+                        eval(editor.getValue());
+                        //  preview.write(boilerplateHTML + editor.getValue() + endHTML);
+                    }
+                    else {
+                        preview.write(editor.getValue());
+                    }
                     preview.close();
                     previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
                 }
-
             }
 
-            setTimeout(updatePreview, 300);
+        }
 
-            function saveTextAsFile() {
-                var textToWrite = document.getElementById(id).value;
-                var textFileAsBlob = new Blob([textToWrite], {
-                    type: 'text/plain'
-                });
-                var fileNameToSaveAs = "myfile.html";
+        setTimeout(updatePreview, 300);
 
-                var downloadLink = document.createElement("a");
-                downloadLink.download = fileNameToSaveAs;
-                downloadLink.innerHTML = "Download File";
-                if (window.webkitURL != null) {
-                    // Chrome allows the link to be clicked
-                    // without actually adding it to the DOM.
-                    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-                } else {
-                    // Firefox requires the link to be added to the DOM
-                    // before it can be clicked.
-                    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-                    downloadLink.onclick = destroyClickedElement;
-                    downloadLink.style.display = "none";
-                    document.body.appendChild(downloadLink);
-                }
+        function saveTextAsFile() {
+            var textToWrite = document.getElementById(id).value;
+            var textFileAsBlob = new Blob([textToWrite], {
+                type: 'text/plain'
+            });
+            var fileNameToSaveAs = "myfile.html";
 
-                downloadLink.click();
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null) {
+                // Chrome allows the link to be clicked
+                // without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            } else {
+                // Firefox requires the link to be added to the DOM
+                // before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = destroyClickedElement;
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
             }
 
-            function destroyClickedElement(event) {
-                document.body.removeChild(event.target);
+            downloadLink.click();
+        }
+
+        function destroyClickedElement(event) {
+            document.body.removeChild(event.target);
+        }
+
+        function loadfile(input) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                editor.setValue(e.target.result);
             }
+            reader.readAsText(input.files[0]);
+        }
 
-            function loadfile(input) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    editor.setValue(e.target.result);
-                }
-                reader.readAsText(input.files[0]);
-            }
+        var input = document.getElementById("select");
 
-            var input = document.getElementById("select");
+        function selectTheme() {
+            var theme = input.options[input.selectedIndex].innerHTML;
+            editor.setOption("theme", theme);
+        }
 
-            function selectTheme() {
-                var theme = input.options[input.selectedIndex].innerHTML;
-                editor.setOption("theme", theme);
-            }
-
-            var choice = document.location.search && decodeURIComponent(document.location.search.slice(1));
-            if (choice) {
-                input.value = choice;
-                editor.setOption("theme", choice);
-            }
+        var choice = document.location.search && decodeURIComponent(document.location.search.slice(1));
+        if (choice) {
+            input.value = choice;
+            editor.setOption("theme", choice);
+        }
 
 
-            // init with file or code
-            if (file != "") {
-                $.get(file, function (data) {
-                    editor.setValue(data);
+        // init with file or code
+        if (file != "") {
+            $.get(file, function (data) {
+                editor.setValue(data);
 
-                });
-            } else if (code != "") {
+            });
+        } else if (code != "") {
 
-                editor.setValue(code);
-
-            }
-
+            editor.setValue(code);
 
         }
 
 
-    </script>
-    </header>
+    }
 
-    <header class="post-header">
-        <h1>The Languages and Tools of the Web</h1>
 
-    </header>
+</script>
+</header>
 
-    <article class="post-content">
-        <p><em>Based on material by <a href="http://cscheid.net/courses/spr15/cs444/lectures/week2.html">Carlos Scheidegger</a> and Kevin Sun</em><br />
+<header class="post-header">
+    <h1>The Languages and Tools of the Web</h1>
+
+</header>
+
+<article class="post-content">
+    <p><em>Based on material by <a href="http://cscheid.net/courses/spr15/cs444/lectures/week2.html">Carlos Scheidegger</a> and Kevin Sun</em><br />
 Next, we go over the very basics of how the content of a web page is represented in HTML. We will learn some simple CSS, which lets us separate the content of the web page with how we want it to look; this separation will let us change both things independently of one another, which will help a lot when we’re quickly iterating over designs. For visual elements such as lines, circles and polygons, we will learn SVG.</p>
 
 <h2 id="html">HTML</h2>
@@ -265,22 +288,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="basic_element" name="basic_element">
+<textarea id="basic_element" name="basic_element"></textarea>
 
-        </textarea>
+
 <iframe id="preview-basic_element" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
-
-
 <script>
-    renderCode("basic_element", "", "<strong>This is an HTML element.</strong>");
+    renderCode("basic_element", "", "<strong>This is an HTML element.</strong>", "", "");
 </script>
-
+<i><a href="">See output in new page.</a></i>
 
 </body>
 
@@ -295,22 +316,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="nested_element" name="nested_element">
+<textarea id="nested_element" name="nested_element"></textarea>
 
-        </textarea>
+
 <iframe id="preview-nested_element" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
-
-
 <script>
-    renderCode("nested_element", "", "<strong>This is strong, and <u>this is underlined and strong.</u></strong>");
+    renderCode("nested_element", "", "<strong>This is strong, and <u>this is underlined and strong.</u></strong>", "", "");
 </script>
-
+<i><a href="">See output in new page.</a></i>
 
 </body>
 
@@ -323,22 +342,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="attribute" name="attribute">
+<textarea id="attribute" name="attribute"></textarea>
 
-        </textarea>
+
 <iframe id="preview-attribute" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
-
-
 <script>
-    renderCode("attribute", "", "<a href='http://www.google.com'>A link to Google's main page</a>");
+    renderCode("attribute", "", "<a href='http://www.google.com'>A link to Google's main page</a>", "", "");
 </script>
-
+<i><a href="">See output in new page.</a></i>
 
 </body>
 
@@ -358,23 +375,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="htmls_tags" name="htmls_tags">
+<textarea id="htmls_tags" name="htmls_tags"></textarea>
 
-        </textarea>
+
 <iframe id="preview-htmls_tags" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("htmls_tags", "html_tags.html", "");
+    renderCode("htmls_tags", "html_tags.html", "", "", "");
 </script>
 <i><a href="html_tags.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -399,23 +413,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="simple_example" name="simple_example">
+<textarea id="simple_example" name="simple_example"></textarea>
 
-        </textarea>
+
 <iframe id="preview-simple_example" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("simple_example", "simple_example.html", "");
+    renderCode("simple_example", "simple_example.html", "", "", "");
 </script>
 <i><a href="simple_example.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -446,23 +457,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="simple_css" name="simple_css">
+<textarea id="simple_css" name="simple_css"></textarea>
 
-        </textarea>
+
 <iframe id="preview-simple_css" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("simple_css", "simple_css.html", "");
+    renderCode("simple_css", "simple_css.html", "", "", "");
 </script>
 <i><a href="simple_css.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -475,23 +483,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="simple_css2" name="simple_css2">
+<textarea id="simple_css2" name="simple_css2"></textarea>
 
-        </textarea>
+
 <iframe id="preview-simple_css2" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("simple_css2", "simple_css2.html", "");
+    renderCode("simple_css2", "simple_css2.html", "", "", "");
 </script>
 <i><a href="simple_css2.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -506,23 +511,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="css_classes" name="css_classes">
+<textarea id="css_classes" name="css_classes"></textarea>
 
-        </textarea>
+
 <iframe id="preview-css_classes" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("css_classes", "css_classes.html", "");
+    renderCode("css_classes", "css_classes.html", "", "", "");
 </script>
 <i><a href="css_classes.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -539,23 +541,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="css_ids" name="css_ids">
+<textarea id="css_ids" name="css_ids"></textarea>
 
-        </textarea>
+
 <iframe id="preview-css_ids" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("css_ids", "css_ids.html", "");
+    renderCode("css_ids", "css_ids.html", "", "", "");
 </script>
 <i><a href="css_ids.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -568,23 +567,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="css_layouts" name="css_layouts">
+<textarea id="css_layouts" name="css_layouts"></textarea>
 
-        </textarea>
+
 <iframe id="preview-css_layouts" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("css_layouts", "css_layouts.html", "");
+    renderCode("css_layouts", "css_layouts.html", "", "", "");
 </script>
 <i><a href="css_layouts.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -601,23 +597,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="css_relationships" name="css_relationships">
+<textarea id="css_relationships" name="css_relationships"></textarea>
 
-        </textarea>
+
 <iframe id="preview-css_relationships" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("css_relationships", "css_relationships.html", "");
+    renderCode("css_relationships", "css_relationships.html", "", "", "");
 </script>
 <i><a href="css_relationships.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -642,23 +635,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="css_inline" name="css_inline">
+<textarea id="css_inline" name="css_inline"></textarea>
 
-        </textarea>
+
 <iframe id="preview-css_inline" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("css_inline", "css_inline.html", "");
+    renderCode("css_inline", "css_inline.html", "", "", "");
 </script>
 <i><a href="css_inline.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -679,23 +669,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_minimal" name="svg_minimal">
+<textarea id="svg_minimal" name="svg_minimal"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_minimal" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_minimal", "svg_minimal.html", "");
+    renderCode("svg_minimal", "svg_minimal.html", "", "", "");
 </script>
 <i><a href="svg_minimal.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -712,23 +699,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_circle" name="svg_circle">
+<textarea id="svg_circle" name="svg_circle"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_circle" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_circle", "svg_circle.html", "");
+    renderCode("svg_circle", "svg_circle.html", "", "", "");
 </script>
 <i><a href="svg_circle.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -741,23 +725,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_ellipse" name="svg_ellipse">
+<textarea id="svg_ellipse" name="svg_ellipse"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_ellipse" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_ellipse", "svg_ellipse.html", "");
+    renderCode("svg_ellipse", "svg_ellipse.html", "", "", "");
 </script>
 <i><a href="svg_ellipse.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -770,23 +751,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_rect" name="svg_rect">
+<textarea id="svg_rect" name="svg_rect"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_rect" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_rect", "svg_rect.html", "");
+    renderCode("svg_rect", "svg_rect.html", "", "", "");
 </script>
 <i><a href="svg_rect.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -799,23 +777,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_line" name="svg_line">
+<textarea id="svg_line" name="svg_line"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_line" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_line", "svg_line.html", "");
+    renderCode("svg_line", "svg_line.html", "", "", "");
 </script>
 <i><a href="svg_line.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -828,23 +803,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_text" name="svg_text">
+<textarea id="svg_text" name="svg_text"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_text" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_text", "svg_text.html", "");
+    renderCode("svg_text", "svg_text.html", "", "", "");
 </script>
 <i><a href="svg_text.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -859,23 +831,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_path" name="svg_path">
+<textarea id="svg_path" name="svg_path"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_path" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_path", "svg_path.html", "");
+    renderCode("svg_path", "svg_path.html", "", "", "");
 </script>
 <i><a href="svg_path.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -892,23 +861,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_order" name="svg_order">
+<textarea id="svg_order" name="svg_order"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_order" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_order", "svg_order.html", "");
+    renderCode("svg_order", "svg_order.html", "", "", "");
 </script>
 <i><a href="svg_order.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -925,23 +891,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_group" name="svg_group">
+<textarea id="svg_group" name="svg_group"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_group" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_group", "svg_group.html", "");
+    renderCode("svg_group", "svg_group.html", "", "", "");
 </script>
 <i><a href="svg_group.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -954,23 +917,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_group2" name="svg_group2">
+<textarea id="svg_group2" name="svg_group2"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_group2" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_group2", "svg_group2.html", "");
+    renderCode("svg_group2", "svg_group2.html", "", "", "");
 </script>
 <i><a href="svg_group2.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -985,23 +945,20 @@ Next, we go over the very basics of how the content of a web page is represented
 <head>
     <meta charset="utf-8" />
 
+
 </head>
 
 <body>
-<textarea id="svg_translate_text" name="svg_translate_text">
+<textarea id="svg_translate_text" name="svg_translate_text"></textarea>
 
-        </textarea>
+
 <iframe id="preview-svg_translate_text" class="CodePreview"></iframe>
 <!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
 
-
 <script>
-    renderCode("svg_translate_text", "svg_translate_text.html", "");
+    renderCode("svg_translate_text", "svg_translate_text.html", "", "", "");
 </script>
 <i><a href="svg_translate_text.html">See output in new page.</a></i>
-
-
-
 
 </body>
 
@@ -1015,7 +972,7 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <p>It’s worth remembering this because CSS declarations for these attributes will override inline attribute definitions in the DOM. This is in turn inconsistent with the rule for the style attribute itself, which overrides CSS definitions (on behalf of whoever designed this standard: I am sorry).</p>
 
-    </article>
+</article>
 
 </div>
       </div>
