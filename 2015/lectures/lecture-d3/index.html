@@ -277,7 +277,8 @@
 </header>
 
 <article class="post-content">
-    <h2 id="more-nuts--bolts-python-server">More nuts &amp; bolts: Python server</h2>
+    <h2 id="running-a-web-server">Running a web server</h2>
+<hr />
 
 <p><em>10 minutes; interactive.</em></p>
 
@@ -295,105 +296,6 @@
 <p><em>show the relation between the files and the contents of the directory</em></p>
 
 <p>You can only have one server at the same time (unless you specify a port). Control-C to quit.</p>
-
-<h2 id="the-dom">The DOM</h2>
-
-<p><em>Return to your text editor (<code>basic.html</code>). 20 minutes; demonstration only.</em></p>
-
-<p>The DOM is the hierarchical structure used for representing elements in the browser — you should already be familiar with it. Here is a simple HTML example:</p>
-
-<pre><code class="language-html">&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;CS171 Section 1&lt;/title&gt;
-    &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Welcome to CS171&lt;/h1&gt;
-    &lt;p&gt;Data visualization&lt;/p&gt;
-    &lt;svg&gt;&lt;/svg&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-<p><em>briefly describe the structure of the document</em></p>
-
-<p>Notice the tags <code>&lt;...&gt;</code> that are matched with <code>&lt;/...&gt;</code> — those are DOM (HTML) elements.</p>
-
-<h3 id="the-web-inspector">The Web Inspector</h3>
-
-<p><code>&lt;h1&gt;</code> indicates a heading. Let’s change the contents of the <code>&lt;h1&gt;</code> and refresh.</p>
-
-<p>Let’s add anotger paragraph below the first paragraph — a <code>&lt;p&gt;</code>.</p>
-
-<p><em>Open <code>basic.html</code> in Chrome with Developers Tools vertically docked</em></p>
-
-<p>In Developer Tools, we can do live modifications to the DOM. For example, let’s move the paragraph around and change its content. Or, let’s delete it.</p>
-
-<h3 id="css-making-it-pretty">CSS: Making it pretty</h3>
-
-<p><em>Return to the text editor</em></p>
-
-<p>HTML sets the structure and contents of the page and CSS sets its style — things like fonts, colors, margins, backgrounds, etc.</p>
-
-<p>Let’s add some CSS.</p>
-
-<pre><code>...
-    &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
-    &lt;link rel="stylesheet" type="text/css" href="/style.css" /&gt;
-  &lt;/head&gt;
-...
-</code></pre>
-
-<p>That line tells the browser to look for styling information in <code>style.css</code>.</p>
-
-<p><em>open <code>style.css</code> in another pane</em></p>
-
-<p>The file describes a list of styles (e.g. <code>color: darkgrey</code>) applied to a particular group of HTML elements.</p>
-
-<p>We won’t be using CSS extensively in this course: CSS works by assigning styles (e.g. <code>color: darkgrey</code>) to particular groups of HTML elements.</p>
-
-<p>Sometimes we want to target one particular element — a particular <code>p</code>, not all <code>p</code>s. Let’s add an <em>id</em> of <code>subheading</code> to the first <code>p</code>.</p>
-
-<pre><code class="language-html">...
-    &lt;h1&gt;Welcome to CS171&lt;/h1&gt;
-    &lt;p id="subheading"&gt;Data visualization&lt;/p&gt;
-...
-</code></pre>
-
-<p>And now, in <code>style.css</code>, we use that id to only apply styling to a specific paragraph.</p>
-
-<pre><code class="language-css">p#subheading {
-  color: darkgrey;
-  font-style: italic;
-}
-</code></pre>
-
-<p><em>return to Developer Tools</em></p>
-
-<p>We can also edit CSS live in the Developer Tools. Let’s change that paragraph’s color to red.</p>
-
-<h3 id="svg-drawing-shapes">SVG: Drawing shapes</h3>
-
-<p><em>return to the text editor</em></p>
-
-<p>SVG is a format for drawing vector graphics in the browser. We’ll be using SVG a lot in this course and you’re probably not familiar with it yet.</p>
-
-<p>HTML and SVG are similar — HTML defines the content and structure of elements such as headings, paragraphs, and images; SVG defines graphical marks such as circles, rectangles, and paths.</p>
-
-<p>Let’s add a circle inside the <code>&lt;svg&gt;</code> element.</p>
-
-<pre><code class="language-svg">&lt;circle cx="200" cy="200" r="50"/&gt;
-</code></pre>
-
-<p>We can modify the attributes of the circle. Let’s change the <code>cx</code> value. Let’s make the <code>fill</code> attribute <code>steelblue</code>.</p>
-
-<p>Let’s add a rectangle.</p>
-
-<pre><code class="language-svg">&lt;rect x="10" y="100" width="10" height="100" fill="steelblue"/&gt;
-</code></pre>
-
-<p><em>remove the circle and rectangle</em></p>
 
 <h3 id="manipulating-the-dom">Manipulating the DOM</h3>
 
