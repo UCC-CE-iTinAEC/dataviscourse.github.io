@@ -137,6 +137,7 @@
 <script>
 
     function renderCode(id, file, code, js, renderPreview) {
+        console.log(id);
         var delay;
 
         var boilerplateHTML = "<!DOCTYPE html><html lang='en'><head> <meta charset='UTF-8'><title><\/title><\/head><body><script src='/2015/lectures/logger.js'\/>\n";
@@ -317,7 +318,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 </html>
 
-<p>It has variables which hold values:</p>
+<p>It has <strong>variables</strong> which hold <strong>values</strong>:</p>
 
 <html>
 
@@ -344,9 +345,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>You also do not need to declare a variable ahead of time. If you don’t, then JavaScript either assumes you’re referring to an already existing variable, or it creates a new global variable. Again, this is convenient but very error-prone (this is a theme, as you’ll see). One common source of confusion is that typos in variable assignments are not caught: they just become global variables.</p>
 
-<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local means in the current execution context. When used within a function these variables are really private, however, when they are declared outside a function, as in the above example, they are still global.</p>
+<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local here refers to the current execution context. When used within a function these variables are <strong>private to that function</strong>, however, when they are declared outside a function, as in the above example, they are still global. As a general rule: minimize your use of global variables, and never define global variables in a function.</p>
 
-<p><strong>Arrays in Javascript:</strong></p>
+<p>You can execute <strong>operations</strong> on these variables. Below are a couple of important examples, refer to the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators">MDN documentation</a>  for the full list:</p>
 
 <html>
 
@@ -357,13 +358,111 @@ If we had a dynamic and general way to load the data, we could use the same vari
 </head>
 
 <body>
-<textarea id="arrays" name="arrays"></textarea>
+<textarea id="moperators" name="moperators"></textarea>
 
 
 <script>
-    renderCode("arrays", "arrays.js", "", "true", "false");
+    renderCode("moperators", "operators.js", "", "true", "false");
+</script>
+<i><a href="operators.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<h3 id="arrays">Arrays</h3>
+
+<p>Array literals are declared using square brackets and addressed with square brackets and a reference to the index starting with 0:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="marrays" name="marrays"></textarea>
+
+
+<script>
+    renderCode("marrays", "arrays.js", "", "true", "false");
 </script>
 <i><a href="arrays.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>You can do much more with arrays than shown here, again, check out the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN documentation</a>. Arrays are very important for data visualization, so take the time to go through this!</p>
+
+<h3 id="objects">Objects</h3>
+
+<p>Objects are the second type of compound values in JavaScript.</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="mobjects" name="mobjects"></textarea>
+
+
+<script>
+    renderCode("mobjects", "objects.js", "", "true", "false");
+</script>
+<i><a href="objects.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<h3 id="control-structures">Control Structures</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="control_structures" name="control_structures"></textarea>
+
+
+<script>
+    renderCode("control_structures", "control_structures.js", "", "true", "false");
+</script>
+<i><a href="control_structures.js">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<h3 id="loops">Loops</h3>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="mloops" name="mloops"></textarea>
+
+
+<script>
+    renderCode("mloops", "loops.js", "", "true", "false");
+</script>
+<i><a href="loops.js">See output in new page.</a></i>
 
 </body>
 
