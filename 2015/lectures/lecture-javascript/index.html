@@ -598,7 +598,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <h3 id="the-special-variable-this">The special variable <code>this</code></h3>
 
-<p>JavaScript has a special variable that is available at every scope called this. When a function is called with a notation that resembles methods in typical object-oriented languages, say obj.method(), then this is bound to the object holding the method (in this case obj). this allows you to make changes to the local object:</p>
+<p>JavaScript has a special variable that is available at every scope called <code>this</code>. When a function is called with a notation that resembles methods in typical object-oriented languages, say <code>obj.method()</code>, then <code>this</code> is bound to the object holding the method (in this case obj). this allows you to make changes to the local object:</p>
 
 <html>
 
@@ -621,9 +621,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 </html>
 
-<p>So far, so good: we’ve used this to change the value bound to the x field in the object from the object itself. That’s pretty convenient.</p>
+<p>So far, so good: we’ve used <code>this</code> to change the value bound to the x field in the object. That’s pretty convenient.</p>
 
-<p>However, the conenience comes with a caveat. The way JavaScript decides to associate this with a given object is simple to explain, but sometimes leads to strange behavior. The way it works is that although obj.someFunction is the syntax to access the someFunction slot from obj and someFunction(parameter) is the syntax to call a the function value bound to someFunction with parameter parameter, the syntax obj.someFunction(parameter) is not equivalent to storing obj.someFunction to some temporary variable and calling that. In other words, the syntax obj.someFunction(parameter) consisting of those three things next to one another is special to JavaScript.</p>
+<p>However, the convenience comes with a caveat. The way JavaScript decides to associate <code>this</code> with a given object is simple to explain, but sometimes leads to strange behavior. The way it works is that although <code>obj.someFunction</code> is the syntax to access the <code>someFunction</code> slot from obj and <code>someFunction(parameter)</code> is the syntax to call a the function value bound to someFunction with parameter parameter, the syntax <code>obj.someFunction(parameter)</code> is not equivalent to storing <code>obj.someFunction</code> to some temporary variable and calling that. In other words, the syntax <code>obj.someFunction(parameter)</code> consisting of those three things next to one another is special to JavaScript.</p>
 
 <p>Here’s what can go wrong:</p>
 
