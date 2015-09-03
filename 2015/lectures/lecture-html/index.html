@@ -171,7 +171,7 @@
                 // if we don't want to see a preview we just evaluate the javascript code
                 eval(editor.getValue());
             }
-            if (renderPreview == "true" && js != "true") {
+            if (renderPreview != "false" && js != "true") {
 
                 var previewFrame = document.getElementById('preview-' + id);
                 if (previewFrame) {
