@@ -171,7 +171,7 @@
                 // if we don't want to see a preview we just evaluate the javascript code
                 eval(editor.getValue());
             }
-            if (renderPreview == "true") {
+            if (renderPreview == "true" && js != "true") {
 
                 var previewFrame = document.getElementById('preview-' + id);
                 if (previewFrame) {
@@ -647,6 +647,14 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
+<p>Here is a code snippet that we will use in future examples, included as run.js:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">);</span>
+<span class="lineno">2</span> <span class="nx">button</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Run!&quot;</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">execute</span><span class="p">);</span></code></pre></div>
+
+<p>Here we have three SVG rectangles and use selectAll to apply a new style to them:</p>
+
 <html>
 
 <head>
@@ -671,6 +679,216 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
+<h3 id="data">Data</h3>
+<p>Mapping existing element to data:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_data" name="d3_data"></textarea>
+
+
+<iframe id="preview-d3_data" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_data", "d3_data.html", "", "false", "true");
+</script>
+<i><a href="d3_data.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>What happens if we have more datapoints than elements?</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_enter1" name="d3_enter1"></textarea>
+
+
+<iframe id="preview-d3_enter1" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_enter1", "d3_enter1.html", "", "false", "true");
+</script>
+<i><a href="d3_enter1.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>There are still only three elements, it doesn’t matter how many data points we have - we can’t use more than there are elements to select. What to do? <strong>Enter</strong>!</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_enter2" name="d3_enter2"></textarea>
+
+
+<iframe id="preview-d3_enter2" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_enter2", "d3_enter2.html", "", "false", "true");
+</script>
+<i><a href="d3_enter2.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>Progress - we have one element for each data item, but it doesn’t look good:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_enter3" name="d3_enter3"></textarea>
+
+
+<iframe id="preview-d3_enter3" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_enter3", "d3_enter3.html", "", "false", "true");
+</script>
+<i><a href="d3_enter3.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>Now, that works! But we’re duplicating code. So instead we can do this shorter version:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_enter4" name="d3_enter4"></textarea>
+
+
+<iframe id="preview-d3_enter4" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_enter4", "d3_enter4.html", "", "false", "true");
+</script>
+<i><a href="d3_enter4.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>So what if we don’t have initialized svg elements?</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_enter5" name="d3_enter5"></textarea>
+
+
+<iframe id="preview-d3_enter5" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_enter5", "d3_enter5.html", "", "false", "true");
+</script>
+<i><a href="d3_enter5.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>Now let’s try to get rid of some of the elements:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_exit1" name="d3_exit1"></textarea>
+
+
+<iframe id="preview-d3_exit1" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_exit1", "d3_exit1.html", "", "false", "true");
+</script>
+<i><a href="d3_exit1.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<p>We have a similar problem as before - we need to remove the element that’s not bound.</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="d3_exit2" name="d3_exit2"></textarea>
+
+
+<iframe id="preview-d3_exit2" class="CodePreview"></iframe>
+<!--<input type="file" onchange="loadfile(this)"> <a href="#my-header" onclick='saveTextAsFile()'>Save/Download</a>-->
+
+<script>
+    renderCode("d3_exit2", "d3_exit2.html", "", "false", "true");
+</script>
+<i><a href="d3_exit2.html">See output in new page.</a></i>
+
+</body>
+
+</html>
+
+<h3 id="transitions">Transitions</h3>
 
 </article>
 
