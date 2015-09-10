@@ -76,6 +76,9 @@
         
         
         
+        
+        
+        
         <a class="page-link" href="/2015/">Home</a>
         
         
@@ -437,9 +440,12 @@ After <code>enter()</code> was called, the array contains objects with the <code
 
 <h3 id="groupings-handling-nested-elements">Groupings: Handling Nested Elements</h3>
 
-<p>In many cases we want to apply data not directly to low-level SVG elements, but instead use a hierarchy of elements. For the bar chart, for example, we might want to add a label showing the actual value. There are two approaches to doing this:<br />
- * Laying out the numbers and the bars independently so that they match up<br />
- * Using a group element to define the commonalities between the bars and the numbers (i.e., the y position in our example).</p>
+<p>In many cases we want to apply data not directly to low-level SVG elements, but instead use a hierarchy of elements. For the bar chart, for example, we might want to add a label showing the actual value. There are two approaches to doing this:</p>
+
+<ul>
+  <li>Laying out the numbers and the bars independently so that they match up</li>
+  <li>Using a group element to define the commonalities between the bars and the numbers (i.e., the y position in our example).</li>
+</ul>
 
 <p>The latter is the better approach, as we only have to define the common aspects of the group once. This might not make much difference for only labels and bars, but we could also add tick marks on the bar charts, an overlay for highlights, etc. So, let’s try to add groups and take a similar approach to the example before:</p>
 
@@ -698,6 +704,20 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 <h2 id="more-complex-data">More Complex Data</h2>
 
+<p>Up to this point we have only worked with one-dimensional arrays. Here is an example on how to handle arrays of objects, where each object has multiple values. We have three types of values: products (labels), types of products (categories), and tons (numerical data). We’re showing the data in a colored bar chart, where the color corresponds to the product type and the bar width to the tonnage. In addition to that, you can sort the bar chart based on the three data values: alphabetically by type and product, numerically by tonnage.</p>
+
+<p>Among the new concepts introduced in this example are:</p>
+
+<ul>
+  <li>How to access data in objects.</li>
+  <li>How to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort data</a>.</li>
+  <li>How to properly deal with padding in an SVG.</li>
+  <li>How to use a scale with <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal_rangeRoundBands">rangeBoundBands</a> to evenly space the bars.</li>
+  <li>How to update a scale.</li>
+  <li>How to ensure object consistency for transitions with the <a href="https://github.com/mbostock/d3/wiki/Selections#data">key function of the data mapping</a>.</li>
+  <li>How to use the object notation to define many attributes at the same time.</li>
+</ul>
+
 <html>
 
 <head>
@@ -721,6 +741,8 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 </body>
 
 </html>
+
+<p>An alternative to the sorting as used here would be to use D3’s <a href="https://github.com/mbostock/d3/wiki/Selections#sort">sort</a> feature for selections.</p>
 
 
 </article>
