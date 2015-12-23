@@ -219,10 +219,10 @@ def blog_url(project)
     url = if File.exists?('CNAME')
       "http://#{IO.read('CNAME').strip}"
     else
-      "http://vcg.github.io"
+      "http://dataviscourse.net"
     end
   else
-    url = "http://vcg.github.io/#{project}"
+    url = "http://dataviscourse.net#{project}"
   end
   url
 end
