@@ -309,7 +309,7 @@
 
 <p>So, this is not new, but let’s take a look at the data structure the selection uses:</p>
 
-<p><img src="images/selection.png" alt="selection data structure" /><br />
+<p><img src="images/selection.png" alt="selection data structure" />
 The selections return an array of an array with all matching objects. You can also see that this is not actually the original array implementation, but instead a sub-class of array that exposes much of its functionality, but also overrides some of its methods. The <code>parentNode</code>, for example, isn’t part of the original array implementation, and we can see that the prototype of the object is set to <code>Array</code>. <br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <h3 id="mapping-data">Mapping Data</h3>
@@ -340,7 +340,7 @@ The selections return an array of an array with all matching objects. You can al
 
 </html>
 
-<p><img src="images/data.png" alt="data assinged" /><br />
+<p><img src="images/data.png" alt="data assinged" />
 If we look at the properties of the array after we assigned the data, we can see a field <code>__data__</code> that holds the actual data values. We then can access these data values through the first parameter passed into a function <code>.attr("width", function (d, i) {return d;})</code>. The second parameter is the index of the current element, in the order of how they occur in the DOM.</p>
 
 <p>Typically, we want to be able to create visualizations from skratch, i.e., we don’t want to select existing elements but add new ones. We can do this using the <code>enter</code> function:</p>
@@ -369,9 +369,9 @@ If we look at the properties of the array after we assigned the data, we can see
 
 </html>
 
-<p><img src="images/data_empty.png" alt="data assinged but still empty" /><br />
-The selection right after the data assignment contains an uninitialized array of length 3. There’s nothing there, but we can use the <code>enter()</code> function of D3 to add elements. <br /><br /><br /><br /><br /><br /><br /><br /><br />
-<img src="images/enter.png" alt="enter" /><br />
+<p><img src="images/data_empty.png" alt="data assinged but still empty" />
+The selection right after the data assignment contains an uninitialized array of length 3. There’s nothing there, but we can use the <code>enter()</code> function of D3 to add elements. <br /><br /><br /><br /><br /><br /><br /><br />
+<img src="images/enter.png" alt="enter" />
 After <code>enter()</code> was called, the array contains objects with the <code>__data__</code> property set. Next we can use D3 functions, such as the <code>append()</code> to assign specific DOM elements to the arrays. Again, we only have to declare what we want to do once, and D3 will take care of the looping for you.  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <p>However, the things that we apply to the enter selection, <strong>do not apply to elements already in the slection</strong>. So, if we for example add a rectangle <code>&lt;rect x="0" y="10" height="10" width="50"&gt;&lt;/rect&gt;</code> to the above svg, we will see that the data is not applied to it.</p>
@@ -471,7 +471,7 @@ After <code>enter()</code> was called, the array contains objects with the <code
 
 </html>
 
-<p><img src="images/broken_group.png" alt="broken group" /><br />
+<p><img src="images/broken_group.png" alt="broken group" />
 This doesn’t work as we would hope. The update isn’t handled correctly. When we look at the selection we can see why: the data in the <code>g</code> element is updated correctly, but not the data in the <code>rect</code> or the <code>text</code>.</p>
 
 <p>We can fix this by separating the update from the enter and by explicitly selecting the lower-level elements (the rectangle and the text). The selection propagates the data to the actual elements:</p>

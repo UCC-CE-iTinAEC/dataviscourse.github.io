@@ -138,15 +138,15 @@
 <h3 id="why-version-control">Why version Control?</h3>
 
 <ul>
-  <li><strong>Keep copies of multiple states of files</strong> <br />
+  <li><strong>Keep copies of multiple states of files</strong> 
   By committing you record a state of the file to which you can go back any time.</li>
-  <li><strong>Create alternative states</strong><br />
+  <li><strong>Create alternative states</strong>
  Imagine you just want to try out something, but you realize you have to modify multiple files. You’re not sure whether it works or is worth it. With version control you can just create a <strong>branch</strong> where you can experiment or develop new features without disturbing the main or other branches.</li>
-  <li><strong>Collaborate in Teams</strong> <br />
+  <li><strong>Collaborate in Teams</strong> 
  Nobody wants to send code via e-mail. Version control lets you keep your code remotely and has dedicated ways to merge and deal with conflicts.</li>
-  <li><strong>Keep your work safe</strong><br />
+  <li><strong>Keep your work safe</strong>
  Your hard drive breaks. Your computer is stolen. But your code is safe because you store it not only on your computer but also on a remote server.</li>
-  <li><strong>Share</strong><br />
+  <li><strong>Share</strong>
  You developed something awesome and want to share it. But not only do you want to make it available, you’re also happy about contributions from others!</li>
 </ul>
 
@@ -182,7 +182,7 @@
   <li>Everybody has a full history of the repository locally</li>
   <li>No defined server - every node is equal.
     <ul>
-      <li>In practice: often server is used for one “official” copy of code.<br />
+      <li>In practice: often server is used for one “official” copy of code.
  But: server by convention only, no technical difference.</li>
     </ul>
   </li>
@@ -456,7 +456,7 @@
 <span class="lineno">10</span> <span class="o">[</span>master 8437327<span class="o">]</span> Front and back
 <span class="lineno">11</span>  <span class="m">1</span> file changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span></code></pre></div>
 
-<p>At this point we have changed the file in two different branches of the repository. This is great for working on new features without breaking a stable codebase, but it can result in conflicts. <br />
+<p>At this point we have changed the file in two different branches of the repository. This is great for working on new features without breaking a stable codebase, but it can result in conflicts. 
 <strong>Let’s try to merge those two branches.</strong></p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno"> 1</span> <span class="c"># the git merge command merges the specified branch into the currently active one. &quot;master&quot; is active, and we want to merge in &quot;draft&quot;. </span>
@@ -540,7 +540,7 @@
 <span class="lineno">21</span> To https://github.com/alexsb/demo.git
 <span class="lineno">22</span>    8e1ecd1..2e1918d  master -&gt; master</code></pre></div>
 
-<p>We have now committed a file locally and pushed it to the server, i.e., our local copy is in sync with the server copy. <br />
+<p>We have now committed a file locally and pushed it to the server, i.e., our local copy is in sync with the server copy. 
 Note that the <code>git push</code> command uses the origin defined in the config file. You can also push to other repositories!</p>
 
 <p>Next, we will make changes at another place. We’ll use the GitHub web interface to do that.</p>
@@ -566,18 +566,18 @@ Note that the <code>git push</code> command uses the origin defined in the confi
 <h3 id="other-github-features">Other GitHub Features</h3>
 
 <ul>
-  <li><strong>GitHub Issues</strong> <br />
+  <li><strong>GitHub Issues</strong> 
  Github Issues are a great way to keep track of open tasks and problems. Issues can be references and closed from commits.</li>
-  <li><strong>Forking</strong> <br />
+  <li><strong>Forking</strong> 
  Forking is essentially making use of the distributed nature of git, while having the benefits of a server. When you fork a repository you make a clone of someone else’s code that you are not allowed to read. The repository appears in your github account and you can start editing the code. If you think you improved the code, you can send a “pull request” to the original owner. The owner can then review your code and merge your modifications into his main repository. Forking is hence virtually the same as branching, with the exception that it resolves issues with write permissions.</li>
 </ul>
 
 <h3 id="gui-clients">GUI Clients</h3>
 
 <ul>
-  <li><strong>GitHub Desktop</strong> <br />
+  <li><strong>GitHub Desktop</strong> 
 Good option if you want a GUI client. <a href="https://desktop.github.com/">Download here</a></li>
-  <li><strong>Integrated in IDEs</strong> <br />
+  <li><strong>Integrated in IDEs</strong> 
 Many operations can be done out of a IDE such as WebStorm</li>
 </ul>
 
