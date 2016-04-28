@@ -1,6 +1,6 @@
-### Introduction to Data Science Course
+### CS 5630 / CS 6630
 
-This website is built with [Jekyll](http://jekyllrb.com).
+The 2015 Visualization website is built with [Jekyll](http://jekyllrb.com).
 
 #### Ubuntu Prerequisites
 
@@ -10,7 +10,7 @@ $ sudo apt-get install ruby-dev
 
 #### Setup
 
-Requires Jekyll 3 or later.
+Requires Jekyll 2.4.0 or later.
 
 ```ShellSession
 $ gem install jekyll
