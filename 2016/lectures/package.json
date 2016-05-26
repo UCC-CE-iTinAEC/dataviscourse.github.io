@@ -1,0 +1,791 @@
+[
+  {
+    "name": "clinical_patient_public_GBM",
+    "path": "clinical_patient_public_GBM.txt",
+    "size": 113202,
+    "columns": [
+      {
+        "id": 1,
+        "header": "bcr_patient_barcode",
+        "datatype": {
+          "type": "string"
+        }
+      },
+      {
+        "id": 2,
+        "header": "additional_chemo_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 268,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 167,
+                "index": 3,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 102,
+                "index": 5,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "header": "additional_drug_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 404,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 67,
+                "index": 26,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 66,
+                "index": 103,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "header": "additional_hormone_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "null",
+              "freq": {
+                "value": 537,
+                "index": 0,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "header": "additional_immuno_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 458,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 68,
+                "index": 26,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 11,
+                "index": 104,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "header": "additional_pharmaceutical_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 446,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 66,
+                "index": 26,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 25,
+                "index": 122,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "header": "additional_radiation_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 424,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 48,
+                "index": 4,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 65,
+                "index": 26,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 8,
+        "header": "age_at_initial_pathologic_diagnosis",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      },
+      {
+        "id": 9,
+        "header": "anatomic_organ_subdivision",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "Brain",
+              "freq": {
+                "value": 497,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 40,
+                "index": 26,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 10,
+        "header": "chemo_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "YES",
+              "freq": {
+                "value": 367,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 78,
+                "index": 5,
+                "type": "string"
+              }
+            },
+            {
+              "name": "NO",
+              "freq": {
+                "value": 92,
+                "index": 20,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 11,
+        "header": "days_to_birth",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      },
+      {
+        "id": 12,
+        "header": "days_to_death",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      },
+      {
+        "id": 13,
+        "header": "days_to_initial_pathologic_diagnosis",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      },
+      {
+        "id": 14,
+        "header": "days_to_last_followup",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      },
+      {
+        "id": 15,
+        "header": "days_to_tumor_progression",
+        "datatype": {
+          "type": "error",
+          "expected_type": "string"
+        }
+      },
+      {
+        "id": 16,
+        "header": "days_to_tumor_recurrence",
+        "datatype": {
+          "type": "error",
+          "expected_type": "string"
+        }
+      },
+      {
+        "id": 17,
+        "header": "drugs",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "null",
+              "freq": {
+                "value": 537,
+                "index": 0,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 18,
+        "header": "gender",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "FEMALE",
+              "freq": {
+                "value": 195,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "MALE",
+              "freq": {
+                "value": 308,
+                "index": 1,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 34,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 19,
+        "header": "histological_type",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "Untreated primary (de novo) GBM",
+              "freq": {
+                "value": 486,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "Treated primary GBM",
+              "freq": {
+                "value": 17,
+                "index": 4,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 34,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 20,
+        "header": "hormonal_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 416,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 52,
+                "index": 45,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 69,
+                "index": 117,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 21,
+        "header": "immuno_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 471,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 52,
+                "index": 45,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 14,
+                "index": 269,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 22,
+        "header": "informed_consent_verified",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "YES",
+              "freq": {
+                "value": 530,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 7,
+                "index": 214,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 23,
+        "header": "initial_pathologic_diagnosis_method",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "TUMOR RESECTION",
+              "freq": {
+                "value": 439,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 36,
+                "index": 26,
+                "type": "string"
+              }
+            },
+            {
+              "name": "EXCISIONAL BIOPSY",
+              "freq": {
+                "value": 56,
+                "index": 91,
+                "type": "string"
+              }
+            },
+            {
+              "name": "INCISION BIOPSY",
+              "freq": {
+                "value": 2,
+                "index": 233,
+                "type": "string"
+              }
+            },
+            {
+              "name": "OTHER METHOD, SPECIFY IN NOTES",
+              "freq": {
+                "value": 1,
+                "index": 262,
+                "type": "string"
+              }
+            },
+            {
+              "name": "FINE NEEDLE ASPIRATION BIOPSY",
+              "freq": {
+                "value": 3,
+                "index": 404,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 24,
+        "header": "person_neoplasm_cancer_status",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "WITH TUMOR",
+              "freq": {
+                "value": 431,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 84,
+                "index": 26,
+                "type": "string"
+              }
+            },
+            {
+              "name": "TUMOR FREE",
+              "freq": {
+                "value": 22,
+                "index": 141,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 25,
+        "header": "pretreatment_history",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "YES",
+              "freq": {
+                "value": 20,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "NO",
+              "freq": {
+                "value": 483,
+                "index": 1,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 34,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 26,
+        "header": "prior_glioma",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 490,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 13,
+                "index": 32,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 34,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 27,
+        "header": "radiation_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "YES",
+              "freq": {
+                "value": 428,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 50,
+                "index": 45,
+                "type": "string"
+              }
+            },
+            {
+              "name": "NO",
+              "freq": {
+                "value": 59,
+                "index": 115,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 28,
+        "header": "radiations",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "null",
+              "freq": {
+                "value": 537,
+                "index": 0,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 29,
+        "header": "targeted_molecular_therapy",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "NO",
+              "freq": {
+                "value": 414,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 55,
+                "index": 45,
+                "type": "string"
+              }
+            },
+            {
+              "name": "YES",
+              "freq": {
+                "value": 68,
+                "index": 103,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 30,
+        "header": "tumor_tissue_site",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "BRAIN",
+              "freq": {
+                "value": 503,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 34,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 31,
+        "header": "vital_status",
+        "datatype": {
+          "type": "nominal",
+          "categories": [
+            {
+              "name": "DECEASED",
+              "freq": {
+                "value": 388,
+                "index": 0,
+                "type": "string"
+              }
+            },
+            {
+              "name": "LIVING",
+              "freq": {
+                "value": 114,
+                "index": 10,
+                "type": "string"
+              }
+            },
+            {
+              "name": "null",
+              "freq": {
+                "value": 35,
+                "index": 60,
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": 32,
+        "header": "year_of_initial_pathologic_diagnosis",
+        "datatype": {
+          "type": "error",
+          "expected_type": "numerical"
+        }
+      }
+    ]
+  }
+]
