@@ -1,6 +1,6 @@
 ### CS 5630 / CS 6630
 
-The 2015 Visualization website is built with [Jekyll](http://jekyllrb.com).
+The 2016 Visualization website is built with [Jekyll](http://jekyllrb.com).
 
 #### Ubuntu Prerequisites
 
@@ -10,7 +10,7 @@ $ sudo apt-get install ruby-dev
 
 #### Setup
 
-Requires Jekyll 2.4.0 or later.
+Requires Jekyll 3 or later.
 
 ```ShellSession
 $ gem install jekyll
@@ -19,13 +19,13 @@ $ gem install jekyll
 #### Generate and/or Serve Site
 
 ```ShellSession
-$ jekyll serve --watch
+$ jekyll serve 
 ```
 
 #### View Site
 
 ```ShellSession
-$ open http://0.0.0.0:4000/
+$ open http://0.0.0.0:4000/2016/
 ```
 
 ### Liquid Syntax
