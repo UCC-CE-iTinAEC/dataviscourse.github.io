@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>D3 Complex Data</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.0.0-alpha.44.min.js" charset="utf-8"></script>
     <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
     <style>
         .axis path,
@@ -110,21 +110,21 @@
 
     var textWidth = 80;
 
-    var xScale = d3.scale.linear()
+    var xScale = d3.scaleLinear()
             .domain([0, max])
             .range([textWidth, width])
             .nice();
 
-    var colorScale = d3.scale.ordinal()
+    var colorScale = d3.scaleOrdinal()
             .domain(types)
             .range(colorbrewer.Accent[4]);
 
     // here we use an ordinal scale with rangeBoundBands
     // to position and size the bars in y direction
-    var yScale = d3.scale.ordinal()
+    var yScale = d3.scaleOrdinal()
             .rangeRoundBands([0, height], .1);
 
-    var xAxis = d3.svg.axis();
+    var xAxis = d3.axisBottom();
     xAxis.scale(xScale);
     xAxis.orient("bottom");
 

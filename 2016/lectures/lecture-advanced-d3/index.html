@@ -582,7 +582,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <code class="highlighter-rouge">d3.scale.linear()</code>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <code class="highlighter-rouge">d3.max()</code> function. We could use <code class="highlighter-rouge">d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
+<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <code class="highlighter-rouge">d3.scaleLinear()</code>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <code class="highlighter-rouge">d3.max()</code> function. We could use <code class="highlighter-rouge">d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
 
 <p>The <strong>range defines which output values we want from the scale</strong>, i.e., we’d typically pick something that we can easily use to draw on the screen.</p>
 
@@ -672,7 +672,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This worked! We create a new axes by calling <code class="highlighter-rouge">d3.scale.linear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code class="highlighter-rouge">svg.append("g").call(xAxis)</code>. Now, we can see that it’s not very pretty, that it overlaps with our bar charts and that some of the numbers are truncated because they go beyond the svg. To fix this we have to style the chart and add some margins.</p>
+<p>This worked! We create a new axes by calling <code class="highlighter-rouge">d3.scaleLinear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code class="highlighter-rouge">svg.append("g").call(xAxis)</code>. Now, we can see that it’s not very pretty, that it overlaps with our bar charts and that some of the numbers are truncated because they go beyond the svg. To fix this we have to style the chart and add some margins.</p>
 
 <html>
 
