@@ -29,7 +29,7 @@
                 .range([0, 800]);
 
         // here we define a color scale
-        var color = d3.scale.linear()
+        var color = d3.scaleLinear()
                 .domain([d3.min(data), 0, d3.max(data)])
                 .range(["darkred", "lightgray", "steelblue"]);
 

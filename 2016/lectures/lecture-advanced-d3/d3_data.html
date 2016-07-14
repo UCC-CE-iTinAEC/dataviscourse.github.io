@@ -28,7 +28,8 @@
         console.log(selection);
 
         // with the .data method we bind the data to the selection
-        var data = selection.data([127, 61, 256]);
+        var data = [127, 61, 256];
+                selection.data(data);
         // here we have an array of length 3, the object has enter and exit functions
         // the data is stored in the __data__ variable
         console.log("Data");
