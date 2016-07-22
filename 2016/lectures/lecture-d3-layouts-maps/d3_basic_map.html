@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>D3: Loading GeoJSON data and generating SVG paths</title>
-    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <style>
         path {
             fill: none;
@@ -23,8 +23,15 @@
             .attr("width", w)
             .attr("height", h);
 
-    //Define default path generator
-    var path = d3.geo.path();
+    //Had to add projection to work in v4.0
+    var projection = d3.geoAlbersUsa()
+            .translate([w/2, h/2])
+            .scale([700]);
+
+    // Define default path generator
+    var path = d3.geoPath()
+            .projection(projection);
+
 
     //Load in GeoJSON data
     d3.json("us-states.json", function(json) {

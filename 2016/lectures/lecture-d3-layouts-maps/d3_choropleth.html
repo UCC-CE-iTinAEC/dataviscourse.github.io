@@ -3,22 +3,21 @@
 <head>
     <meta charset="utf-8">
     <title>D3: Choropleth</title>
-    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
     var w = 800;
     var h = 500;
-    var projection = d3.geo.albersUsa()
+    var projection = d3.geoAlbersUsa()
             .translate([w/2, h/2])
             .scale([700]);
 
-    var path = d3.geo.path()
+    var path = d3.geoPath()
             .projection(projection);
 
     //Define quantize scale to sort data values into buckets of color
-    var color = d3.scale.quantize()
+    var color = d3.scaleQuantize()
             .range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
 
     var svg = d3.select("body")

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>D3 Data</title>
-    <script src="https://d3js.org/d3.v4.0.0-alpha.44.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <style>
         rect {
             fill: lightgray;
@@ -28,8 +28,7 @@
         console.log(selection);
 
         // with the .data method we bind the data to the selection
-        var data = [127, 61, 256];
-                selection.data(data);
+        var data = selection.data([127, 61, 256]);
         // here we have an array of length 3, the object has enter and exit functions
         // the data is stored in the __data__ variable
         console.log("Data");

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>D3 Complex Data</title>
-    <script src="https://d3js.org/d3.v4.0.0-alpha.44.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
     <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
     <style>
         .axis path,
@@ -37,7 +38,7 @@
     var height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#chart")
-            .attr({
+            .attrs({
                 width: width + margin.left + margin.right,
                 height: height + margin.top + margin.bottom
             }).append("g")
@@ -121,12 +122,12 @@
 
     // here we use an ordinal scale with rangeBoundBands
     // to position and size the bars in y direction
-    var yScale = d3.scaleOrdinal()
-            .rangeRoundBands([0, height], .1);
+    var yScale = d3.scaleBand()
+            .range([0, height], .1);
 
     var xAxis = d3.axisBottom();
     xAxis.scale(xScale);
-    xAxis.orient("bottom");
+//    xAxis.orient("bottom");
 
     svg.append("g")
             .classed("axis", true)
@@ -162,7 +163,7 @@
         })
                 .attr("x", textWidth - 10)
             // dy is a shift along the y axis
-                .attr("dy", yScale.rangeBand() / 2)
+                .attr("dy", yScale.step() / 2)
             // align it to the right
                 .attr("text-anchor", "end")
             // center it
@@ -175,7 +176,7 @@
                 .attr("width", "0")
                 .attr("x", textWidth)
                 // rangeBand accesses the automatically computed width of the bar
-                .attr("height", yScale.rangeBand())
+                .attr("height", yScale.step()/1.2)
                 .style("fill", function (d) {
                     // here we apply the color scale
                     return colorScale(d.type);

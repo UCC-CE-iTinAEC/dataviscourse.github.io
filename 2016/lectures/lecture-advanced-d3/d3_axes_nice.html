@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>D3 Nice Axes</title>
-    <script src="https://d3js.org/d3.v4.0.0-alpha.44.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
     <style>
         .axis path,
         .axis line {
@@ -31,14 +32,14 @@
     // add padding on all sides
     var padding = 25;
     var svg = d3.select("svg");
-    svg.attr({
+    svg.attrs({
         width: width + 2 * padding,
         height: height + 2 * padding
     })
 
     // a rectangle in the background
     svg.append("rect")
-            .attr({
+            .attrs({
                 width: width,
                 height: height,
                 style: "stroke: none; fill: #eeeeee",

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>D3: Cities</title>
-    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <style>
         path {
             fill: none;
@@ -16,11 +16,11 @@
 <script type="text/javascript">
     var w = 800;
     var h = 500;
-    var projection = d3.geo.albersUsa()
+    var projection = d3.geoAlbersUsa()
             .translate([w / 2, h / 2])
             .scale([700]);
 
-    var path = d3.geo.path()
+    var path = d3.geoPath()
             .projection(projection);
 
     var svg = d3.select("body")

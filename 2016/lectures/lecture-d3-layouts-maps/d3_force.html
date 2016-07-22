@@ -22,24 +22,23 @@
 
 </style>
 <body>
-<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
     // based on http://bl.ocks.org/mbostock/4062045
     var width = 800;
     var height = 400;
 
-    var color = d3.scale.category20();
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     // here we initialize the force layout
-    var force = d3.layout.force()
+    var force = d3.forceSimulation()
         // the strength of repulsion/attraction
         // the lower the value, the more repulsion
-        // positive values attract each other
-            .charge(-120)
-        // the target distance between nodes
-            .linkDistance(30)
+        // positive values attract each other, // the target distance between nodes
+            .force("charge", d3.forceManyBody())
+            .force("link", d3.forceLink().distance(30).strength(-120))
         // how "sticky" things are - 1, no friction, 0 max friction
-            .friction(0.9)
+            .velocityDecay(0.9)
         // how strongly the nodes are pulled toward a gravity well (e.g., the center of the svg)
             .gravity(0.1)
         // tells the layout about the available space
@@ -54,16 +53,15 @@
     d3.json("miserables.json", function (error, graph) {
         if (error) throw error;
 
-
         force
             // providing the layout with the nodes
                 .nodes(graph.nodes)
             // providing the layouts with the links
-                .links(graph.links)
-            // first computation
-                .start();
+                .force("link").links(graph.links)
+            // first computation (the simluation starts automatically in v4.0)??
+            // .start();
 
-        console.log(force.links());
+        console.log(force.force("link")());
 
         // adding the links, binding the link data
         var link = svg.selectAll(".link")
