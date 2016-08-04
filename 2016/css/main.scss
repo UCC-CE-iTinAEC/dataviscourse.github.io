@@ -2,8 +2,10 @@
 
 
 $crimson: #c10000;
+$crimson-medium: #bf3030;
 $crimson_light: #e47b7b;
 $crimson_super_light: #f09c9c;
+$complement_color: #90d6f0;
 
 $body-font: Helvetica, Arial, sans-serif;
 $heading-font: 'Baumans', cursive;
@@ -127,6 +129,15 @@ table th, table td {
   font-weight: bold;
 }
 
+.lecture-part {
+  @extend .note-box;
+  background-color: $crimson-medium;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+}
+
+
 #schedule h3 {
   font-size: 19px;
   width: 70%;
@@ -182,7 +193,7 @@ table th, table td {
   //border: dashed;
 }
 
-.site-subtitle, {
+.site-subtitle {
   font-family: $heading-font;
   font-weight: 400;
   display: block;
