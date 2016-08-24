@@ -316,7 +316,9 @@ Initialized empty Git repository <span class="k">in</span> ../myProject/.git/<sp
 23
 24
 25
-26</pre></td><td class="code"><pre><span class="c"># Let's look at what git creates</span>
+26
+27
+28</pre></td><td class="code"><pre><span class="c"># Let's look at what git creates</span>
 <span class="gp">$ </span>ls .git/ 
 branches  config  description  HEAD  hooks  info  objects  refs
 
@@ -332,16 +334,18 @@ branches  config  description  HEAD  hooks  info  objects  refs
 <span class="c"># More interesting for a project with branches and remotes </span>
 <span class="gp">$ </span>cat .git/config 
 <span class="o">[</span>core]
-        repositoryformatversion <span class="o">=</span> 0
-        filemode <span class="o">=</span> <span class="nb">true
-        </span>bare <span class="o">=</span> <span class="nb">false
-        </span>logallrefupdates <span class="o">=</span> <span class="nb">true</span>
+       	repositoryformatversion <span class="o">=</span> 0
+       	filemode <span class="o">=</span> <span class="nb">true
+       	</span>bare <span class="o">=</span> <span class="nb">false
+       	</span>logallrefupdates <span class="o">=</span> <span class="nb">true
+       	</span>ignorecase <span class="o">=</span> <span class="nb">true
+       	</span>precomposeunicode <span class="o">=</span> <span class="nb">true</span>
 <span class="o">[</span>remote <span class="s2">"origin"</span><span class="o">]</span>
-        url <span class="o">=</span> https://github.com/CS171/HW1.git
-        fetch <span class="o">=</span> +refs/heads/<span class="k">*</span>:refs/remotes/origin/<span class="k">*</span>
+       	url <span class="o">=</span> https://github.com/dataviscourse/2016-dataviscourse-website
+       	fetch <span class="o">=</span> +refs/heads/<span class="k">*</span>:refs/remotes/origin/<span class="k">*</span>
 <span class="o">[</span>branch <span class="s2">"master"</span><span class="o">]</span>
-        remote <span class="o">=</span> origin
-        merge <span class="o">=</span> refs/heads/master<span class="w">
+       	remote <span class="o">=</span> origin
+       	merge <span class="o">=</span> refs/heads/master<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>Now let’s create a file</strong></p>
@@ -479,21 +483,19 @@ Changes not staged <span class="k">for </span>commit:
  1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
 
 <span class="c"># Better. Now, let's look at what happened up to now</span>
-<span class="gp">$ </span>git log
-commit a939cdfeaf0a7ffb972e6616549e9053917e0673
-Author: Alexander Lex &lt;alex@seas.harvard.edu&gt;
-Date:   Thu Jan 30 20:35:37 2014 -0500
-
-    spinning
-
-commit 3be5e8c4b3691a70598d784483ef9cf35d5663ba
-Author: Alexander Lex &lt;alex@seas.harvard.edu&gt;
-Date:   Thu Jan 30 20:29:52 2014 -0500
-
-    Wrote to demo<span class="w">
+<span class="gp">$ </span><span class="nv">$ </span>git log
+  commit bf92da7ad772480f7fe5f28ef105227383e07a45
+  Author: Alexander Lex &lt;alex@sci.utah.edu&gt;
+  Date:   Wed Aug 24 14:39:45 2016 -0600
+  
+      Added another line to the demo file
+  
+  commit 2886218c7f65ba3c2d7d7339e2b8a7b9ab4420c0
+  Author: Alexander Lex &lt;alex@sci.utah.edu&gt;
+  Date:   Wed Aug 24 14:37:06 2016 -0600
+  
+      added demo file<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>Commits have a unique ID. This ID is a hash of your complete history.  When we retreive your homeworks, we will tell you the commit ID of the homework we grade. Check whether that’s the correct ID!</p>
 
 <p>Through this cycle of editing, adding and committing, you can develop software in a linear fashion. Now let’s see how we can create alternate versions.</p>
 
@@ -599,7 +601,7 @@ Hello World!
 Are you still spinning?
 Indeed!
 
-<span class="c"># comitting again</span>
+<span class="c"># committing again</span>
 <span class="gp">$ </span>git commit -a 
 <span class="o">[</span>master 8437327] Front and back
  1 file changed, 2 insertions<span class="o">(</span>+<span class="o">)</span>
