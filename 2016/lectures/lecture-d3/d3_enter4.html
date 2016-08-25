@@ -26,11 +26,11 @@
                 .data([127, 61, 256, 71])
 
         // Shorter
-        selection.enter().append("rect")
+        //Notice that in order to merge the enter selection (the new rectangle) with
+        // the regular selection, we must use the .merge command
 
-        // when updating the regular selection then
-        // enter selection is joined in to the update
-        // selection for convenience.
+        selection = selection.enter().append("rect").merge(selection);
+
         selection
                 .attr("x", 0)
                 .attr("y", function (d, i) {

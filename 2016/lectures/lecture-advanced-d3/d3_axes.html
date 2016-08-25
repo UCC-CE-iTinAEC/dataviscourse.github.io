@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>D3 Axes</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!--Need to add d3-selection-multi.js separately because the multi-value methods have been extracted into a separate library and are no longer part of the default bundle. -->
     <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
 </head>
 <body>
@@ -16,6 +17,7 @@
     var width = 800;
 
     var svg = d3.select("svg");
+//  The multi-value map methods have been renamed to plural form: selection.attrs, selection.styles and selection.properties.
     svg.attrs({
         width: width,
         height: height
@@ -27,6 +29,7 @@
         var spacing = height / data.length;
         var min = -1.45, max = 1.45;
 
+//      v3.0 -> d3.scale.linear()  v4.0 -> d3.scaleLinear()
         var xScale = d3.scaleLinear()
                 .domain([min, max])
                 .range([0, 800]);

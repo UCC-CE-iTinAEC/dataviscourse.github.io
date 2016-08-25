@@ -32,6 +32,7 @@
                 .attr("height", 20)
                 .style("fill", "steelblue")
 
+        //Note this is only applying these attributes to the "enter" selection. i.e, the new rectangle.
         selection.enter().append("rect")
                 .attr("x", 0)
                 .attr("y", function(d,i) { return i*60+50 })
