@@ -32,13 +32,13 @@
                 .attr("height", 20)
                 .style("fill", "steelblue")
 
-        //Note this is only applying these attributes to the "enter" selection. i.e, the new rectangle.
+        // Note this is only applying these attributes to the "enter" selection. i.e, the new rectangle.
         selection.enter().append("rect")
                 .attr("x", 0)
                 .attr("y", function(d,i) { return i*60+50 })
                 .attr("width", function(d,i) { return d; })
                 .attr("height", 20)
-                .style("fill", "steelblue")
+                .style("fill", "green")
     }
 </script>
 <script src="run.js" charset="utf-8"></script>

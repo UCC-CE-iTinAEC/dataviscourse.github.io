@@ -285,7 +285,7 @@
 
 <h2 id="selections-and-data">Selections and Data</h2>
 
-<p>First, let’s go over how selections and data mapping works again. We talked about the selection methods <code class="highlighter-rouge">select()</code> and  <code class="highlighter-rouge">selectAll()</code>, that take CSS3 identifiers. That means that we can select on elements - <code class="highlighter-rouge">select("svg")</code>, classes - <code class="highlighter-rouge">selectAll(".className")</code>, IDs - <code class="highlighter-rouge">selectAll("#cancelButton")</code>, but also other selection expression such as parent child relationships - <code class="highlighter-rouge">selectAll("p &gt; span")</code>. Here is a simple example:</p>
+<p>First, let’s go over how selections and data mapping works again. We talked about the selection methods <code>select()</code> and  <code>selectAll()</code>, that take CSS3 identifiers. That means that we can select on elements - <code>select("svg")</code>, classes - <code>selectAll(".className")</code>, IDs - <code>selectAll("#cancelButton")</code>, but also other selection expression such as parent child relationships - <code>selectAll("p &gt; span")</code>. Here is a simple example:</p>
 
 <html>
 
@@ -314,7 +314,7 @@
 <p>So, this is not new, but let’s take a look at the data structure the selection uses:</p>
 
 <p><img src="images/selection.png" alt="selection data structure" />
-The selections return an array of an array with all matching objects. You can also see that this is not actually the original array implementation, but instead a sub-class of array that exposes much of its functionality, but also overrides some of its methods. The <code class="highlighter-rouge">parentNode</code>, for example, isn’t part of the original array implementation, and we can see that the prototype of the object is set to <code class="highlighter-rouge">Array</code>. <br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+The selections return an array of an array with all matching objects. You can also see that this is not actually the original array implementation, but instead a sub-class of array that exposes much of its functionality, but also overrides some of its methods. The <code>parentNode</code>, for example, isn’t part of the original array implementation, and we can see that the prototype of the object is set to <code>Array</code>. <br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <h3 id="mapping-data">Mapping Data</h3>
 
@@ -345,9 +345,9 @@ The selections return an array of an array with all matching objects. You can al
 </html>
 
 <p><img src="images/data.png" alt="data assinged" />
-If we look at the properties of the array after we assigned the data, we can see a field <code class="highlighter-rouge">__data__</code> that holds the actual data values. We then can access these data values through the first parameter passed into a function <code class="highlighter-rouge">.attr("width", function (d, i) {return d;})</code>. The second parameter is the index of the current element, in the order of how they occur in the DOM.</p>
+If we look at the properties of the array after we assigned the data, we can see a field <code>__data__</code> that holds the actual data values. We then can access these data values through the first parameter passed into a function <code>.attr("width", function (d, i) {return d;})</code>. The second parameter is the index of the current element, in the order of how they occur in the DOM.</p>
 
-<p>Typically, we want to be able to create visualizations from skratch, i.e., we don’t want to select existing elements but add new ones. We can do this using the <code class="highlighter-rouge">enter</code> function:</p>
+<p>Typically, we want to be able to create visualizations from skratch, i.e., we don’t want to select existing elements but add new ones. We can do this using the <code>enter</code> function:</p>
 
 <html>
 
@@ -374,11 +374,11 @@ If we look at the properties of the array after we assigned the data, we can see
 </html>
 
 <p><img src="images/data_empty.png" alt="data assinged but still empty" />
-The selection right after the data assignment contains an uninitialized array of length 3. There’s nothing there, but we can use the <code class="highlighter-rouge">enter()</code> function of D3 to add elements. <br /><br /><br /><br /><br /><br /><br /><br />
+The selection right after the data assignment contains an uninitialized array of length 3. There’s nothing there, but we can use the <code>enter()</code> function of D3 to add elements. <br /><br /><br /><br /><br /><br /><br /><br />
 <img src="images/enter.png" alt="enter" />
-After <code class="highlighter-rouge">enter()</code> was called, the array contains objects with the <code class="highlighter-rouge">__data__</code> property set. Next we can use D3 functions, such as the <code class="highlighter-rouge">append()</code> to assign specific DOM elements to the arrays. Again, we only have to declare what we want to do once, and D3 will take care of the looping for you.  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+After <code>enter()</code> was called, the array contains objects with the <code>__data__</code> property set. Next we can use D3 functions, such as the <code>append()</code> to assign specific DOM elements to the arrays. Again, we only have to declare what we want to do once, and D3 will take care of the looping for you.  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
 
-<p>However, the things that we apply to the enter selection, <strong>do not apply to elements already in the slection</strong>. So, if we for example add a rectangle <code class="highlighter-rouge">&lt;rect x="0" y="10" height="10" width="50"&gt;&lt;/rect&gt;</code> to the above svg, we will see that the data is not applied to it.</p>
+<p>However, the things that we apply to the enter selection, <strong>do not apply to elements already in the slection</strong>. So, if we for example add a rectangle <code>&lt;rect x="0" y="10" height="10" width="50"&gt;&lt;/rect&gt;</code> to the above svg, we will see that the data is not applied to it.</p>
 
 <p>Here is an example that handles enter and update correctly:</p>
 
@@ -476,7 +476,7 @@ After <code class="highlighter-rouge">enter()</code> was called, the array conta
 </html>
 
 <p><img src="images/broken_group.png" alt="broken group" />
-This doesn’t work as we would hope. The update isn’t handled correctly. When we look at the selection we can see why: the data in the <code class="highlighter-rouge">g</code> element is updated correctly, but not the data in the <code class="highlighter-rouge">rect</code> or the <code class="highlighter-rouge">text</code>.</p>
+This doesn’t work as we would hope. The update isn’t handled correctly. When we look at the selection we can see why: the data in the <code>g</code> element is updated correctly, but not the data in the <code>rect</code> or the <code>text</code>.</p>
 
 <p>We can fix this by separating the update from the enter and by explicitly selecting the lower-level elements (the rectangle and the text). The selection propagates the data to the actual elements:</p>
 
@@ -506,7 +506,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 <h2 id="scales">Scales</h2>
 
-<p>Up to this point, our data has conveniently had dimensions that we could directly plot without any data transformation. However, in your homework, for example, you used Anscombe’s quartett, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. Generally speaking what we are looking for a function <code class="highlighter-rouge">f()</code> that maps an input dataset <code class="highlighter-rouge">D</code> to a derived dataset <code class="highlighter-rouge">D'</code>, i.e., <code class="highlighter-rouge">D'=f(D)</code>. Naturally, we want to choose <code class="highlighter-rouge">f()</code> such that the resulting derived dataset can be directly used for mapping.</p>
+<p>Up to this point, our data has conveniently had dimensions that we could directly plot without any data transformation. However, in your homework, for example, you used Anscombe’s quartett, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. Generally speaking what we are looking for a function <code>f()</code> that maps an input dataset <code>D</code> to a derived dataset <code>D'</code>, i.e., <code>D'=f(D)</code>. Naturally, we want to choose <code>f()</code> such that the resulting derived dataset can be directly used for mapping.</p>
 
 <p>Here is an example of a datset that is not suitable for direct plotting:</p>
 
@@ -586,7 +586,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <code class="highlighter-rouge">d3.scaleLinear()</code>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <code class="highlighter-rouge">d3.max()</code> function. We could use <code class="highlighter-rouge">d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
+<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <code>d3.scaleLinear()</code>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <code>d3.max()</code> function. We could use <code>d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
 
 <p>The <strong>range defines which output values we want from the scale</strong>, i.e., we’d typically pick something that we can easily use to draw on the screen.</p>
 
@@ -676,7 +676,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This worked! We create a new axes by calling <code class="highlighter-rouge">d3.scaleLinear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code class="highlighter-rouge">svg.append("g").call(xAxis)</code>. Now, we can see that it’s not very pretty, that it overlaps with our bar charts and that some of the numbers are truncated because they go beyond the svg. To fix this we have to style the chart and add some margins.</p>
+<p>This worked! We create a new axes by calling <code>d3.scaleLinear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code>svg.append("g").call(xAxis)</code>. Now, we can see that it’s not very pretty, that it overlaps with our bar charts and that some of the numbers are truncated because they go beyond the svg. To fix this we have to style the chart and add some margins.</p>
 
 <html>
 
@@ -702,7 +702,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This is a much nicer bar chart! We’ve used CSS to style the axis, the <code class="highlighter-rouge">nice()</code> function for the scale to get round axis labels, introduced a padding and a background for the chart. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
+<p>This is a much nicer bar chart! We’ve used CSS to style the axis, the <code>nice()</code> function for the scale to get round axis labels, introduced a padding and a background for the chart. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
 
 <h2 id="more-complex-data">More Complex Data</h2>
 

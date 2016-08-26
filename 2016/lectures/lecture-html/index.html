@@ -281,8 +281,10 @@
 </header>
 
 <article class="post-content">
-    <p><em>Based on material by <a href="http://cscheid.net/courses/spr15/cs444/lectures/week2.html">Carlos Scheidegger</a> and Kevin Sun</em>
-Next, we go over the very basics of how the content of a web page is represented in HTML. We will learn some simple CSS, which lets us separate the content of the web page with how we want it to look; this separation will let us change both things independently of one another, which will help a lot when we’re quickly iterating over designs. For visual elements such as lines, circles and polygons, we will learn SVG.</p>
+    <p><em>Based on material by <a href="http://cscheid.net/courses/spr15/cs444/lectures/week2.html">Carlos Scheidegger</a> and Kevin Sun</em></p>
+
+<p>Next, we go over the basics of how the content of a web page is represented in HTML. We will learn about CSS, which lets us separate the content of the web page with how we want it to look.
+Then we’ll go into the essential technology for rendering visualizations: SVG - Scalable Vector Graphics.</p>
 
 <h2 id="html">HTML</h2>
 <p>In this course we will use HTML to create our data visualizations. HTML stands for “HyperText Markup Language”. 25 years ago, <a href="http://www.w3.org/People/Raggett/book4/ch02.html">that used to be a meaningful description of what HTML actually did</a>: it has links (<a href="http://en.wikipedia.org/wiki/Hypertext">hypertext</a>), and it is a <a href="http://en.wikipedia.org/wiki/Markup_language">markup language</a>. But we will be using many things from the HTML5 standard, which does much, much more: <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">graphics</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video">audio, video</a>, etc. So it is easier to think of HTML as “whatever it is that web browsers know how to interpret”, and just not think about the actual term.</p>
@@ -369,12 +371,12 @@ Next, we go over the very basics of how the content of a web page is represented
 
 </html>
 
-<p>In this case, we’re using the <code class="highlighter-rouge">a</code> element (which stood for “anchor”, but now is almost universally used as a “link” — go figure). The attribute  <code class="highlighter-rouge">href</code> means “HTML reference”, which actually makes sense for a change. The meaning given to each attribute changes from element to element.</p>
+<p>In this case, we’re using the <code>a</code> element (which stood for “anchor”, but now is almost universally used as a “link”). The attribute  <code>href</code> means “HTML reference”, which actually makes sense for a change. The meaning given to each attribute changes from element to element.</p>
 
-<p>We will use element attributes in pretty much every example from now on. The most important ones are <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">class</code>, and <code class="highlighter-rouge">style</code>. The <code class="highlighter-rouge">id</code> attribute gives the attribute a unique identifier, which can then be used to access the element via Javascript (we’ll see how next week). Think of it as making the element accessible via a global variable. This is as convenient as a global variable, and potentially just as confusing: needing lots of different element ids might be a sign that you could organize your code better (in the coming weeks, we’ll learn about good practices like this). The class and style attributes will be explained in the CSS section below.</p>
+<p>We will use element attributes in pretty much every example from now on. The most important ones are <code>id</code>, <code>class</code>, and <code>style</code>. The <code>id</code> attribute gives the attribute a unique identifier, which can then be used to access the element via Javascript (we’ll see how next week). Think of it as making the element accessible via a global variable. This is as convenient as a global variable, and potentially just as confusing: needing lots of different element ids might be a sign that you could organize your code better (in the coming weeks, we’ll learn about good practices like this). The class and style attributes will be explained in the CSS section below.</p>
 
 <h4 id="self-closing-elements">Self-closing elements</h4>
-<p>Some elements rarely have internal content between their opening and closing tags, and therefore it becomes a bit of a pain to type the closing tags every time. In that case, you can use the following shorthand notation: <code class="highlighter-rouge">&lt;foo /&gt;</code> is equivalent to <code class="highlighter-rouge">&lt;foo&gt;&lt;/foo&gt;</code> (you might have noticed that in the charset declaration above).</p>
+<p>Some elements rarely have internal content between their opening and closing tags, and therefore it becomes a bit of a pain to type the closing tags every time. In that case, you can use the following shorthand notation: <code>&lt;foo /&gt;</code> is equivalent to <code>&lt;foo&gt;&lt;/foo&gt;</code> (you might have noticed that in the charset declaration above).</p>
 
 <p><strong>Here are some important tags:</strong></p>
 
@@ -402,19 +404,22 @@ Next, we go over the very basics of how the content of a web page is represented
 
 </html>
 
-<p>Below are a couple of tags that don’t have visual equivalents on the website, but they are used to define <strong>document metadata</strong>:
- * <code class="highlighter-rouge"><span class="nt">&lt;html&gt;</span></code> creates the entire HTML container.
- * <code class="highlighter-rouge">&lt;head&gt;</code> Creates the header (generally where the title and links to style sheets/scripts are found).
- * <code class="highlighter-rouge">&lt;script&gt;</code> links to or embeds a script (we will do that a lot).
- * <code class="highlighter-rouge">&lt;style&gt;</code> for embedding a style in the website.
- *  <code class="highlighter-rouge">&lt;link&gt;</code> to reference an external document, often a css document like that: <code class="highlighter-rouge">&lt;link rel="stylesheet" type="text/css" href="theme.css"&gt;</code>. The rel attribute defines the relationship to the active document, the type attribute tells the browser which type of file to expect. 
- * <code class="highlighter-rouge">&lt;body&gt;</code> marks the container of the content on the website.</p>
+<p>Below are a couple of tags that don’t have visual equivalents on the website, but they are used to define <strong>document metadata</strong>:</p>
+
+<ul>
+  <li><code>&lt;html&gt;</code> creates the entire HTML container.</li>
+  <li><code>&lt;head&gt;</code> Creates the header (generally where the title and links to style sheets/scripts are found).</li>
+  <li><code>&lt;script&gt;</code> links to or embeds a script (we will do that a lot).</li>
+  <li><code>&lt;style&gt;</code> for embedding a style in the website.</li>
+  <li><code>&lt;link&gt;</code> to reference an external document, often a css document like that: <code>&lt;link rel="stylesheet" type="text/css" href="theme.css"&gt;</code>. The <code>rel</code> attribute defines the relationship to the active document, the type attribute tells the browser which type of file to expect.</li>
+  <li><code>&lt;body&gt;</code> marks the container of the content of the website.</li>
+</ul>
 
 <p>A comprehensive and well structured list of all elements can be <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">found at MDN</a>.</p>
 
 <h3 id="necessary-boilerplate">Necessary Boilerplate</h3>
 
-<p>An HTML5 document has a little bit of necessary boilerplate that you should just copy and paste every time you need to get started (and no, you won’t get charged with plagiarism for this one.). Every HTML5 document you create in class should have this skeleton:</p>
+<p>An HTML5 document has a little bit of necessary boilerplate that you should just copy and paste every time you need to get started. Every HTML5 document you create in class should have this skeleton:</p>
 
 <html>
 
@@ -450,11 +455,13 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <p>Perhaps the most important habit you will learn in these first web lessons is the following: when in doubt, go to the Developer Tools. In this case, we’ll look at the Element tree, by clicking on the menu bar: View → Developer → Developer Tools. Alternatively, you can right click on any part of the webpage, and choose “Inspect Element”. Notice that there can be a big difference between what is in the DOM and what is in the source. In fact, much of this class is about dynamically generating DOM elements. Here is a <a href="https://developer.chrome.com/devtools">good overview of the developer tools</a>.</p>
 
-<h2 id="making-things-pretty-cascading-style-sheets">Making Things Pretty: Cascading Style Sheets</h2>
+<h2 id="cascading-style-sheets-and-selectors">Cascading Style Sheets and Selectors</h2>
 
 <p>HTML specifies the content of a web page, but plain HTML says relatively little about how the content looks. This is where CSS comes in. CSS stands for Cascading Style Sheets: they are external declarations that control the way your elements will get rendered by a web browser. A full discussion of CSS syntax is, as usual, given at the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax">MDN CSS website</a>; we show the very basics here.</p>
 
-<p>A stylesheet will usually consist of a list of CSS rules that are inserted in <code class="highlighter-rouge">&lt;style&gt;</code> elements on the HTML header, <code class="highlighter-rouge">&lt;head&gt;</code>. A single CSS rule associates a CSS selector with a set of CSS declarations. These are easier to see through examples.</p>
+<p>A stylesheet will usually consist of a list of CSS rules that are inserted in <code>&lt;style&gt;</code> elements on the HTML header, <code>&lt;head&gt;</code>. A single CSS rule associates a CSS selector with a set of CSS declarations. These are easier to see through examples.</p>
+
+<p><strong>More important than styling, however, are the rules on how we identify elements in the dom, the selectors.</strong></p>
 
 <h3 id="css-element-selectors">CSS Element Selectors</h3>
 
@@ -512,7 +519,7 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <h3 id="css-class-selectors">CSS Class Selectors</h3>
 
-<p>CSS selectors can be much more powerful than selecting on element names. For example, we can create user-defined “classes” of style. Classes allow us to define certain elements to be of a specific type that is then formatted consistently. Here is an example with “important” text and a “footnote”. Both are in a div, but they have different semantics, and we also want to display them differntly.</p>
+<p>CSS selectors can be much more powerful than selecting on element names. For example, we can create user-defined “classes” of style. Classes allow us to define certain elements to be of a specific type that is then formatted consistently. Here is an example with “important” text and a “footnote”. Both are in a div, but they have different semantics, and we also want to display them differntly. Class selectors are identified by a leading <code>.</code>, e.g., <code>.menu</code>.</p>
 
 <html>
 
@@ -542,7 +549,7 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <h3 id="css-id-selectors">CSS ID Selectors</h3>
 
-<p>ID selectors work similar to class selectors, but IDs may only be used once for an element in the DOM. You can use IDs as “anchors” to refer to a site by appending <code class="highlighter-rouge">#idname</code> to the URL. But you can also use IDs to apply custom styles in CSS:</p>
+<p>ID selectors work similar to class selectors, but IDs may only be used once for an element in the DOM. ID selectors are identified by a leading <code>#</code>, e.g., <code>#header</code>.You can use IDs as “anchors” to refer to a site by appending <code>#idname</code> to the URL. But you can also use IDs to apply custom styles in CSS:</p>
 
 <html>
 
@@ -630,9 +637,9 @@ Next, we go over the very basics of how the content of a web page is represented
 
 <h3 id="other-ways-of-declaring-css">Other ways of declaring CSS</h3>
 
-<p>You can provide CSS stylesheets as an external file. This is very useful when you want to share CSS rules across many different documents. In that case, you include the following element in your <code class="highlighter-rouge">&lt;head&gt;</code>:</p>
+<p>You can provide CSS stylesheets as an external file. This is very useful when you want to share CSS rules across many different documents. In that case, you include the following element in your <code>&lt;head&gt;</code>:</p>
 
-<p><code class="highlighter-rouge">&lt;link rel="stylesheet" href="style.css"/&gt;</code></p>
+<p><code>&lt;link rel="stylesheet" href="style.css"/&gt;</code></p>
 
 <p>In this case, style.css should be an additional file that consists entirely of CSS rules.</p>
 

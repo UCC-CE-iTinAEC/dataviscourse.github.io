@@ -352,7 +352,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>You also do not need to declare a variable ahead of time. If you don’t, then JavaScript either assumes you’re referring to an already existing variable, or it creates a new global variable. Again, this is convenient but very error-prone (this is a theme, as you’ll see). One common source of confusion is that typos in variable assignments are not caught: they just become global variables.</p>
 
-<p>To create a <strong>local variable</strong>, use the keyword <code class="highlighter-rouge">var</code>. Local here refers to the current execution context. When used within a function these variables are <strong>private to that function</strong>, however, when they are declared outside a function, as in the above example, they are still global. As a general rule: minimize your use of global variables, and never define global variables in a function.</p>
+<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local here refers to the current execution context. When used within a function these variables are <strong>private to that function</strong>, however, when they are declared outside a function, as in the above example, they are still global. As a general rule: minimize your use of global variables, and never define global variables in a function.</p>
 
 <p>You can execute <strong>operations</strong> on these variables. Below are a couple of important examples, refer to the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators">MDN documentation</a>  for the full list:</p>
 
@@ -600,9 +600,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 </html>
 
-<h3 id="the-special-variable-this">The special variable <code class="highlighter-rouge">this</code></h3>
+<h3 id="the-special-variable-this">The special variable <code>this</code></h3>
 
-<p>JavaScript has a special variable that is available at every scope called <code class="highlighter-rouge">this</code>. When a function is called with a notation that resembles methods in typical object-oriented languages, say <code class="highlighter-rouge">obj.method()</code>, then <code class="highlighter-rouge">this</code> is bound to the object holding the method (in this case obj). this allows you to make changes to the local object:</p>
+<p>JavaScript has a special variable that is available at every scope called <code>this</code>. When a function is called with a notation that resembles methods in typical object-oriented languages, say <code>obj.method()</code>, then <code>this</code> is bound to the object holding the method (in this case obj). this allows you to make changes to the local object:</p>
 
 <html>
 
@@ -625,9 +625,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 </html>
 
-<p>So far, so good: we’ve used <code class="highlighter-rouge">this</code> to change the value bound to the x field in the object. That’s pretty convenient.</p>
+<p>So far, so good: we’ve used <code>this</code> to change the value bound to the x field in the object. That’s pretty convenient.</p>
 
-<p>However, the convenience comes with a caveat. The way JavaScript decides to associate <code class="highlighter-rouge">this</code> with a given object is simple to explain, but sometimes leads to strange behavior. The way it works is that although <code class="highlighter-rouge">obj.someFunction</code> is the syntax to access the <code class="highlighter-rouge">someFunction</code> slot from obj and <code class="highlighter-rouge">someFunction(parameter)</code> is the syntax to call a the function value bound to someFunction with parameter parameter, the syntax <code class="highlighter-rouge">obj.someFunction(parameter)</code> is not equivalent to storing <code class="highlighter-rouge">obj.someFunction</code> to some temporary variable and calling that. In other words, the syntax <code class="highlighter-rouge">obj.someFunction(parameter)</code> consisting of those three things next to one another is special to JavaScript.</p>
+<p>However, the convenience comes with a caveat. The way JavaScript decides to associate <code>this</code> with a given object is simple to explain, but sometimes leads to strange behavior. The way it works is that although <code>obj.someFunction</code> is the syntax to access the <code>someFunction</code> slot from obj and <code>someFunction(parameter)</code> is the syntax to call a the function value bound to someFunction with parameter parameter, the syntax <code>obj.someFunction(parameter)</code> is not equivalent to storing <code>obj.someFunction</code> to some temporary variable and calling that. In other words, the syntax <code>obj.someFunction(parameter)</code> consisting of those three things next to one another is special to JavaScript.</p>
 
 <p>Here’s what can go wrong:</p>
 

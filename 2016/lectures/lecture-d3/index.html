@@ -287,7 +287,7 @@
 <p>After we covered the basics of JavaScript last lecture it’s now time to explore how javascript interacts with the DOM and thus makes all the interesting things in the browser happen. 
 Like we’ve seen before, the HTML we write is represented as a tree inside a web browser. What we are going to turn to now are the JavaScript APIs that web browsers provide to let you edit the DOM dynamically, so that we can build our visualizations with code instead of text editors.</p>
 
-<p>While we will manipulate the DOM mainly through libraries (we will use mainly <a href="http://d3js.org/">D3</a>, but <a href="https://jquery.com/">JQuery</a> is the most popular DOM manipulation library) you can also manipulate the DOM directly through the standard DOM API through the <code class="highlighter-rouge">document</code> object. Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/API/document">MDN reference</a> on the document object.</p>
+<p>While we will manipulate the DOM mainly through libraries (we will use mainly <a href="http://d3js.org/">D3</a>, but <a href="https://jquery.com/">JQuery</a> is the most popular DOM manipulation library) you can also manipulate the DOM directly through the standard DOM API through the <code>document</code> object. Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/API/document">MDN reference</a> on the document object.</p>
 
 <p>Here are the very first steps:</p>
 
@@ -315,7 +315,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p><code class="highlighter-rouge">document</code> is a global javascript object that contains the dom. If you log the document object you will see exactly the same as in the DOM view in the web inspector. It is this object that we are manipulating dynamically and that the browser then renders. The document object contains functions, like the <code class="highlighter-rouge">getElementByID</code> method we’re using here, or the <code class="highlighter-rouge">createElement</code> or the <code class="highlighter-rouge">createTextNode</code> functions used to create new content.</p>
+<p><code>document</code> is a global javascript object that contains the dom. If you log the document object you will see exactly the same as in the DOM view in the web inspector. It is this object that we are manipulating dynamically and that the browser then renders. The document object contains functions, like the <code>getElementByID</code> method we’re using here, or the <code>createElement</code> or the <code>createTextNode</code> functions used to create new content.</p>
 
 <p>Now we can make use of the features we learned about last lecture to make more complicated programs that write websites:</p>
 
@@ -369,7 +369,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p>Remember that in JavaScript we can attach new fields to existing objects. You can do this to DOM elements returned by the API, and that turns out to be very powerful. Note how in the snippet below, we are adding a new method <code class="highlighter-rouge">update</code> to the node returned by <code class="highlighter-rouge">divWithText</code>. When this method is called, we add the passed value to the current amount (stored at <code class="highlighter-rouge">v</code>), compute new positions from <code class="highlighter-rouge">v</code>, and update the text content of the node. By calling the update method we can get an <strong>animation</strong>:</p>
+<p>Remember that in JavaScript we can attach new fields to existing objects. You can do this to DOM elements returned by the API, and that turns out to be very powerful. Note how in the snippet below, we are adding a new method <code>update</code> to the node returned by <code>divWithText</code>. When this method is called, we add the passed value to the current amount (stored at <code>v</code>), compute new positions from <code>v</code>, and update the text content of the node. By calling the update method we can get an <strong>animation</strong>:</p>
 
 <html>
 
@@ -395,7 +395,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p>Notice the <code class="highlighter-rouge">tickForever</code> function. We can’t use an infinte while loop here. If we did, the element attributes would be changed, but the user of the web browser does not get to see it, because the web browser does not ever get a chance to update the graphical representation of the DOM. The way to solve this problem is by using a special browser API called <code class="highlighter-rouge">requestAnimationFrame</code>. This API lets you tell a web browser that you’d like the opportunity to change something in the DOM. The next time the web browser is sitting idly, after having drawn all of its needed graphics, it will call the function passed as a parameter. Then, we just need to make sure that after updating the graphics, we call requestAnimationFrame again. The solution is a recursive version of the endless loop above <code class="highlighter-rouge">(function f() { tick(); f(); })</code>. The fundamental difference here is that instead of making the recursive call directly, we ask the browser to make the recursive call, after it has updated the graphics. This way there’s always a step in between every update where the web browser updates the UI and graphics, and you get nice animations as a result.</p>
+<p>Notice the <code>tickForever</code> function. We can’t use an infinte while loop here. If we did, the element attributes would be changed, but the user of the web browser does not get to see it, because the web browser does not ever get a chance to update the graphical representation of the DOM. The way to solve this problem is by using a special browser API called <code>requestAnimationFrame</code>. This API lets you tell a web browser that you’d like the opportunity to change something in the DOM. The next time the web browser is sitting idly, after having drawn all of its needed graphics, it will call the function passed as a parameter. Then, we just need to make sure that after updating the graphics, we call requestAnimationFrame again. The solution is a recursive version of the endless loop above <code>(function f() { tick(); f(); })</code>. The fundamental difference here is that instead of making the recursive call directly, we ask the browser to make the recursive call, after it has updated the graphics. This way there’s always a step in between every update where the web browser updates the UI and graphics, and you get nice animations as a result.</p>
 
 <p>While we’ve worked with regular HTML elements here, the possibilities of demonstrated equally apply to SVG, of course. So in theory, you would have all the tools to create data driven visualizations. Of course, libraries such as D3 make our lives easier!</p>
 
@@ -429,9 +429,9 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p>The first button defines the function to be called - <code class="highlighter-rouge">messageMe()</code> directly in HTML. When the button is clicked, the corresponding function is called. The second button has an identifier. In the script we retrieve the button and add the function to be called dynamically.</p>
+<p>The first button defines the function to be called - <code>messageMe()</code> directly in HTML. When the button is clicked, the corresponding function is called. The second button has an identifier. In the script we retrieve the button and add the function to be called dynamically.</p>
 
-<p><code class="highlighter-rouge">onclick</code> is of course not the only event that we can listen to. Here is an example for how to react to changes in a dropdown box with the <code class="highlighter-rouge">onchange</code> events.</p>
+<p><code>onclick</code> is of course not the only event that we can listen to. Here is an example for how to react to changes in a dropdown box with the <code>onchange</code> events.</p>
 
 <html>
 
@@ -457,7 +457,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p>Other <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers">useful events</a> are <code class="highlighter-rouge">onload</code>, <code class="highlighter-rouge">onmouseover</code>, <code class="highlighter-rouge">onmouseout</code>, <code class="highlighter-rouge">onresize</code>, etc.</p>
+<p>Other <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers">useful events</a> are <code>onload</code>, <code>onmouseover</code>, <code>onmouseout</code>, <code>onresize</code>, etc.</p>
 
 <p>And finally, we can of course listen to events that are triggered by interacting with any kind of DOM element, not only with form elements such as buttons and drop-downs. Here is an example for SVG:</p>
 
@@ -493,17 +493,16 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 <h3 id="the-python-simplehttpserver">The Python SimpleHTTPServer</h3>
 
-<p>If you have python installed you can run the built in simple server. To do this, <code class="highlighter-rouge">cd</code> to the directory where your code is located and run the following command:</p>
+<p>If you have python installed you can run the built in simple server. To do this, <code>cd</code> to the directory where your code is located and run the following command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>python -m SimpleHTTPServer<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> python -m SimpleHTTPServer</code></pre></figure>
 
-<p>Open <code class="highlighter-rouge">[http://localhost:8000/](http://localhost:8000/)</code> to get you to the server.
+<p>Open <code>[http://localhost:8000/](http://localhost:8000/)</code> to get you to the server.
 You can only have one server at the same time (unless you specify ports explicitly). Hit Control-C to quit the server.</p>
 
 <h3 id="running-a-server-and-debugging-with-webstorm">Running a Server and Debugging with WebStorm</h3>
 
-<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like webstorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debuggin. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a webserver. Webstorm comes with a built-in webserver, that you can activate via the <code class="highlighter-rouge">Run</code> menue. Here is an example configuration:</p>
+<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like webstorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debuggin. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a webserver. Webstorm comes with a built-in webserver, that you can activate via the <code>Run</code> menue. Here is an example configuration:</p>
 
 <p><img src="images/debug_config.png" alt="WebStorm debug configuration" /></p>
 
@@ -574,9 +573,9 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>You can see that we achieve a similar result to the DOM manipulation examples we had before. We select an existing element in the DOM, here the first <code class="highlighter-rouge">&lt;p&gt;</code> element, and apply a style.  However, you can also see differences: instead of having to use the API standard <code class="highlighter-rouge">document.getElementsByTagName</code> we use <code class="highlighter-rouge">d3.select</code>; and instead of using <code class="highlighter-rouge">setAttribute("style", "color: steelblue;")</code> we use D3’s <code class="highlighter-rouge">style</code> method.</p>
+<p>You can see that we achieve a similar result to the DOM manipulation examples we had before. We select an existing element in the DOM, here the first <code>&lt;p&gt;</code> element, and apply a style.  However, you can also see differences: instead of having to use the API standard <code>document.getElementsByTagName</code> we use <code>d3.select</code>; and instead of using <code>setAttribute("style", "color: steelblue;")</code> we use D3’s <code>style</code> method.</p>
 
-<p><code class="highlighter-rouge">d3.select</code> selects the first element that matches a selector. <strong>Selectors</strong> can specify tags (<code class="highlighter-rouge">p</code> in our example above), classes, and IDs, all through the same interface:</p>
+<p><code>d3.select</code> selects the first element that matches a selector. <strong>Selectors</strong> can specify tags (<code>p</code> in our example above), classes, and IDs, all through the same interface:</p>
 
 <html>
 
@@ -602,7 +601,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>Notice, however, that as mentioned previously, only the first element that matches is selected. Of course, it is more practical to select all elements of a certain type, which we can achieve with <code class="highlighter-rouge">d3.selectAll</code></p>
+<p>Notice, however, that as mentioned previously, only the first element that matches is selected. Of course, it is more practical to select all elements of a certain type, which we can achieve with <code>d3.selectAll</code></p>
 
 <html>
 
@@ -630,7 +629,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 <p>The last example illustrates the <strong>declarative approach of D3</strong>: we don’t have to iterate over a list of elements and apply the style. Instead we select a set of elements through rules and declare properties.</p>
 
-<p>Once you have a selection, you can bulk-modify it’s content, not only in terms of style, but we can modify <a href="https://github.com/mbostock/d3/wiki/Selections#property">arbitrary properties</a> using <code class="highlighter-rouge">selection.property(name[, value])</code>, the <a href="https://github.com/mbostock/d3/wiki/Selections#text">textual content of the elements</a> with <code class="highlighter-rouge">selection.text([value])</code>, etc. We can also append elements:</p>
+<p>Once you have a selection, you can bulk-modify it’s content, not only in terms of style, but we can modify <a href="https://github.com/mbostock/d3/wiki/Selections#property">arbitrary properties</a> using <code>selection.property(name[, value])</code>, the <a href="https://github.com/mbostock/d3/wiki/Selections#text">textual content of the elements</a> with <code>selection.text([value])</code>, etc. We can also append elements:</p>
 
 <html>
 
@@ -658,12 +657,9 @@ You can only have one server at the same time (unless you specify ports explicit
 
 <p>Here is a code snippet that we will use in future examples, included as run.js:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"body"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"button"</span><span class="p">);</span>
-<span class="nx">button</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">"Run!"</span><span class="p">);</span>
-<span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">execute</span><span class="p">);</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">);</span>
+<span class="lineno">2</span> <span class="nx">button</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Run!&quot;</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">execute</span><span class="p">);</span></code></pre></figure>
 
 <p>Here we have three SVG rectangles and use selectAll to apply a new style to them:</p>
 

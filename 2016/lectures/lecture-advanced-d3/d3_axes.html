@@ -29,7 +29,7 @@
         var spacing = height / data.length;
         var min = -1.45, max = 1.45;
 
-//      v3.0 -> d3.scale.linear()  v4.0 -> d3.scaleLinear()
+        //     v3.0 -> d3.scale.linear()  v4.0 -> d3.scaleLinear()
         var xScale = d3.scaleLinear()
                 .domain([min, max])
                 .range([0, 800]);
@@ -40,7 +40,7 @@
 
         var xAxis  = d3.axisBottom();
         xAxis.scale(xScale);
-//        xAxis.orient("bottom");
+        //  xAxis.orient("bottom");
 
         svg.selectAll("rect")
                 .data(data)

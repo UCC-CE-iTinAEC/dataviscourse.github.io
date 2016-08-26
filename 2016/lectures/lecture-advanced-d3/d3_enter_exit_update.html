@@ -29,12 +29,12 @@
         var bars = svg.selectAll(".bars")
                 .data(myData);
 
-        // how do we handle new elements?
-        bars.enter().append("rect")
-                .classed("bars", true);
-
         // how do we handle things that are removed?
         bars.exit().remove();
+
+        // how do we handle new elements?
+        bars = bars.enter().append("rect").merge(bars)
+                .classed("bars", true);
 
         // how do we handle updates?
         bars.attr("x", 0)
