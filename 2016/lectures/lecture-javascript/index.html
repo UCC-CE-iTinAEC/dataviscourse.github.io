@@ -7,7 +7,7 @@
   <title> Visualization - JavaScript Fundamentals</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="Visualization Class at the University of Utah">
-  <link rel="canonical" href="http://dataviscourse.net/2016/lectures/lecture-javascript/">
+  <link rel="canonical" href="http://dataviscourse.net//2016/lectures/lecture-javascript/">
   <link href='http://fonts.googleapis.com/css?family=Baumans' rel='stylesheet' type='text/css'>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/2016/css/main.css">
@@ -291,12 +291,16 @@
 
 <h2 id="javascript-background">JavaScript Background</h2>
 
-<p>Why do we want to use JavaScript? So far we have only written <strong>static HTML and SVG code</strong>. In your homework, for example, you have to encode a dataset by hand every time, for your line-chart, bar chart, scatterplot, etc.
+<p>Why do we want to use JavaScript? So far we have only written <strong>static HTML and SVG code</strong>. In your homework, for example, you have to encode a dataset by hand multiple times: for your line-chart, bar chart, scatterplot, etc.
 If we had a dynamic and general way to load the data, we could use the same variables for all charts and we could also plot the charts with various datasets of different size and with different characteristics. I like to think of pure HTML and SVG as analogous to pen and paper - you can create things that look nice once, but you <strong>can’t re-use them efficiently and you can’t interact with them</strong>. Computer programming brings <strong>interactivity and generalizability (re-use)</strong> to the table. We can tell the computer how to do something for certain classes of (legal) input, and the computer will do that for all possible cases of legal input.</p>
 
 <p>JavaScript is the most important programming language of the web, and the only programming language that can be used on most web-browsers without any plugins. Alternatives such as Java Applets or Flash were popular in the past but have lost significant ground to JavaScript. JavaScript is mostly used on the client-side of a client-server application, other languages such as Java and Python are popular on the server, but JavaScript is nowadays also used on the server e.g., using <a href="https://nodejs.org/">Node.js</a>. We will be focusing on the client-side in this class.</p>
 
-<p>JavaScript can be used with <strong>imperative/procedural, object-oriented, and functional programming styles</strong>.  It is a <strong>dynamically typed language</strong>, which can be strange for developers who mainly work with strongly typed languages such as C/C++ and Java. Also, Javascript uses <strong>prototypical inheritance</strong> instead of a class-based model for it’s object oriented purposes. That means that there is no “class” that is defined centrally, instead you rely on objects’ prototypes for inheritance that can be extended at runtime. If this doesn’t mean much to you now, don’t worry - we’ll go through it slowly.</p>
+<p>JavaScript can be used with <strong>imperative/procedural, object-oriented, and functional programming styles</strong>.</p>
+
+<p>It is a <strong>dynamically typed language</strong>, which can be strange for developers who mainly work with strongly typed languages such as C/C++ and Java.</p>
+
+<p>Also, Javascript uses <strong>prototypical inheritance</strong> instead of a class-based model for it’s object oriented purposes. That means that there is no “class” that is defined centrally, instead you rely on objects’ prototypes for inheritance that can be extended at runtime. If this doesn’t mean much to you now, don’t worry - we’ll go through it slowly.</p>
 
 <h2 id="javascript---the-very-basic">JavaScript - The Very Basic</h2>
 
@@ -352,7 +356,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>You also do not need to declare a variable ahead of time. If you don’t, then JavaScript either assumes you’re referring to an already existing variable, or it creates a new global variable. Again, this is convenient but very error-prone (this is a theme, as you’ll see). One common source of confusion is that typos in variable assignments are not caught: they just become global variables.</p>
 
-<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local here refers to the current execution context. When used within a function these variables are <strong>private to that function</strong>, however, when they are declared outside a function, as in the above example, they are still global. As a general rule: minimize your use of global variables, and never define global variables in a function.</p>
+<p>To create a <strong>local variable</strong>, use the keyword <code>var</code>. Local here refers to the current execution context. When used within a function these variables are <strong>private to that function</strong>, however, when they are declared outside a function, as in the above example, they are still global.</p>
+
+<p>As a general rule: <strong>minimize your use of global variables, and never define global variables in a function</strong>.</p>
 
 <p>You can execute <strong>operations</strong> on these variables. Below are a couple of important examples, refer to the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators">MDN documentation</a>  for the full list:</p>
 
@@ -379,7 +385,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <h3 id="arrays">Arrays</h3>
 
-<p>Array literals are declared using square brackets and addressed with square brackets and a reference to the index starting with 0:</p>
+<p>Array literals are declared using square brackets and addressed with square brackets and a reference to the index starting with 0. Arrays in JavaScript are more like Lists in other languages, such as Java. They don’t have to be allocated ahead of time and can be easily extended.</p>
 
 <html>
 
@@ -406,7 +412,9 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <h3 id="objects">Objects</h3>
 
-<p>Objects are the second type of compound values in JavaScript.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Objects</a> are the second type of compound values in JavaScript.</p>
+
+<p><strong>Objects in JavaScript are also dictionaries/hash maps/associative arrays (pick your favorite name).</strong></p>
 
 <html>
 
@@ -431,6 +439,8 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <h3 id="control-structures">Control Structures</h3>
 
+<p>JavaScript comes with standard conditional control structures - if and switch.</p>
+
 <html>
 
 <head>
@@ -453,6 +463,8 @@ If we had a dynamic and general way to load the data, we could use the same vari
 </html>
 
 <h3 id="loops">Loops</h3>
+
+<p>Loops are C-like: for, do-while and while loops are available. To loop over arrays, use either a regular for loop, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach function</a> of arrays, or the new for-of statement.</p>
 
 <html>
 
@@ -502,6 +514,8 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>None of the calls above cause runtime errors. If you call a function with too many parameters, JavaScript will simply ignore the extra ones. If you call a function with too few parameters, JavaScript gives the local parameters the special value undefined.</p>
 
+<p>Local variables in JavaScript use scope as you’d hope they would:</p>
+
 <html>
 
 <head>
@@ -534,19 +548,42 @@ If we had a dynamic and general way to load the data, we could use the same vari
 </head>
 
 <body>
-<textarea id="anonymousfunctions" name="anonymousfunctions"></textarea>
+<textarea id="function_expression" name="function_expression"></textarea>
 
 
 <script>
-    renderCode("anonymousfunctions", "anonymousfunctions.js", "", "true", "false");
+    renderCode("function_expression", "function_expression.js", "", "true", "false");
 </script>
-<i><a href="anonymousfunctions.js">See output in new page.</a></i>
+<i><a href="function_expression.js">See output in new page.</a></i>
 
 </body>
 
 </html>
 
 <p>Pay attention to what’s happening here: this is assigning a value to a variable, in the same way that x = “hi” assigns the string value “hi” to the variable x. But that value is a function! This is important. In JavaScript, <strong>functions are values that can be stored in variables</strong>. This is your first exposure to the idea that JavaScript is a “functional” language. In the same way that you can store function values in variables, you can pass them around as parameters, store them in arrays, object fields, and even use them as return values of other functions! This is a powerful idea that we will use a lot.</p>
+
+<p>In particular, we will use a lot of anonymous functions, or “lambda abstractions” when working with D3. We’ve already used one example for sorting an array above. Here is another example:</p>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+
+</head>
+
+<body>
+<textarea id="anonyfunction" name="anonyfunction"></textarea>
+
+
+<script>
+    renderCode("anonyfunction", "anonfunction.js", "", "true", "false");
+</script>
+<i><a href="anonfunction.js">See output in new page.</a></i>
+
+</body>
+
+</html>
 
 <h3 id="object-oriented-javascript">Object Oriented JavaScript</h3>
 
@@ -577,7 +614,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>JavaScript does support a notion of inheritance, but it does it without any classes. This means that there’s no subclasses, so how does it work?</p>
 
-<p>Instead of subclasses, JavaScript has the notion of a prototype chain. Every JavaScript object has a special field which points to another object. Then, every time you tell JavaScript to access a field from an object, it tries to find the field. If the field exists, then the lookup is performed. If, however, the field doesn’t exist, then JavaScript checks for the presence of a special prototype field in the object. If that field is not null, then the JavaScript runtime performs a recursive access of the field in the prototype object. This is more obvious with an example. Make sure to run these in your JavaScript console:</p>
+<p>Instead of subclasses, JavaScript has the notion of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">prototype chain</a>. Every JavaScript object has a special field which points to another object. Then, every time you tell JavaScript to access a field from an object, it tries to find the field. If the field exists, then the lookup is performed. If, however, the field doesn’t exist, then JavaScript checks for the presence of a special prototype field in the object. If that field is not null, then the JavaScript runtime performs a recursive access of the field in the prototype object. This is more obvious with an example. Make sure to run these in your JavaScript console:</p>
 
 <html>
 
@@ -588,17 +625,19 @@ If we had a dynamic and general way to load the data, we could use the same vari
 </head>
 
 <body>
-<textarea id="prototype" name="prototype"></textarea>
+<textarea id="inheritance" name="inheritance"></textarea>
 
 
 <script>
-    renderCode("prototype", "prototype.js", "", "true", "false");
+    renderCode("inheritance", "inheritance.js", "", "true", "false");
 </script>
-<i><a href="prototype.js">See output in new page.</a></i>
+<i><a href="inheritance.js">See output in new page.</a></i>
 
 </body>
 
 </html>
+
+<p>Note that ECMA Script 6 <a href="http://es6-features.org/#ClassDefinition">adds syntax for classes</a>, but this is only syntactic sugar, i.e., JavaScript remains a prototypical language.</p>
 
 <h3 id="the-special-variable-this">The special variable <code>this</code></h3>
 
@@ -627,7 +666,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 <p>So far, so good: we’ve used <code>this</code> to change the value bound to the x field in the object. That’s pretty convenient.</p>
 
-<p>However, the convenience comes with a caveat. The way JavaScript decides to associate <code>this</code> with a given object is simple to explain, but sometimes leads to strange behavior. The way it works is that although <code>obj.someFunction</code> is the syntax to access the <code>someFunction</code> slot from obj and <code>someFunction(parameter)</code> is the syntax to call a the function value bound to someFunction with parameter parameter, the syntax <code>obj.someFunction(parameter)</code> is not equivalent to storing <code>obj.someFunction</code> to some temporary variable and calling that. In other words, the syntax <code>obj.someFunction(parameter)</code> consisting of those three things next to one another is special to JavaScript.</p>
+<p>However, the convenience comes with a caveat. The way JavaScript decides to associate <code>this</code> with a given object is simple to explain: it assumes the context of the calling object.</p>
 
 <p>Here’s what can go wrong:</p>
 
@@ -652,9 +691,7 @@ If we had a dynamic and general way to load the data, we could use the same vari
 
 </html>
 
-<p>What happened in the example that goes wrong is that when t() is called, JavaScript doesn’t see the special notation obj.method(params), and so it keeps the binding of this to its present value.</p>
-
-<p>Anytime you use this and something goes wrong, the first you should try to check is whether some call in your chain forgot to set the binding by using the right syntax.</p>
+<p>What happened in the example that goes wrong is that when <code>t()</code> is called, <code>this</code> is bound to the calling object, which is the global <code>window</code> object in the latter case.</p>
 
 </article>
 

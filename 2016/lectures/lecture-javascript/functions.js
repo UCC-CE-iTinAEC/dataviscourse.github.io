@@ -11,9 +11,7 @@ console.log("Function for 30: " + someFunction(30));
 console.log("Function for -5: " + someFunction(-5));
 
 // But, as usual, JavaScript lets you do strange things that are convenient sometimes, and confusing at other times:
-console.log("Function for string 50: " + someFunction("50"));
-console.log("Function for string: " + someFunction("what?"));
-console.log("Function with more parameters: " + someFunction(30, "huh?"));
-console.log("Function with no parameters: " + someFunction());
-
-
+console.log("Function for string that can be converted to a number (50): " + someFunction("50"));
+console.log("Function for string that cannot be converted to a number (JavaScript still tries!): " + someFunction("what?"));
+console.log("Function with more parameters (we'll just ignore them, right?): " + someFunction(30, "huh?"));
+console.log("Function with no parameters (oh, you meant undefined!): " + someFunction());

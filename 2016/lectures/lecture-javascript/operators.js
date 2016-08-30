@@ -5,12 +5,11 @@ sum++;
 sum--;
 var division = sum/13;
 
-
 // modulo
 var mod = division % 2;
 
 // typeof operator
-typeof(division); // returns string number
+typeof(division); // returns string "number"
 var type = typeof division; // assigns string number to variable type
 console.log(type);
 

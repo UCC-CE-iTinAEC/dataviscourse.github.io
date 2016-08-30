@@ -1,6 +1,6 @@
-var c = [0,1,2];
-var e = []; // empty array declaration
-console.log(c[0]);
+var numArray = [15, 12, 21, 4];
+var empty = []; // empty array declaration
+console.log(numArray[0]);
 // you can but should not use arrays of different type
 var multiTypeArray = [0, "This", "is", true, "unfortunately"];
 console.log(multiTypeArray[1]);
@@ -15,10 +15,24 @@ var nested = [[1, 2], [3, 4], [5, 6]];
 console.log("First element of second array: " + nested[1][0]);
 
 // extend arrays
-c.push(3);
-var newLength = c.push(4);
+numArray.push(3);
+var newLength = numArray.push(4);
+
 // remove last element from array
-var lastElement = c.pop();
+var lastElement = numArray.pop();
 
 // find index of entry:
-var pos = c.indexOf(2);
+var pos = numArray.indexOf(2);
+
+// sort an array
+numArray = numArray.sort()
+// [12, 15, 21, 3, 4]
+console.log(numArray)
+
+// sorting is based on string values. we need to supply a compare function
+function compareNumbers(a, b) {
+    return a - b;
+}
+
+numArray.sort(compareNumbers)
+console.log(numArray)
