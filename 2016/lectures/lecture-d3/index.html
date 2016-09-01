@@ -584,7 +584,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>You can see that we achieve a similar result to the DOM manipulation examples we had before. We select an existing element in the DOM, here the first <code>&lt;p&gt;</code> element, and apply a style.  However, you can also see differences: instead of having to use the API standard <code>document.getElementsByTagName</code> we use <code>d3.select</code>; and instead of using <code>setAttribute("style", "color: steelblue;")</code> we use D3’s <code>style</code> method.</p>
+<p>You can see that we achieve a similar result to the DOM manipulation examples we had before. We select an existing element in the DOM, here the first <code>&lt;p&gt;</code> element, and apply a style.  However, you can also see differences: instead of having to use the API standard <code>document.getElementsByTagName</code> we use <a href="https://github.com/d3/d3-selection/blob/master/README.md"><code>d3.select</code></a>; and instead of using <code>setAttribute("style", "color: steelblue;")</code> we use D3’s <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_style"><code>style</code></a> method.</p>
 
 <p><code>d3.select</code> selects the first element that matches a selector. <strong>Selectors</strong> can specify tags (<code>p</code> in our example above), classes, and IDs, all through the same interface:</p>
 
@@ -672,7 +672,12 @@ You can only have one server at the same time (unless you specify ports explicit
 <span class="lineno">2</span> <span class="nx">button</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;Run!&quot;</span><span class="p">);</span>
 <span class="lineno">3</span> <span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">execute</span><span class="p">);</span></code></pre></figure>
 
-<p>Here we have three SVG rectangles and use selectAll to apply a new style to them:</p>
+<p>Here we have three SVG rectangles and use selectAll to apply a new style to them. Notice two things:</p>
+
+<ol>
+  <li>the <strong>method chaining</strong> used to make this convenient to write,</li>
+  <li>the use of <strong>anonymous functions</strong> and the parameters d and i.</li>
+</ol>
 
 <html>
 
@@ -699,7 +704,8 @@ You can only have one server at the same time (unless you specify ports explicit
 </html>
 
 <h3 id="data">Data</h3>
-<p>Mapping existing element to data:</p>
+
+<p>THE key feature of D3 is mapping DOM elements with data. We can do this by calling the <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_data"><code>data()</code></a> method on a slection:</p>
 
 <html>
 
@@ -725,7 +731,11 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>What happens if we have more datapoints than elements?</p>
+<p>D3 binds the data that is passed to a selection directly to the DOM elements. We can see this by logging and/or inspecting the selection.</p>
+
+<p>Here we’ve also used <strong>data-driven styling for the first time</strong>! By setting the width of the rectangle dynamically to the size of the data item we get a data driven bar chart!</p>
+
+<p>What happens if we have more data points than elements? Let’s try it:</p>
 
 <html>
 
@@ -751,7 +761,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>There are still only three elements, it doesn’t matter how many data points we have - we can’t use more than there are elements to select. What to do? <strong>Enter</strong>!</p>
+<p>There are still only three elements, it doesn’t matter how many data points we have - we can’t use more than there are elements to select. What to do? <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_enter"><code>enter()</code></a>! The enter selection holds placeholders for all the data elements that had no corresponding DOM element. We can use this selection to append new elements.</p>
 
 <html>
 
@@ -777,7 +787,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>Progress - we have one element for each data item, but it doesn’t look good:</p>
+<p>Progress - we have one element for each data item, but it doesn’t look good and it’s not drawn based on data. To fix this, we can apply data-driven attributes to the enter selection as well:</p>
 
 <html>
 
@@ -829,7 +839,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>So what if we don’t have initialized svg elements?</p>
+<p>So what if we don’t have initialized svg elements at all?</p>
 
 <html>
 
@@ -855,7 +865,9 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>Now let’s try to get rid of some of the elements:</p>
+<p>That’s great! D3 can also select things that aren’t there. Sounds strange, but that is very practical. We rarely start with existing DOM elements but mostly want to create them completely in code.</p>
+
+<p>Now let’s explore what happens when we have fewer data items than DOM elements:</p>
 
 <html>
 
@@ -881,7 +893,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 </html>
 
-<p>We have a similar problem as before - we need to remove the element that’s not bound.</p>
+<p>We have a similar problem as before. Here, the element that was not bound to data just remains as it was. Fortunately, there is a solution, which is the <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_exit"><code>exit()</code></a> selection.</p>
 
 <html>
 
@@ -906,6 +918,8 @@ You can only have one server at the same time (unless you specify ports explicit
 </body>
 
 </html>
+
+<p>We now have all the knowledge to select, bind data, react to changes in data. Next, we’ll look at how we can make state changes look great.</p>
 
 <h3 id="transitions">Transitions</h3>
 
