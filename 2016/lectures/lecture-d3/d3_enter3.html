@@ -21,27 +21,34 @@
 </body>
 <script>
     var execute = function () {
-        var svg = d3.select("svg")
+        var svg = d3.select("svg");
         var selection = svg.selectAll("rect")
-                .data([127, 61, 256, 71])
+                .data([127, 61, 256, 71]);
 
         selection
                 .attr("x", 0)
-                .attr("y", function(d,i) { return i*60+50 })
-                .attr("width", function(d,i) { return d; })
+                .attr("y", function (d, i) {
+                    return i * 60 + 50
+                })
+                .attr("width", function (d) {
+                    return d;
+                })
                 .attr("height", 20)
-                .style("fill", "steelblue")
+                .style("fill", "steelblue");
 
         // Note this is only applying attributes to the "enter" selection,
         // i.e, the new rectangle
         selection.enter().append("rect")
                 .attr("x", 0)
-                .attr("y", function(d,i) { return i*60+50 })
-                .attr("width", function(d,i) { return d; })
+                .attr("y", function (d, i) {
+                    return i * 60 + 50
+                })
+                .attr("width", function (d) {
+                    return d;
+                })
                 .attr("height", 20)
-                .style("fill", "green")
+                .style("fill", "green");
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

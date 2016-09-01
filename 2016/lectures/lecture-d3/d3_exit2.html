@@ -21,25 +21,24 @@
 </body>
 <script>
     var execute = function () {
-        var svg = d3.select("svg")
+        var svg = d3.select("svg");
         var selection = svg.selectAll("rect")
-                .data([127, 61])
+                .data([127, 61]);
 
         selection
                 .attr("x", 0)
                 .attr("y", function (d, i) {
                     return i * 90 + 50
                 })
-                .attr("width", function (d, i) {
+                .attr("width", function (d) {
                     return d;
                 })
                 .attr("height", 20)
-                .style("fill", "steelblue")
+                .style("fill", "steelblue");
         // here we call remove on the exit selection!
         selection.exit().remove();
 
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

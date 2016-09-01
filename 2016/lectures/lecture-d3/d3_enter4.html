@@ -21,9 +21,9 @@
 </body>
 <script>
     var execute = function () {
-        var svg = d3.select("svg")
+        var svg = d3.select("svg");
         var selection = svg.selectAll("rect")
-                .data([127, 61, 256, 71])
+                .data([127, 61, 256, 71]);
 
         // Notice that in order to merge the enter selection (the new rectangle) with
         // the regular selection, we must use the merge method - which is new in V4
@@ -34,13 +34,12 @@
                 .attr("y", function (d, i) {
                     return i * 60 + 50
                 })
-                .attr("width", function (d, i) {
+                .attr("width", function (d) {
                     return d;
                 })
                 .attr("height", 20)
-                .style("fill", "steelblue")
+                .style("fill", "steelblue");
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

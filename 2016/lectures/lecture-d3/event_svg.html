@@ -18,7 +18,7 @@
         var rect = event.target;
         var currentWidth = parseFloat(rect.getAttribute("width"));
         rect.setAttribute("width", (currentWidth + 10).toString());
-        rect.setAttribute("style", "fill: " + colors[colorCount%4]);
+        rect.setAttribute("style", "fill: " + colors[colorCount % 4]);
         colorCount++;
     }
 </script>

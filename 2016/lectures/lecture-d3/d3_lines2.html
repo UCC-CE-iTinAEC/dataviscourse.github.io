@@ -17,7 +17,7 @@
             {x: 200, y: 400},
             {x: 300, y: 100},
             {x: 400, y: 150}
-        ]
+        ];
 
         var lineFn = d3.line()
                 .x(function (d) {
@@ -25,18 +25,18 @@
                 })
                 .y(function (d) {
                     return d.y
-                })
-                // https://github.com/d3/d3-shape/blob/master/README.md#curves
-                //.curve(d3.curveCatmullRom.alpha(0.5));
-                //.curve(d3.curveBundle.beta(0.5));
+                });
+        // https://github.com/d3/d3-shape/blob/master/README.md#curves
+        //.curve(d3.curveCatmullRom.alpha(0.5));
+        //.curve(d3.curveBundle.beta(0.5));
 
-        var svg = d3.select("svg")
+        var svg = d3.select("svg");
 
         svg.append("path")
                 .style("fill", "none")
                 .style("stroke", "black")
                 .style("stroke-width", 2)
-                .attr("d", lineFn(points))
+                .attr("d", lineFn(points));
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
