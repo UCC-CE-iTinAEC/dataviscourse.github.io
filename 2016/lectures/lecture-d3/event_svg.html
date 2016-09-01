@@ -15,7 +15,7 @@
     var colorCount = 0;
     // on click we make the rectangle wider by 10 pixels
     document.getElementById("myBar").onclick = function (event) {
-        var rect = event.srcElement;
+        var rect = event.target;
         var currentWidth = parseFloat(rect.getAttribute("width"));
         rect.setAttribute("width", (currentWidth + 10).toString());
         rect.setAttribute("style", "fill: " + colors[colorCount%4]);

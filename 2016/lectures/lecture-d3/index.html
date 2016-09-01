@@ -369,6 +369,8 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
+<p>The coloring here is defined using the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#hsl()">HSL color model</a>.</p>
+
 <p>Remember that in JavaScript we can attach new fields to existing objects. You can do this to DOM elements returned by the API, and that turns out to be very powerful. Note how in the snippet below, we are adding a new method <code>update</code> to the node returned by <code>divWithText</code>. When this method is called, we add the passed value to the current amount (stored at <code>v</code>), compute new positions from <code>v</code>, and update the text content of the node. By calling the update method we can get an <strong>animation</strong>:</p>
 
 <html>
@@ -431,9 +433,9 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 <p>The first button defines the function to be called - <code>messageMe()</code> directly in HTML. When the button is clicked, the corresponding function is called. The second button has an identifier. In the script we retrieve the button and add the function to be called dynamically.</p>
 
-<p>We don’t have to use buttons to react to clicks though! Any dom element can trigger an event. So we’ve also added a <code>onClick</code> event call to a <code>&lt;div&gt;</code>.</p>
+<p>We don’t have to use buttons to react to clicks though! Any DOM element can trigger an event. So we’ve also added a <code>onClick</code> event call to a <code>&lt;div&gt;</code>.</p>
 
-<p><code>onclick</code> is of course not the only event that we can listen to. Here is an example for how to react to changes in a dropdown box with the <code>onchange</code> events.</p>
+<p><code>onclick</code> is of course not the only event that we can listen to. Here is an example for how to react to changes in a drop-down box with the <code>onchange</code> events.</p>
 
 <html>
 
@@ -458,6 +460,8 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 </body>
 
 </html>
+
+<p>Here we also make use of the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Event"><code>Event</code></a> object that is passed along with the event call to identify the HTML element that triggered the event and retrieve its value.</p>
 
 <p>Other <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers">useful events</a> are <code>onload</code>, <code>onmouseover</code>, <code>onmouseout</code>, <code>onresize</code>, etc.</p>
 
@@ -507,7 +511,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 <h3 id="running-a-server-and-debugging-with-webstorm">Running a Server and Debugging with WebStorm</h3>
 
-<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like webstorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debugging. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a web server. Webstorm comes with a built-in web server that you can activate via the <code>Run</code> menu. Here is an example configuration:</p>
+<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like WebStorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debugging. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a web server. WebStorm comes with a built-in web server that you can activate via the <code>Run</code> menu. Here is an example configuration:</p>
 
 <p><img src="images/debug_config.png" alt="WebStorm debug configuration" /></p>
 
@@ -519,7 +523,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 <h2 id="d3-data-driven-documents">D3: Data Driven Documents</h2>
 
-<p>D3 is a javascript library for manipulating the DOM based on data. D3 was originally written by Mike Bostock, Vadim Ogievetsky, and Jeff Heer; at this point it has a large number of contributors, yet Mike Bostock still is the core developer. It’s also one of the overall most popular projects on GitHub (!). D3 certainly owes some of its popularity to riding the everything-on-the-web wave. Nevertheless, the way in which you can express relationships between data and visual elements is fundamentally superior than any other library available, open source or not! It is nothing short of a breakthrough in the way we use code to express visual encodings.</p>
+<p>D3 is a javascript library for manipulating the DOM based on data. D3 was originally written by Mike Bostock, Vadim Ogievetsky, and Jeff Heer and published <a href="http://idl.cs.washington.edu/files/2011-D3-InfoVis.pdf">as a paper</a> at InfoVis, the main information visualization conference; at this point it has a large number of contributors, yet Mike Bostock still is the core developer. It’s also one of the overall most popular projects on GitHub (!). D3 certainly owes some of its popularity to riding the everything-on-the-web wave. Nevertheless, the way in which you can express relationships between data and visual elements is fundamentally superior than any other library available, open source or not! It is nothing short of a breakthrough in the way we use code to express visual encodings.</p>
 
 <p>D3 can be used to manipulate pure HTML, but most commonly it’s used in combination with SVG, i.e., we will be producing SVG charts using D3.</p>
 
@@ -547,6 +551,8 @@ You can only have one server at the same time (unless you specify ports explicit
 </body>
 
 </html>
+
+<p>You should also note that D3 has just undergone a major version change, from D3 3 to D3 4. Unfortuantely, most example you’ll find on the web will be using version 3. We’ll be using version 4 in this class though, so you can’t expect to just copy and paste code for version 4 and have it work. Check out the <a href="https://github.com/d3/d3/blob/master/CHANGES.md">release notes</a> to learn about changes in D3 v4.</p>
 
 <h3 id="selections">Selections</h3>
 
