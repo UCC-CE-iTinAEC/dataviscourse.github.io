@@ -45,9 +45,11 @@
                 .attr("width", function(d,i) { return d; })
                 .attr("height", 20)
                 .style("fill", "steelblue")
+
                 // here we start a second transition!
                 .transition()
                 .duration(3000)
+                // wait for three seconds before going into the next transition
                 .delay(3000)
                 .style("fill", "green")
                 .attr("width", function(d,i) {

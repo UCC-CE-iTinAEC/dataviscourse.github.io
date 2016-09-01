@@ -24,9 +24,6 @@
         var svg = d3.select("svg")
         var selection = svg.selectAll("rect")
                 .data([127, 61, 256, 71])
-
-        svg.selectAll("rect")
-                .data([127, 61, 256])
                 .transition()
                 .duration(3000) // 3 seconds
                 .attr("x", 0)
