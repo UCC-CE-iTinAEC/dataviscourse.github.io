@@ -1,15 +1,18 @@
-function yetAnotherObject() {
+function otherObject(value) {
     return {
-        x: 3,
+        x: value,
         get: function () {
-            console.log("This:")
-            console.log(this)
-            return this.x
+            return this.x;
+        },
+        set: function (newValue) {
+            this.x = newValue;
         }
     };
 }
 
-obj = yetAnotherObject()
-console.log("As expected: " + obj.get()); // fine
-var t = obj.get;
-console.log("Problem: " + t()); // *NOT* fine, this is bound to the context of the calling object, which is the global "this" Window
+other = otherObject(3);
+other.x;
+other.get();
+other.set(5);
+other.get();
+other.x;

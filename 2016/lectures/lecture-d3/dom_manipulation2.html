@@ -7,11 +7,12 @@
 <body>
 <div id="mainDiv">Text in HTML.</div>
 <script>
+    // helper to create <div>text</div>
     function divWithText(text) {
-        var result = document.createElement("div");
+        var div = document.createElement("div");
         var textNode = document.createTextNode(text);
-        result.appendChild(textNode);
-        return result;
+        div.appendChild(textNode);
+        return div;
     }
 
     for (i=0; i<10; ++i) {

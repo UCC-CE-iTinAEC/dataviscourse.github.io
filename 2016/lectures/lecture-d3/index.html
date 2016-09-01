@@ -7,7 +7,7 @@
   <title> Visualization - DOM Manipulation & D3 Fundamentals</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="Visualization Class at the University of Utah">
-  <link rel="canonical" href="http://dataviscourse.net//2016/lectures/lecture-d3/">
+  <link rel="canonical" href="http://dataviscourse.net/2016/lectures/lecture-d3/">
   <link href='http://fonts.googleapis.com/css?family=Baumans' rel='stylesheet' type='text/css'>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/2016/css/main.css">
@@ -287,7 +287,7 @@
 <p>After we covered the basics of JavaScript last lecture it’s now time to explore how javascript interacts with the DOM and thus makes all the interesting things in the browser happen. 
 Like we’ve seen before, the HTML we write is represented as a tree inside a web browser. What we are going to turn to now are the JavaScript APIs that web browsers provide to let you edit the DOM dynamically, so that we can build our visualizations with code instead of text editors.</p>
 
-<p>While we will manipulate the DOM mainly through libraries (we will use mainly <a href="http://d3js.org/">D3</a>, but <a href="https://jquery.com/">JQuery</a> is the most popular DOM manipulation library) you can also manipulate the DOM directly through the standard DOM API through the <code>document</code> object. Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/API/document">MDN reference</a> on the document object.</p>
+<p>While we will manipulate the DOM mainly through libraries (we will use <a href="http://d3js.org/">D3</a>, but <a href="https://jquery.com/">JQuery</a> is the most popular DOM manipulation library) you can also manipulate the DOM directly through the standard DOM API through the <code>document</code> object. Check out the <a href="https://developer.mozilla.org/en-US/docs/Web/API/document">MDN reference</a> on the document object.</p>
 
 <p>Here are the very first steps:</p>
 
@@ -315,7 +315,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 </html>
 
-<p><code>document</code> is a global javascript object that contains the dom. If you log the document object you will see exactly the same as in the DOM view in the web inspector. It is this object that we are manipulating dynamically and that the browser then renders. The document object contains functions, like the <code>getElementByID</code> method we’re using here, or the <code>createElement</code> or the <code>createTextNode</code> functions used to create new content.</p>
+<p><code>document</code> is a global javascript object that contains the DOM. If you log the document object you will see exactly the same as in the DOM view in the web inspector. It is this object that we are manipulating dynamically and that the browser then renders. The document object contains functions, like the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById"><code>getElementByID()</code></a> method we’re using here to retreive a specific element, or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement"><code>createElement()</code></a>, which creates a new HTML element, or the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode"><code>createTextNode()</code></a> functions used to create new text content. We’ve also used the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild"><code>appendChild()</code></a> method (which is defined on a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node"><code>node</code></a>) that appends the passed element to the end of the list of the node.</p>
 
 <p>Now we can make use of the features we learned about last lecture to make more complicated programs that write websites:</p>
 
@@ -431,6 +431,8 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 <p>The first button defines the function to be called - <code>messageMe()</code> directly in HTML. When the button is clicked, the corresponding function is called. The second button has an identifier. In the script we retrieve the button and add the function to be called dynamically.</p>
 
+<p>We don’t have to use buttons to react to clicks though! Any dom element can trigger an event. So we’ve also added a <code>onClick</code> event call to a <code>&lt;div&gt;</code>.</p>
+
 <p><code>onclick</code> is of course not the only event that we can listen to. Here is an example for how to react to changes in a dropdown box with the <code>onchange</code> events.</p>
 
 <html>
@@ -459,7 +461,7 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 <p>Other <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers">useful events</a> are <code>onload</code>, <code>onmouseover</code>, <code>onmouseout</code>, <code>onresize</code>, etc.</p>
 
-<p>And finally, we can of course listen to events that are triggered by interacting with any kind of DOM element, not only with form elements such as buttons and drop-downs. Here is an example for SVG:</p>
+<p>And finally, we can of course listen to events that are triggered by interacting with an SVG element:</p>
 
 <html>
 
@@ -495,14 +497,17 @@ Like we’ve seen before, the HTML we write is represented as a tree inside a we
 
 <p>If you have python installed you can run the built in simple server. To do this, <code>cd</code> to the directory where your code is located and run the following command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> python -m SimpleHTTPServer</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="lineno">1</span> <span class="c"># for python 2</span>
+<span class="lineno">2</span> python -m SimpleHTTPServer
+<span class="lineno">3</span> <span class="c"># for python 3</span>
+<span class="lineno">4</span> python -m http.server</code></pre></figure>
 
-<p>Open <code>[http://localhost:8000/](http://localhost:8000/)</code> to get you to the server.
+<p>Open <a href="http://localhost:8000/">http://localhost:8000/</a> to get you to the server.
 You can only have one server at the same time (unless you specify ports explicitly). Hit Control-C to quit the server.</p>
 
 <h3 id="running-a-server-and-debugging-with-webstorm">Running a Server and Debugging with WebStorm</h3>
 
-<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like webstorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debuggin. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a webserver. Webstorm comes with a built-in webserver, that you can activate via the <code>Run</code> menue. Here is an example configuration:</p>
+<p>As you know, we made educational licenses of WebStorm available for you in this class. If you develop your code in an IDE like webstorm you get many powerful features, such as code completion, syntax highlighting, refactoring and interactive debugging. While you can use the chrome developer tools to debug your code, it’s more convenient to debug the code in the place you’re writing it, as you can immediately edit if you see something wrong. To debug code, you first have to run it on a web server. Webstorm comes with a built-in web server that you can activate via the <code>Run</code> menu. Here is an example configuration:</p>
 
 <p><img src="images/debug_config.png" alt="WebStorm debug configuration" /></p>
 
@@ -514,7 +519,7 @@ You can only have one server at the same time (unless you specify ports explicit
 
 <h2 id="d3-data-driven-documents">D3: Data Driven Documents</h2>
 
-<p>D3 is a javascript library for manipulating the DOM based on data. D3 was originally written by Mike Bostock, Vadim Ogievetsky, and Jeff Heer; at this point it has a large number of contributors, and it’s one of the overall most popular projects on GitHub (!). D3 certainly owes some of its popularity to riding the everything-on-the-web wave. Nevertheless, the way in which you can express relationships between data and visual elements is fundamentally superior than any other library available, open source or not! It is nothing short of a breakthrough in the way we use code to express visual encodings.</p>
+<p>D3 is a javascript library for manipulating the DOM based on data. D3 was originally written by Mike Bostock, Vadim Ogievetsky, and Jeff Heer; at this point it has a large number of contributors, yet Mike Bostock still is the core developer. It’s also one of the overall most popular projects on GitHub (!). D3 certainly owes some of its popularity to riding the everything-on-the-web wave. Nevertheless, the way in which you can express relationships between data and visual elements is fundamentally superior than any other library available, open source or not! It is nothing short of a breakthrough in the way we use code to express visual encodings.</p>
 
 <p>D3 can be used to manipulate pure HTML, but most commonly it’s used in combination with SVG, i.e., we will be producing SVG charts using D3.</p>
 

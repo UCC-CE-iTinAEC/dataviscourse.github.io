@@ -2,7 +2,7 @@
 ### Upgrades to website to upgrade from D3 v3.0 to v4.0
 
 Changed Source file to v4.0 
- <script src="https://d3js.org/d3.v4.min.js"></script>   
+ <script src="https://d3js.org/d3.v4.js"></script>   
 
 When changing multiple attributes, we now use the independent library d3-selection-multi.js
 <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>

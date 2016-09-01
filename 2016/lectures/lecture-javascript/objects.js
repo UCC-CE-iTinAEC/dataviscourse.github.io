@@ -15,7 +15,7 @@ otherObject = {
     "stringKey1": "3",
     "stringKey2": "4"
 }
-console.log("Value of stringKey: " + otherObject.stringKey);
+console.log("Value of stringKey1: " + otherObject.stringKey1);
 
 // you can extend objects dynamically:
 otherObject.newKey = "dynamicallyAdded";
