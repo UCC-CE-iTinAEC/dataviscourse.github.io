@@ -14,25 +14,20 @@
 </head>
 <body>
 <svg height="300" width="800">
-
 </svg>
 </body>
 <script>
     var execute = function () {
-        var svg = d3.select("svg")
+        var svg = d3.select("svg");
         var selection = svg.selectAll("rect");
-        // here we have an empty selection
-        console.log("Selection")
-        console.log(selection);
-
-        // with the .data method we bind the data to the selection
         var data = selection.data([127, 61, 256]);
-        // here we have an array of length 3, the object has enter and exit functions
-        // we need to set a breakpoint after the log to see the content at this time.
+        // the resulting object contains the enter and exit selections
+        // since the initial selection is empty, all data elements are
+        // part of the enter selection
         console.log("Data");
         console.log(data);
 
-        // here we call the enter function to add new elements
+        // with a call to enter() we retreive only the enter selection
         var enter = data.enter();
         console.log("Enter")
         console.log(enter);

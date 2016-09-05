@@ -184,7 +184,7 @@
                 var previewFrame = document.getElementById('preview-' + id);
                 if (previewFrame) {
                     // here you can set the height, I delete it first, then I make it again
-                    //    previewFrame.height = "";
+                        previewFrame.height = "370px";
                     //  previewFrame.height = previewFrame.contentWindow.document.body.scrollHeight + "px";
 
 
@@ -285,7 +285,7 @@
 
 <h2 id="selections-and-data">Selections and Data</h2>
 
-<p>First, let’s go over how selections and data mapping works again. We talked about the selection methods <code>select()</code> and  <code>selectAll()</code>, that take CSS3 identifiers. That means that we can select on elements - <code>select("svg")</code>, classes - <code>selectAll(".className")</code>, IDs - <code>selectAll("#cancelButton")</code>, but also other selection expression such as parent child relationships - <code>selectAll("p &gt; span")</code>. Here is a simple example:</p>
+<p>First, let’s go over how selections and data mapping works again. We talked about the selection methods <code>select()</code> and  <code>selectAll()</code>, that take CSS selectors. That means that we can select on elements - <code>select("svg")</code>, classes - <code>selectAll(".className")</code>, IDs - <code>selectAll("#cancelButton")</code>, but also other selection expression such as parent child relationships - <code>selectAll("p &gt; span")</code>. Here is a simple example:</p>
 
 <html>
 
@@ -314,7 +314,7 @@
 <p>So, this is not new, but let’s take a look at the data structure the selection uses:</p>
 
 <p><img src="images/selection.png" alt="selection data structure" />
-The selections return an array of an array with all matching objects. You can also see that this is not actually the original array implementation, but instead a sub-class of array that exposes much of its functionality, but also overrides some of its methods. The <code>parentNode</code>, for example, isn’t part of the original array implementation, and we can see that the prototype of the object is set to <code>Array</code>. <br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+The selections returns a <code>Selection</code> object which contains (among other things) a <code>_groups</code> array, which contains a <code>NodeList</code>. In the <code>NodeList</code> we can see all the matching objects. You can also see that the <code>Selection</code> object has other fields, e.g., a list of <code>_parents</code>. <br /><br /><br /><br /><br /><br /><br /><br /></p>
 
 <h3 id="mapping-data">Mapping Data</h3>
 
@@ -345,9 +345,14 @@ The selections return an array of an array with all matching objects. You can al
 </html>
 
 <p><img src="images/data.png" alt="data assinged" />
-If we look at the properties of the array after we assigned the data, we can see a field <code>__data__</code> that holds the actual data values. We then can access these data values through the first parameter passed into a function <code>.attr("width", function (d, i) {return d;})</code>. The second parameter is the index of the current element, in the order of how they occur in the DOM.</p>
+If we look at the properties of the <code>Selection</code> object after we assigned the data we can see the distinct selections: <code>_enter</code> for all data items that didn’t match to a DOM element and are scheduled to be a
+dded, <code>_exit</code> for all DOM elements that didn’t map to a data item, and the familiar <code>_groups</code> for the updated selection. When we drill down to the <code>rect</code> DOM elements, we can see a field <code>__data__</code> that holds the actual data values. We then can access these data values through the first parameter passed into a function <code>.attr("width", function (d) {return d;})</code>. An optional second parameter is the index of the current element, in the order of how they occur in the DOM.</p>
 
-<p>Typically, we want to be able to create visualizations from skratch, i.e., we don’t want to select existing elements but add new ones. We can do this using the <code>enter</code> function:</p>
+<p>The following figure illustrates the differences between the enter, update and exit selection:</p>
+
+<p><img src="images/data_concept.png" alt="data_concept" /></p>
+
+<p>Typically, we want to be able to create visualizations from scratch, i.e., we don’t want to select existing elements but add new ones. We can do this by appending elements to the <code>enter</code> selection:</p>
 
 <html>
 
@@ -373,16 +378,17 @@ If we look at the properties of the array after we assigned the data, we can see
 
 </html>
 
-<p><img src="images/data_empty.png" alt="data assinged but still empty" />
-The selection right after the data assignment contains an uninitialized array of length 3. There’s nothing there, but we can use the <code>enter()</code> function of D3 to add elements. <br /><br /><br /><br /><br /><br /><br /><br />
-<img src="images/enter.png" alt="enter" />
-After <code>enter()</code> was called, the array contains objects with the <code>__data__</code> property set. Next we can use D3 functions, such as the <code>append()</code> to assign specific DOM elements to the arrays. Again, we only have to declare what we want to do once, and D3 will take care of the looping for you.  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /></p>
+<p>The enter selection right after the data assignment contains an array of length 3 with the generic <code>EnterNode</code> objects. We can see that the data is already bound to those objects.</p>
 
-<p>However, the things that we apply to the enter selection, <strong>do not apply to elements already in the slection</strong>. So, if we for example add a rectangle <code>&lt;rect x="0" y="10" height="10" width="50"&gt;&lt;/rect&gt;</code> to the above svg, we will see that the data is not applied to it.</p>
+<p><img src="images/enter_before_append.png" alt="Data assigned to placeholder nodes" /></p>
 
-<p>Here is an example that handles enter and update correctly:</p>
+<p>Next we can use the <code>append()</code> function to assign specific DOM elements to the elements in the selection. Again, we only have to declare what we want to do once, and D3 will take care of the looping for you.</p>
+
+<p>However, the things that we apply to the enter selection, <strong>do not apply to elements in the update selection</strong>. So, if we for example add a rectangle <code>&lt;rect x="0" y="10" height="10" width="50"&gt;&lt;/rect&gt;</code> to the above SVG, we will see that the data is not applied to it.</p>
 
 <h3 id="updating">Updating</h3>
+
+<p>Here is an example that handles enter and update correctly:</p>
 
 <html>
 
