@@ -58,7 +58,8 @@
         }];
 
     var types = ["grocery", "fruit", "alcohol"];
-    var max = 13000;
+    // a max with an accessor function
+    var max = d3.max(data, function(d){return d.tons;});
 
     var margin = {top: 20, right: 30, bottom: 30, left: 40};
     var width = 800 - margin.left - margin.right;
@@ -72,7 +73,6 @@
             // here we create a master <g> element and move everything by the margins
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 
     // here we use d3's event handler
     // https://github.com/d3/d3-selection#handling-events
