@@ -20,7 +20,7 @@
                 // the domain defines the value range of the input dataset
                 .domain([0, 1.5])
                 // the range defines to which range you want to map the input dataset.
-                .range([0, 500])
+                .range([0, 500]);
                 // uncomment to see the effect of clamping
                 // .clamp(true);
 
@@ -33,7 +33,7 @@
                 .attr("y", function (d, i) {
                     return i * 50 + 50
                 })
-                .attr("width", function (d, i) {
+                .attr("width", function (d) {
                     // here we call the scale function.
                     return xScale(d);
                 })

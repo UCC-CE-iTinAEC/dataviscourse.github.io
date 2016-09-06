@@ -23,13 +23,13 @@
                 .attr("y", function (d, i) {
                     return i * 90 + 50
                 })
-                .attr("width", function (d, i){
+                .attr("width", function (d){
                     // here we don't use the data directly, but call the scale function.
                     return scale(d);
                 })
                 .attr("height", 20)
-                .style("fill", "steelblue")
-    }
+                .style("fill", "steelblue");
+    };
 
     // the scale function
     var scale = function (input) {
@@ -37,5 +37,4 @@
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

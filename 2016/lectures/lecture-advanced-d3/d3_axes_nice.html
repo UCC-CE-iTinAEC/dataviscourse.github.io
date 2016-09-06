@@ -8,15 +8,12 @@
     <style>
         .axis path,
         .axis line {
-            fill: none;
-            stroke: black;
+            stroke: ForestGreen;
             stroke-width: 1px;
-            shape-rendering: crispEdges
         }
-
         .axis text {
-            font-family: sans-serif;
-            font-size: 11px;
+            font-family: serif;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -25,7 +22,6 @@
 </svg>
 </body>
 <script>
-
     // the height and width of the actual drawing area
     var height = 400;
     var width = 750;
@@ -47,7 +43,6 @@
             });
 
     var execute = function () {
-
         var data = [0.3, -0.8, 0.01, -0.4, 1.2, 1.3, -0.2, -1.2, 0.82, 0.4, -0.2, 0.3];
         var spacing = height / data.length;
 
@@ -55,23 +50,23 @@
 
         var xScale = d3.scaleLinear()
                 .domain([min, max])
-                .range([0, width])
-                // make the ranges nice
-                .nice();
+                .range([0, width]);
 
         var color = d3.scaleLinear()
                 .domain([min, 0, max])
                 .range(["darkred", "lightgray", "steelblue"]);
 
         var xAxis = d3.axisBottom();
+                // try manually seting the ticks
+                //.ticks(40);
         xAxis.scale(xScale);
-//        xAxis.orient("bottom");
 
         svg.selectAll(".bar")
                 .data(data)
                 .enter()
                 .append("rect")
                 .classed("bar", true)
+                // new: we add the padding via a tranform/translate
                 .attr("transform", "translate(" + padding + "," + padding + ")")
                 .attr("x", function (d) {
                     return xScale(Math.min(0, d));
@@ -80,14 +75,12 @@
                     return i * spacing + 5;
                 })
                 .attr("width", function (d, i) {
-                    // here we call the scale function.
                     return Math.abs(xScale(d) - xScale(0));
                 })
                 .attr("height", 20)
                 .style("fill", function (d) {
-                    // here we apply the color scale
                     return color(d);
-                })
+                });
 
         svg.append("g")
                 // css class for the axis
@@ -98,5 +91,4 @@
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

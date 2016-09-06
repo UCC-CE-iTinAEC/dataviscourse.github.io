@@ -512,9 +512,9 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 <h2 id="scales">Scales</h2>
 
-<p>Up to this point, our data has conveniently had dimensions that we could directly plot without any data transformation. However, in your homework, for example, you used Anscombe’s quartett, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. Generally speaking what we are looking for a function <code>f()</code> that maps an input dataset <code>D</code> to a derived dataset <code>D'</code>, i.e., <code>D'=f(D)</code>. Naturally, we want to choose <code>f()</code> such that the resulting derived dataset can be directly used for mapping.</p>
+<p>Up to this point, our data has conveniently had dimensions that we could directly plot without appkying a transformation. However, in your homework, for example, you used Anscombe’s quartet, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. In nearly all practical cases, the data won’t match to the pixels on the screen.</p>
 
-<p>Here is an example of a datset that is not suitable for direct plotting:</p>
+<p>Here is an example of a dataset that is not suitable for direct plotting:</p>
 
 <html>
 
@@ -540,7 +540,9 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>Let’s write a little function that we can call so that this is dataset can be easily plotted:</p>
+<p>Generally speaking what we are looking for a function <code>f()</code> that maps an input dataset <code>D</code> to a derived dataset <code>D'</code>, i.e., <code>D'=f(D)</code>. Naturally, we want to choose <code>f()</code> such that the resulting derived dataset can be used for plotting.</p>
+
+<p>Let’s write a function that we can call so that this is dataset can be easily plotted:</p>
 
 <html>
 
@@ -566,7 +568,9 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>That’s nice! We could simply do this for any kind of data we have and could achieve our goal. However, the possibility for functions is endless. For example, we could not only do linear scales, but equally do <strong>logarithmic scales, power scales, discrete scales</strong>, etc. And we don’t always want to write output in screen coordinates, we could equally want to vary the <strong>saturation of a color</strong>, etc. Finally, we could have <strong>ordinal data</strong> (we’ll talk about data types in one of the early theory lectures), or <strong>temporal data</strong>. So you can see that there are many possibilities to transform your input data to achieve a particular visual mapping. Fortunately, D3 provides a set of powerful scales:</p>
+<p>That’s nice! We could simply do this for any kind of data we have and could achieve our goal. However, there are many possibly useful functions. For example, we could not only do linear scales, but could use <strong>logarithmic scales, power scales, discrete scales</strong>, etc.</p>
+
+<p>And we don’t always want to write output in screen coordinates, we equally want to vary the <strong>saturation of a color</strong>, etc. Finally, we could have <strong>ordinal data</strong> (we’ll talk about data types in one of the early theory lectures), or <strong>temporal data</strong>. So you can see that there are many possibilities to transform your input data to achieve a particular visual mapping. Fortunately, D3 provides a set of powerful scales:</p>
 
 <html>
 
@@ -592,13 +596,13 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <code>d3.scaleLinear()</code>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <code>d3.max()</code> function. We could use <code>d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
+<p>Here we’ve successfully used a linear D3 scale. There are a couple of new things here. First, we create a scale of the linear type with the call <a href="https://github.com/d3/d3-scale#scaleLinear"><code>d3.scaleLinear()</code></a>. Next, we define the input domain and the output range. The <strong>domain defines the values that we expect in our dataset</strong>. Here we chose to use an input domain starting at 0 and up to the highest value of the dataset, which we can conveniently determine by using D3’s <a href="https://github.com/d3/d3-array#max"><code>d3.max()</code></a> function. We could use <code>d3.min()</code> to define the lower bound of the range, however, that would mean that our bar-chart doesn’t start at 0, and this is something that we will learn is almost always bad!</p>
 
 <p>The <strong>range defines which output values we want from the scale</strong>, i.e., we’d typically pick something that we can easily use to draw on the screen.</p>
 
 <h3 id="clamping">Clamping</h3>
 
-<p>What happens when you plot a value that’s larger than your domain?</p>
+<p>What happens when you plot a value that’s larger than your domain? When it’s feasible, you will get a value based on your mapping function, but it will exceed your screen coordinates. There is a way to avoid overplotting, by using clamping, i.e., by manually assigning every value larger than the extend of your domain to the maximum value of the domain. This can be very helpful, but should always be done with care: you need to highlight that you’ve broken the scale somehow, e.g., by using a label or a special color.</p>
 
 <html>
 
@@ -656,7 +660,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 <h2 id="axes">Axes</h2>
 
-<p>Drawing Axes and legends is critical for data visualization. All of our examples, with the exception of the labelled bar charts, didn’t really tell us about the size of the data. However, drawing axes well is a lot of work. Fortunately, D3 has extensive support for axes. Here is an example based on our previous bar chart:</p>
+<p>Drawing Axes and legends is critical for data visualization. All of our examples, with the exception of the labelled bar charts, didn’t really tell us about the absolute values of the data. However, drawing axes well can be a lot of work. Fortunately, D3 has extensive <a href="https://github.com/d3/d3-axis">support for axes</a>. Here is an example based on our previous bar chart:</p>
 
 <html>
 
@@ -682,7 +686,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This worked! We create a new axes by calling <code>d3.scaleLinear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code>svg.append("g").call(xAxis)</code>. Now, we can see that it’s not very pretty, that it overlaps with our bar charts and that some of the numbers are truncated because they go beyond the svg. To fix this we have to style the chart and add some margins.</p>
+<p>This worked! We create a new axes by calling <code>d3.scaleLinear()</code> and tell it its value range by passing the relevant scale. We then append the scale to the svg with this call: <code>svg.append("g").call(xAxis)</code>. Now, we can see that it overlaps with our bar charts and that some of the numbers are close to the edge of the svg. To fix this we have to style the chart and add some margins. We’ll also apply some custom styles to our axis.</p>
 
 <html>
 
@@ -708,7 +712,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This is a much nicer bar chart! We’ve used CSS to style the axis, the <code>nice()</code> function for the scale to get round axis labels, introduced a padding and a background for the chart. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
+<p>This is a nicer bar chart! We’ve used CSS to style the axis, introduced a padding and a background for the chart. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
 
 <h2 id="more-complex-data">More Complex Data</h2>
 

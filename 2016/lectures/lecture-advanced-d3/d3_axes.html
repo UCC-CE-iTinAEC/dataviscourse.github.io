@@ -4,43 +4,36 @@
     <meta charset="UTF-8">
     <title>D3 Axes</title>
     <script src="https://d3js.org/d3.v4.js"></script>
-    <!--Need to add d3-selection-multi.js separately because the multi-value methods have been extracted into a separate library and are no longer part of the default bundle. -->
-    <script src="https://d3js.org/d3-selection-multi.v0.4.js"></script>
 </head>
 <body>
 <svg>
 </svg>
 </body>
 <script>
-
     var height = 400;
     var width = 800;
-
     var svg = d3.select("svg");
-//  The multi-value map methods have been renamed to plural form: selection.attrs, selection.styles and selection.properties.
-    svg.attrs({
-        width: width,
-        height: height
-    })
+    svg.attr("width", width)
+            .attr("height", height);
 
     var execute = function () {
-
         var data = [0.3, -0.8, 0.01, -0.4, 1.2, 1.3, -0.2, -1.2, 0.82, 0.4, -0.2, 0.3];
         var spacing = height / data.length;
+        // we introduce an artificial min and max
         var min = -1.45, max = 1.45;
 
-        //     v3.0 -> d3.scale.linear()  v4.0 -> d3.scaleLinear()
         var xScale = d3.scaleLinear()
                 .domain([min, max])
                 .range([0, 800]);
 
-        var color = d3.scaleLinear()
+        var colorScale = d3.scaleLinear()
                 .domain([min, 0, max])
                 .range(["darkred", "lightgray", "steelblue"]);
 
+        // create a new axis that has the ticks and labels on the bottom
         var xAxis  = d3.axisBottom();
+        // assign the scale to the axis
         xAxis.scale(xScale);
-        //  xAxis.orient("bottom");
 
         svg.selectAll("rect")
                 .data(data)
@@ -52,18 +45,16 @@
                 .attr("y", function (d, i) {
                     return i * spacing
                 })
-                .attr("width", function (d, i) {
-                    // here we call the scale function.
+                .attr("width", function (d) {
                     return Math.abs(xScale(d) - xScale(0));
                 })
                 .attr("height", 20)
                 .style("fill", function (d){
-                    // here we apply the color scale
-                    return color(d);
-                })
+                    return colorScale(d);
+                });
+        // add the axis to the svg, wrapped inside a g
         svg.append("g").call(xAxis);
     }
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>
