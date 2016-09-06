@@ -25,7 +25,6 @@
         }
 
         var svg = d3.select("svg");
-
         // the data binding
         var bars = svg.selectAll(".bars")
                 .data(myData);
@@ -51,10 +50,8 @@
                 .style("opacity", 0)
                 .remove();
 
-
-        //We merge the new bars w/ the existing one
+        // We merge the new bars with the existing one
         bars = newBars.merge(bars);
-
 
         // how do we handle updates?
         // we transition towards a blue opaque bar with a data driven width
@@ -64,17 +61,13 @@
                 .attr("y", function (d, i) {
                     return i * 30 + 50
                 })
-                .attr("width", function (d, i) {
+                .attr("width", function (d) {
                     return d;
                 })
                 .attr("height", 20)
                 .style("fill", "steelblue")
                 .style("opacity", 1);
-
-
-
-
-    }
+    };
 
     // a button setting another dataset
     d3.select("#next").on("click", function () {
@@ -82,5 +75,4 @@
     });
 </script>
 <script src="run.js" charset="utf-8"></script>
-
 </html>

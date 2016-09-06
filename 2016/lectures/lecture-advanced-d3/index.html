@@ -318,7 +318,7 @@ The selections returns a <code>Selection</code> object which contains (among oth
 
 <h3 id="mapping-data">Mapping Data</h3>
 
-<p>When we map data to that object, we can see where the data is stored:</p>
+<p>When we map data to that object (called a data-join), we can see where the data is stored:</p>
 
 <html>
 
@@ -414,7 +414,7 @@ dded, <code>_exit</code> for all DOM elements that didn’t map to a data item, 
 
 </html>
 
-<p>What happens here is that we define what to do when we add something (we add a rectangle and set its class), what happens when we remove something (we just remove it), and when we update something (we apply the new data elements).</p>
+<p>What happens here is that we define what to do when we add something (we add a rectangle and set its class), what happens when we remove something (we just remove it), and when we update something (we apply the new data elements). Notice the call to the <code>merge()</code> function, which merges the enter selection with the update selection, so that we can later set attributes on all the DOM elements at the same time.</p>
 
 <h3 id="transitions">Transitions</h3>
 

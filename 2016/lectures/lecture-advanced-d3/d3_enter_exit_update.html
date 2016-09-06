@@ -25,7 +25,7 @@
 
         var svg = d3.select("svg");
 
-        // the data binding
+        // the data join
         var bars = svg.selectAll(".bars")
                 .data(myData);
 
@@ -33,22 +33,22 @@
         bars.exit().remove();
 
         // how do we handle new elements?
-        bars = bars.enter().append("rect").merge(bars)
-                .classed("bars", true);
+        bars = bars.enter().append("rect").classed("bars", true)
+                // merge the enter and the update selection
+                .merge(bars);
 
         // how do we handle updates?
         bars.attr("x", 0)
                 .attr("y", function (d, i) {
                     return i * 30 + 50
                 })
-                .attr("width", function (d, i) {
+                .attr("width", function (d) {
                     return d;
                 })
                 .attr("height", 20)
                 .style("fill", "steelblue")
                 .attr("opacity", 1);
-
-    }
+    };
 
     // a button setting another dataset
     d3.select("#next").on("click", function () {
