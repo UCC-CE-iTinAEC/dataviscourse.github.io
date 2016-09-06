@@ -18,6 +18,10 @@
         var xScale = d3.scaleLinear()
                 // the domain defines the value range of the input dataset
                 .domain([0, d3.max(data)])
+                // we can try a log scale
+                //.scaleLog()
+                // log is undefined for 0
+                //.domain([0.001, d3.max(data)])
                 // the range defines to which range you want to map the input dataset.
                 .range([0, 700]);
 

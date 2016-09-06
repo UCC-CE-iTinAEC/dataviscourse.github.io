@@ -17,10 +17,11 @@
             .attr("height", height);
 
     var execute = function () {
-        var data = [0.3, -0.8, 0.01, -0.4, 1.2, 1.3, -0.2, -1.2, 0.82, 0.4, -0.2, 0.3];
+        var data = [0.3, -0.8, 0.01, -0.4, 1.2, 1.3, -0.2, -1.21, 0.82, 0.4, -0.2, 0.3];
         var spacing = height / data.length;
-        // we introduce an artificial min and max
-        var min = -1.45, max = 1.45;
+
+        var min = d3.min(data);
+        var max = d3.max(data);
 
         var xScale = d3.scaleLinear()
                 .domain([min, max])
@@ -31,7 +32,7 @@
                 .range(["darkred", "lightgray", "steelblue"]);
 
         // create a new axis that has the ticks and labels on the bottom
-        var xAxis  = d3.axisBottom();
+        var xAxis = d3.axisBottom();
         // assign the scale to the axis
         xAxis.scale(xScale);
 
@@ -49,7 +50,7 @@
                     return Math.abs(xScale(d) - xScale(0));
                 })
                 .attr("height", 20)
-                .style("fill", function (d){
+                .style("fill", function (d) {
                     return colorScale(d);
                 });
         // add the axis to the svg, wrapped inside a g

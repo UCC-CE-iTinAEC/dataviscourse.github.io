@@ -38,32 +38,32 @@
 
         barGroups = barGroups.merge(enterBarGroups);
         barGroups.attr("transform", function (d, i) {
+                    // positioning the group in y
                     return "translate(0," + i * barHeight + ")";
                 });
 
         // append a rect to the g element
-        var bars = enterBarGroups.append("rect")
+       enterBarGroups.append("rect")
                 .attr("width", function (d) {
                     return d;
                 })
                 .attr("height", 20)
                 .style("fill", "steelblue");
 
-
         // add a label to the group
-        var text = enterBarGroups.append("text")
-                .attr("transform", function (d, i) {
+       enterBarGroups.append("text")
+                .attr("transform", function (d) {
                     // move it five pixel right of the bar
                     return "translate(" + (parseFloat(d) + 5) + ", 0)";
                 })
                 .text(function (d) {
                     return d;
                 })
-                .attr("dy", barHeight / 2)
+                .attr("dy", barHeight / 2);
 
         // let's see what's wrong here
         console.log(enterBarGroups);
-    }
+    };
 
     // a button setting another dataset
     d3.select("#next").on("click", function () {

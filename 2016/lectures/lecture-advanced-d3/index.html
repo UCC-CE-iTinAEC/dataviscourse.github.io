@@ -451,7 +451,7 @@ dded, <code>_exit</code> for all DOM elements that didn’t map to a data item, 
 <p>In many cases we want to apply data not directly to low-level SVG elements, but instead use a hierarchy of elements. For the bar chart, for example, we might want to add a label showing the actual value. There are two approaches to doing this:</p>
 
 <ul>
-  <li>Laying out the numbers and the bars independently so that they match up</li>
+  <li>Laying out the numbers and the bars independently so that they match up.</li>
   <li>Using a group element to define the commonalities between the bars and the numbers (i.e., the y position in our example).</li>
 </ul>
 
@@ -512,7 +512,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 <h2 id="scales">Scales</h2>
 
-<p>Up to this point, our data has conveniently had dimensions that we could directly plot without appkying a transformation. However, in your homework, for example, you used Anscombe’s quartet, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. In nearly all practical cases, the data won’t match to the pixels on the screen.</p>
+<p>Up to this point, our data has conveniently had dimensions that we could directly plot without applying a transformation. However, in your homework, for example, you used Anscombe’s quartet, and the data there doesn’t neatly match to pixels, so you had to do some manual data transformation. In nearly all practical cases, the data won’t match to the pixels on the screen.</p>
 
 <p>Here is an example of a dataset that is not suitable for direct plotting:</p>
 
@@ -540,7 +540,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>Generally speaking what we are looking for a function <code>f()</code> that maps an input dataset <code>D</code> to a derived dataset <code>D'</code>, i.e., <code>D'=f(D)</code>. Naturally, we want to choose <code>f()</code> such that the resulting derived dataset can be used for plotting.</p>
+<p>Generally speaking what we are looking for is a function <code>f()</code> that maps an input dataset <code>D</code> to a derived dataset <code>D'</code>, i.e., <code>D'=f(D)</code>. Naturally, we want to choose <code>f()</code> such that the resulting derived dataset can be used for plotting.</p>
 
 <p>Let’s write a function that we can call so that this is dataset can be easily plotted:</p>
 
@@ -712,7 +712,7 @@ This doesn’t work as we would hope. The update isn’t handled correctly. When
 
 </html>
 
-<p>This is a nicer bar chart! We’ve used CSS to style the axis, introduced a padding and a background for the chart. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
+<p>This is a nicer bar chart! We’ve used CSS to style the axis, introduced a padding and a background for the chart. Also, we’ve used <a href=".com/d3/d3-scale#continuous_nice"><code>nice()</code></a> on the scales to get a nice, human-readable range. Of course, this chart doesn’t react appropriately to updates, but we’ve seen before how that works.</p>
 
 <h2 id="more-complex-data">More Complex Data</h2>
 
