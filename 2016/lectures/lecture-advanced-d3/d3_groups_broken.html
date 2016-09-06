@@ -23,59 +23,46 @@
         if (!myData) {
             myData = [127, 61, 256, 71, 15, 23]
         }
-
         var barHeight = 30;
-
         var svg = d3.select("svg");
 
         var barGroups = svg.selectAll(".barGroup")
                 .data(myData);
 
+        // append new g elements for each data point
         var enterBarGroups = barGroups.enter()
                 .append("g")
-                .classed("barGroup", true) // assigning the class
-                .attr("transform", function (d, i) {
+                .classed("barGroup", true); // assigning the class
+
+        barGroups.exit().remove();
+
+        barGroups = barGroups.merge(enterBarGroups);
+        barGroups.attr("transform", function (d, i) {
                     return "translate(0," + i * barHeight + ")";
                 });
 
+        // append a rect to the g element
         var bars = enterBarGroups.append("rect")
-                .attr("width", "0")
-                .attr("height", 20)
-                .style("fill", "steelblue")
-                .attr("opacity", 0);
-
-        bars.transition().duration(3000)
-                .attr("width", function (d, i) {
-                    console.log("wa");
+                .attr("width", function (d) {
                     return d;
                 })
-                .attr("opacity", 1);
+                .attr("height", 20)
+                .style("fill", "steelblue");
 
 
+        // add a label to the group
         var text = enterBarGroups.append("text")
                 .attr("transform", function (d, i) {
+                    // move it five pixel right of the bar
                     return "translate(" + (parseFloat(d) + 5) + ", 0)";
                 })
                 .text(function (d) {
                     return d;
                 })
                 .attr("dy", barHeight / 2)
-                .attr("opacity", 0)
-
-        text.transition()
-                .delay(2000)
-                .duration(1000)
-                .attr("opacity", 1);
 
         // let's see what's wrong here
         console.log(enterBarGroups);
-
-        barGroups.exit()
-                .attr("opacity", 1)
-                .transition()
-                .duration(3000)
-                .attr("opacity", 0)
-                .remove();
     }
 
     // a button setting another dataset
