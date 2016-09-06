@@ -86,8 +86,9 @@
     var types = ["grocery", "fruit", "alcohol"];
     var max = 13000;
 
-    document.getElementById("dropDown").onchange = function (event) {
-        var active = event.srcElement.value;
+    d3.select("#dropDown").on("change", function (event) {
+        // d3.event is set to the current event within an event listener
+        var active =  d3.event.srcElement.value;
         // sorting the array based on product, type, or tonnage
         data = data.sort(function compare(a, b) {
             switch (active) {
@@ -104,10 +105,10 @@
                     return a.tons - b.tons;
                     break;
             }
-        })
+        });
         // this execute serves as the update
         execute();
-    }
+    });
 
     var textWidth = 80;
 
@@ -127,7 +128,6 @@
 
     var xAxis = d3.axisBottom();
     xAxis.scale(xScale);
-//    xAxis.orient("bottom");
 
     svg.append("g")
             .classed("axis", true)
