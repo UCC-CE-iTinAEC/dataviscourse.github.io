@@ -1,122 +1,103 @@
 <!DOCTYPE html>
-<title>D3 Force Directed Layout</title>
 <meta charset="utf-8">
 <style>
 
-    .node {
+    .links line {
+        stroke: #999;
+        stroke-opacity: 0.6;
+    }
+
+    .nodes circle {
         stroke: #fff;
         stroke-width: 1.5px;
     }
 
-    .link {
-        stroke: #999;
-        stroke-opacity: .6;
-    }
-
-    text {
-        stroke: #222;
-        stroke-width: 0.5px;
-        font: 10px sans-serif;
-        fill: black;
-    }
-
 </style>
-<body>
-<script src="https://d3js.org/d3.v4.js"></script>
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-    // based on http://bl.ocks.org/mbostock/4062045
-    var width = 800;
-    var height = 400;
+
+    var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
 
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-    // here we initialize the force layout
-    var force = d3.forceSimulation()
-        // the strength of repulsion/attraction
-        // the lower the value, the more repulsion
-        // positive values attract each other, // the target distance between nodes
+    var simulation = d3.forceSimulation()
+            .force("link", d3.forceLink().id(function(d) { return d.id; }))
             .force("charge", d3.forceManyBody())
-            .force("link", d3.forceLink().distance(30).strength(-120))
-        // how "sticky" things are - 1, no friction, 0 max friction
-            .velocityDecay(0.9)
-        // how strongly the nodes are pulled toward a gravity well (e.g., the center of the svg)
-            .gravity(0.1)
-        // tells the layout about the available space
-            .size([width, height]);
+            .force("center", d3.forceCenter(width / 2, height / 2));
 
-    var svg = d3.select("body").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-    //d3.json("miserables_no_links.json", function (error, graph) {
-    // the json function reads in the data file and executes the function passed along when ready
-    d3.json("miserables.json", function (error, graph) {
+    d3.json("miserables.json", function(error, graph) {
         if (error) throw error;
 
-        force
-            // providing the layout with the nodes
-                .nodes(graph.nodes)
-            // providing the layouts with the links
-                .force("link").links(graph.links)
-            // first computation (the simluation starts automatically in v4.0)??
-            // .start();
 
-        console.log(force.force("link")());
-
-        // adding the links, binding the link data
-        var link = svg.selectAll(".link")
+        var link = svg.append("g")
+                .attr("class", "links")
+                .selectAll("line")
                 .data(graph.links)
                 .enter().append("line")
-                .attr("class", "link")
-                .style("stroke-width", function (d) {
-                    // we use the value for link thickness
-                    return Math.sqrt(d.value);
-                    //return d.value;
-                });
-        // adding the nodes, binding the node data
-        var node = svg.selectAll(".node")
+                .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+        var node = svg.append("g")
+                .attr("class", "nodes")
+                .selectAll("circle")
                 .data(graph.nodes)
-                .enter().append("g").attr("class", "node");
-
-        node.append("circle")
+                .enter().append("circle")
                 .attr("r", 5)
-                .style("fill", function (d) {
-                    // color according to the group
-                    return color(d.group);
-                })
-            // making the nodes draggable
-                .call(force.drag);
+                .attr("fill", function(d) { return color(d.group); })
+                .call(d3.drag()
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragended));
 
-        // if we want to label the graph:
-//        node.append("text")
-//                .attr("dx", 12)
-//                .attr("dy", ".35em")
-//                .text(function (d) {
-//                    if (d.group == 2)
-//                        return d.name;
-//                    return "";
-//                });
+        node.append("title")
+                .text(function(d) { return d.id; });
 
-        // this is executed until the network cools of and updates the position
-        force.on("tick", function () {
-            link.attr("x1", function (d) {
-                return d.source.x;
-            })
-                    .attr("y1", function (d) {
-                        return d.source.y;
-                    })
-                    .attr("x2", function (d) {
-                        return d.target.x;
-                    })
-                    .attr("y2", function (d) {
-                        return d.target.y;
-                    });
 
-            node.attr("transform", function (d) {
-                return "translate(" + d.x + ", " + d.y + ")";
 
-            });
-        });
+        simulation
+                .nodes(graph.nodes)
+                .on("tick", ticked);
+
+
+        console.log(graph.links)
+//        return;
+
+        simulation.force("link")
+                .links(graph.links);
+
+
+
+
+        function ticked() {
+            link
+                    .attr("x1", function(d) { return d.source.x; })
+                    .attr("y1", function(d) { return d.source.y; })
+                    .attr("x2", function(d) { return d.target.x; })
+                    .attr("y2", function(d) { return d.target.y; });
+
+            node
+                    .attr("cx", function(d) { return d.x; })
+                    .attr("cy", function(d) { return d.y; });
+        }
     });
+
+    function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
 
 </script>
