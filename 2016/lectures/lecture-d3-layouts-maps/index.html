@@ -285,13 +285,13 @@
 
 <h2 id="layouts">Layouts</h2>
 
-<p>Layouts make it easier to lay elements representing your data out on the screen. While we’ve produced layouts ourselves already, we’ve only used simple position and size assignments that were directly driven by the data. In this lecture we will learn how to use D3’s layout features to produce more complex layouts.</p>
+<p>Layouts make it easier to spatially arrange, shape and size elements representing data on the screen. While we’ve produced layouts ourselves already, we’ve only used simple position and size assignments that were directly driven by the data. And while these cover important classes of visualization techniques, there are more advanced techniques for different data types that are not as easily placed. Layouts are typically based on algorithms that define, e.g., where to put a node in a network visualization, or where to place a rectangle in a tree map. In this lecture we will learn how to use D3’s layout features to render such complex layouts.</p>
 
-<p>Layouts don’t actually draw things for us, rather they perform a data transformation that we can use to draw specific objects on the screen. Let’s start with a simple example, a pie chart.</p>
+<p>D3 Layouts don’t actually draw things for us, rather they perform a data transformation that we can use to draw specific objects on the screen. Let’s start with a simple example, a pie chart.</p>
 
 <h3 id="a-pie-chart">A Pie Chart</h3>
 
-<p>Pie charts are not a very good visaulization technique, they have multiple weaknesses compared to their alternatives. We’ll talk about those in class, but for now, we’ll draw a pie chart because it’s one of the simplest layouts we can do.</p>
+<p>Pie charts are a much criticised visualization technique as they have multiple weaknesses (but also strengths) compared to their alternatives. We’ll talk about those in class, but for now, we’ll draw a pie chart because it’s one of the simplest layouts we can do.</p>
 
 <p>In the following example, we use the <a href="https://github.com/d3/d3-shape/blob/master/README.md#pie">D3 pie layout</a> to calculate the angles and the <a href="https://github.com/d3/d3-shape#arcs">d3.arc</a> function to calculate the arcs used for drawing the wedges.</p>
 
